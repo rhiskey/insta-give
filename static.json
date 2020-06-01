@@ -10,8 +10,8 @@
         }
       },
       "proxies": {
-        "/accounts/": {
-            "origin": "${ACCOUNTS_URL}"
+        "/api/": {
+            "origin": "https://${API_APP_NAME}.herokuapp.com/accounts"
         }
       }
   }

@@ -32,7 +32,7 @@ class App extends Component {
 
     //Subscribtion accs
     let self = this;
-        fetch('/accounts/', {
+        fetch('https://infinite-tundra-04834.herokuapp.com/accounts', {
             method: 'GET'
         }).then(function(response) {
             if (response.status >= 400) {

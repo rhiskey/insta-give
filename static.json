@@ -6,6 +6,9 @@
       "proxies": {
         "/api/": {
             "origin": "https://${API_APP_NAME}.herokuapp.com/accounts"
-        }
+        },
+        "/accounts/": {
+            "origin": "https://infinite-tundra-04834.herokuapp.com/accounts"
+          }
       }
   }

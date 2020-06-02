@@ -52,7 +52,7 @@ class App extends Component {
     console.log(data.name + " was swiped.");
     //showPost
     //
-    this.setState(prevState => ({ childVisible: !prevState.childVisible }));
+    //this.setState(prevState => ({ childVisible: !prevState.childVisible }));
   }
 
   onSwipeLeft(data) {
@@ -67,7 +67,7 @@ class App extends Component {
     console.log(data.name + "Даблклик!");
     
     //show users in page after card
-
+    this.setState(prevState => ({ childVisible: !prevState.childVisible }));
       {/* more posts */}
 
   }
@@ -85,14 +85,14 @@ class App extends Component {
       return(
         <Card style={cardStyle}
           key={d.id}
-          onSwipe={this.onSwipe.bind(this)}
+          //onSwipe={this.onSwipe.bind(this)}
           // onSwipeLeft={this.onSwipeLeft.bind(this)}
           // onSwipeRight={this.onSwipeRight.bind(this)}
-          //onDoubleTap={this.onDoubleTap.bind(this)}>
+          onDoubleTap={this.onDoubleTap.bind(this)}
           data={d}>
             <span><h2>{d.name} </h2></span>
-            <img border="4" alt="Giveaway user avatar" src={d.avatar} width="520px" height="380px"></img>
-            <span className ="App-give-text"><button>{d.info}</button></span>
+            <img border="4" align="middle" hspace="5px" vspace="5px" alt="Giveaway user avatar" src={d.avatar} width="520px" height="370px"></img>
+            <span className ="App-give-text">{d.info}</span>
         </Card>
       );
     });

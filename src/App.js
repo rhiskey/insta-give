@@ -5,12 +5,19 @@ import './App.css';
 import Header from './components/Header';
 import Post from './components/Post';
 import "bootstrap/dist/css/bootstrap.min.css";
+import styled, { keyframes } from 'styled-components';
 
 import { Card, CardWrapper } from 'react-swipeable-cards';
+
+import { fadeInDown } from 'react-animations';
 
 ////React Native
 // import {StyleSheet, Text, View, Image, Button, SwipeStyles} from 'react-native';
 // import SwipeCards from 'react-native-swipeable-cards';
+const fadInDonwAnimation = keyframes`${fadeInDown}`;
+const fadeDiv = styled.div`
+  animation: 3s ${fadInDonwAnimation};
+`;
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -248,15 +255,16 @@ class Child extends React.Component {
   render() {
     const { users } = this.state;
     
-    return (      <div id ="posts-containter">
-      <h2>Подпишись на эти аккаунты для участия в раздаче: </h2>
+    return ( <div id ="posts-containter">
+      <h3>Подпишись на эти аккаунты для участия в раздаче: </h3>
     {this.state.users.map(member =>
     <center><tr key={member.username}>
     <Post nickname={member.username} avatar={member.avatar} followlink={member.link} />
 
     </tr></center>
     )}
-  </div>);
+  </div>
+ );
   }
 }
 

@@ -183,6 +183,7 @@ class Child extends React.Component {
     const { users } = this.state;
     
     return (      <div id ="posts-containter">
+      <h2>Подпишись на эти аккаунты для участия в раздаче: </h2>
     {this.state.users.map(member =>
     <center><tr key={member.username}>
     <Post nickname={member.username} avatar={member.avatar} followlink={member.link} />

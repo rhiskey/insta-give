@@ -72,7 +72,7 @@ class Post extends Component {
         <img src={avatar} alt={nickname} className="Post-user-avatar" />
         <span className="Post-user-nickname">{nickname}</span>
         <strong>{caption}</strong> 
-        <a href={followlink} className="Post-follow-link" ><img border="0" alt="FollowUser" src="https://i.pinimg.com/originals/a4/a3/1a/a4a31ada1473bb2bf2f05cbb43698dcb.png" width="120px" height="50px"></img></a>
+        <a href={followlink} className="Post-follow-link" ><img border="0" alt="FollowUser" src="https://i.pinimg.com/originals/a4/a3/1a/a4a31ada1473bb2bf2f05cbb43698dcb.png" width="100px" height="45px"></img></a>
       </article>
     );
     

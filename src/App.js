@@ -5,6 +5,17 @@ import Header from './components/Header';
 import Post from './components/Post';
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { Card, CardWrapper } from 'react-swipeable-cards';
+
+// Create custom end card
+class MyEndCard extends Component {
+  render() {
+    return(
+      <div>Больше нет раздач!</div>
+    );
+  }
+}
+
 class App extends Component {
   //state ={users: []}
 
@@ -12,21 +23,143 @@ class App extends Component {
     super(props);
     this.state = {
       users: [],
-      value: 'Раздача 1'
+      childVisible: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  componentDidMount() {
+    //this.getUsers();
+
+    //Subscribtion MAIN accs
+    let self = this;
+        fetch('https://dry-plains-18498.herokuapp.com/accounts', {
+            method: 'GET'
+        }).then(function(response) {
+            if (response.status >= 400) {
+                throw new Error("Bad response from server");
+            }
+            return response.json();
+        }).then(function(data) {
+            self.setState({users: data});
+        }).catch(err => {
+        console.log('caught it!',err);
+        })
   }
 
-  handleSubmit(event) {
-    alert('Раздача: ' + this.state.value);
-    event.preventDefault();
+  //Cards
+  onSwipe(data) {
+    console.log(data.name + " was swiped.");
+    //showPost
+    //
+    this.setState(prevState => ({ childVisible: !prevState.childVisible }));
   }
 
+  onSwipeLeft(data) {
+    console.log("Свайп влево!");
+  }
+
+  onSwipeRight(data) {
+    console.log("Свайп вправо!");
+  }
+
+  onDoubleTap(data) {
+    console.log(data.name + "Даблклик!");
+    
+    //show users in page after card
+
+      {/* more posts */}
+
+  }
+
+  renderCards() {
+    const cardStyle = {
+      //backgroundColor: "#059FFF"
+      backgroundColor: "#FFFFFF",
+      
+    }
+    let data = [{id: 1, name: "kslvus", avatar: "https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg", info: "Раздача началась 💰Сделаю 5 стопа 🛑 по 5000 тр. Чем больше комментов, тем больше шансов выиграть бабло 🤑Обязательно должен быть подписанным на мою страницу"},
+    {id: 2, name: "Аккаунт 2", avatar: "https://scontent-hel2-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/81640348_596430880914216_5009838966112953440_n.jpg?_nc_ht=scontent-hel2-1.cdninstagram.com&_nc_cat=100&_nc_ohc=PKa9EzwGwGcAX8v7ini&oh=ff91862943213f43df3843666c3188e4&oe=5EFD611F", info: "Условия раздачи 2"},
+    {id: 1, name: "Аккаунт 3", avatar: "", info:"Условие раздачи 3"}];
+    return data.map((d) => {
+      return(
+        <Card style={cardStyle}
+          key={d.id}
+          onSwipe={this.onSwipe.bind(this)}
+          // onSwipeLeft={this.onSwipeLeft.bind(this)}
+          // onSwipeRight={this.onSwipeRight.bind(this)}
+          //onDoubleTap={this.onDoubleTap.bind(this)}>
+          data={d}>
+            <span><h2>{d.name} </h2></span>
+            <img border="4" alt="Giveaway user avatar" src={d.avatar} width="520px" height="380px"></img>
+            <span className ="App-give-text"><button>{d.info}</button></span>
+        </Card>
+      );
+    });
+
+  }
+
+  getEndCard() {
+    return(
+      <MyEndCard/>
+    );
+  }
+  
+  render() {
+    const { users } = this.state;
+    const selvalue = this.state.value;
+    const wrapperStyle = {
+      backgroundColor: "#FFFFFF"
+    }
+
+    return <div className="App">
+      <Header />
+      <section className="App-main">
+        <div><h1>Giveaway на сегодня: </h1></div>
+
+      
+{/* 
+      <CardWrapper addEndCard={this.getEndCard.bind(this)}>
+        <Card>First</Card>
+        <Card>Second</Card>
+      </CardWrapper> */}
+
+      <CardWrapper addEndCard={this.getEndCard.bind(this)}  style={wrapperStyle}>
+        {this.renderCards()}
+      </CardWrapper>
+      
+      </section>
+
+      <section className ="App-user">
+      {
+          this.state.childVisible
+            ? <Child />
+            : null
+        }
+
+     
+        {/* more posts */}
+      </section>
+
+    </div>
+  }
+}
+
+// ReactDOM.render(
+//   <App />,
+//   mountNode
+// );
+export default App;
+
+class Child extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+
+    };
+
+  }
   componentDidMount() {
     //this.getUsers();
 
@@ -46,84 +179,16 @@ class App extends Component {
         })
   }
 
-  //showUsers = user => <div key={user.username}>{user.avatar}</div>
-
   render() {
     const { users } = this.state;
-    const selvalue = this.state.value;
-    return <div className="App">
-      <Header />
-      <section className="App-main">
-        <div><h1>Giveaway на сегодня: </h1></div>
+    
+    return (      <div id ="posts-containter">
+    {this.state.users.map(member =>
+    <center><tr key={member.username}>
+    <Post nickname={member.username} avatar={member.avatar} followlink={member.link} />
 
-      <section className ="App-user">
-       <span><h2>Main ЮЗЕР</h2></span>
-        <img border="0" alt="Main user avatar" src="https://www.kinonews.ru/insimgs/2019/newsimg/newsimg87089.jpg" width="120px" height="120px"></img>
-        <span className ="App-give-text"><button>Раздача конвейера говна подпишись на эти аккаунты </button></span>
-      </section>
-
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Выберите РАЗДАЧУ:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Грейпфрут</option>
-            <option value="lime">Лайм</option>
-            <option value="coconut">Кокос</option>
-            <option value="mango">Манго</option>
-          </select>
-        </label>
-        <input type="submit" value="Выбрать" />
-      </form>
-
-      <div>
-        {this.state.users.map(member =>
-        <center><tr key={member.username}>
-        <Post nickname={member.username} avatar={member.avatar} followlink={member.link} />
-
-        </tr></center>
-        )}
-      </div>
-     
-  
-        {/* more posts */}
-      </section>
-{/* 
-      <section className="Mysql">
-
-      <div className="container"> 
-            <div className="panel panel-default p50 uth-panel">
-                <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Member name</th>
-                            <th>Member avatar</th>
-                            <th>Member Link</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.users.map(member =>
-                        <tr key={member.username}>
-                        <td>{member.username} </td>
-                        <td>{member.link}</td>
-                        <td>{member.avatar}</td>
-                        </tr>
-                    )}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-      </section> */}
-
-    </div>
-
-
+    </tr></center>
+    )}
+  </div>);
   }
 }
-
-// ReactDOM.render(
-//   <App />,
-//   mountNode
-// );
-export default App;

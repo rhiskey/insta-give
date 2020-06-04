@@ -33,9 +33,20 @@ class App extends Component {
     this.state = {
       usersMain: [],
       childVisible: false,
+      followers: [],
       // cards: cards,
       // outOfCards: false
+      expandedRows: [],
+      data: [
+        { id: 1, date: "2014-04-18", total: 121.0, status: "Shipped", name: "A", points: 5, percent: 50 },
+        { id: 2, date: "2014-04-21", total: 121.0, status: "Not Shipped", name: "B", points: 10, percent: 60 },
+        { id: 3, date: "2014-08-09", total: 121.0, status: "Not Shipped", name: "C", points: 15, percent: 70 },
+        { id: 4, date: "2014-04-24", total: 121.0, status: "Shipped", name: "D", points: 20, percent: 80 },
+        { id: 5, date: "2014-04-26", total: 121.0, status: "Shipped", name: "E", points: 25, percent: 90 },
+      ],
     };
+
+
     this.onClickMainUser = this.onClickMainUser.bind(this);
 
   }
@@ -54,6 +65,19 @@ class App extends Component {
       return response.json();
     }).then(function (data) {
       self.setState({ usersMain: data });
+    }).catch(err => {
+      console.log('caught it!', err);
+    })
+
+    fetch('https://dry-plains-18498.herokuapp.com/follow', {
+      method: 'GET'
+    }).then(function (response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    }).then(function (data) {
+      self.setState({ followers: data });
     }).catch(err => {
       console.log('caught it!', err);
     })
@@ -127,8 +151,78 @@ class App extends Component {
     );
   }
 
-  onClickMainUser(data){
+  onClickMainUser(data) {
     this.setState(prevState => ({ childVisible: !prevState.childVisible }));
+  }
+
+  handleRowClick(rowId) {
+    const currentExpandedRows = this.state.expandedRows;
+    const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
+
+    const newExpandedRows = isRowCurrentlyExpanded ?
+      currentExpandedRows.filter(id => id !== rowId) :
+      currentExpandedRows.concat(rowId);
+
+    this.setState({ expandedRows: newExpandedRows });
+  }
+
+  renderItem(item) {
+    const clickCallback = () => this.handleRowClick(item.id);
+    const itemRows = [
+      <tr onClick={clickCallback} key={"row-data-" + item.id}>
+        <td>
+        <a href={item.link}>
+                        <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                      </a>
+        </td>
+        <td><a href={item.link}>{item.username}</a> </td>
+        <td>{item.giveinfo}</td>
+      </tr>
+    ];
+
+    //Followers
+    if (this.state.expandedRows.includes(item.id)) {
+      itemRows.push(
+        <tr key={"row-expanded-" + item.id}>
+
+          <td>{item.followers}</td>
+          
+
+          {this.state.followers.map(member => {
+            //if(this.props.item.username= member.ee_name)
+            return (
+              <tr key={member.ee_name}>
+                 <td>
+                  <a href={item.link}>
+                    <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                  </a>
+                </td>
+                <td>
+                  <a href={member.link} class="btn btn-primary">{member.er_name}</a>
+                </td>
+                {/* <td dangerouslySetInnerHTML={{__html: member.Ban ? '<input checked="checked" class="check-box" disabled="disabled" type="checkbox">' : '<input class="check-box" disabled="disabled" type="checkbox">'}}></td> */}
+              </tr> );})}
+
+          
+                 {/* <td>
+                  <a href={item.link}>
+                    <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                  </a>
+                </td>
+                <td>
+                  <a href={item.link}>{item.username}</a></td>
+                <td>
+                  <a href={item.link} class="btn btn-primary">Подпишись</a>
+                </td> */}
+
+
+          {/* <td>{item.points}</td>
+                <td>{item.percent}</td> */}
+        </tr>
+      );
+    }
+
+    return itemRows;
   }
 
   render() {
@@ -141,10 +235,42 @@ class App extends Component {
       alignItems: 'center',
     }
 
+    let allItemRows = [];
+
+
+    // this.state.data.forEach(item => {
+    //   const perItemRows = this.renderItem(item);
+    //   allItemRows = allItemRows.concat(perItemRows);
+    // });
+
+    this.state.usersMain.map(item => {
+      const perItemRows = this.renderItem(item);
+      allItemRows = allItemRows.concat(perItemRows);
+    });
+
+    // this.state.followers.map(user => {
+    // });
+
     return <div className="App">
       <Header />
       <section className="App-main">
         <div><h1>Giveaway на сегодня: </h1></div>
+        <center><table className="Giveaway-table">            <thead>
+          <tr>
+            <th>
+              Аватар
+                    </th>
+            <th>
+              Имя пользователя
+                   </th>
+            <th>
+              Инфо раздачи
+                    </th>
+          </tr>
+        </thead>
+          <tbody>{allItemRows}   </tbody></table>
+        </center>
+
         <div>
 
           {/* <CardWrapper addEndCard={this.getEndCard.bind(this)}  style={wrapperStyle} >
@@ -152,53 +278,10 @@ class App extends Component {
         {this.renderCards()}
       </CardWrapper> */}
 
-          <center><table className="Giveaway-table" >
-            <thead>
-              <tr>
-                <th>
-                  Аватар
-                    </th>
-                <th>
-                  Имя пользователя
-                   </th>
-                <th>
-                  Инфо раздачи
-                    </th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.usersMain.map(member => {
-                return (
-                  <tr key={member.username}>
-                    <td>
-                      <a href={member.link}>
-                        <img className="instaImage" border="0" alt="FollowImage" src={member.avatar} width="100" height="100"></img>
-                      </a>
-                    </td>
-                    <td>
-                      <a href={member.link}>{member.username}</a></td>
-                    <td>
-                      <b onClick={this.onClickMainUser}>{member.giveinfo}</b>
-                    </td>
-                    <td>
-                    <section className="App-user">
-                        {
-                          this.state.childVisible
-                            ? <Child />
-                            : null
-                        }
-                      </section>
-                    </td>
-                    {/* <td dangerouslySetInnerHTML={{__html: member.Ban ? '<input checked="checked" class="check-box" disabled="disabled" type="checkbox">' : '<input class="check-box" disabled="disabled" type="checkbox">'}}></td> */}
-                  </tr>
-                );
-              })
-              }
-            </tbody>
-          </table></center>
         </div>
+
       </section>
-      
+
 
 
     </div>
@@ -215,8 +298,7 @@ class Child extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
-
+      users: []
     };
 
   }

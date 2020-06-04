@@ -72,6 +72,10 @@ td {
   text-align: left;
   padding: 5px; /* Поля вокруг содержимого ячеек */
   /* border: 1px solid black; Граница вокруг ячеек */
+  /* border-right: 1px solid #515BD4; */ /*вертикальный разделитель*/
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 @keyframes App-logo-spin {
   from {

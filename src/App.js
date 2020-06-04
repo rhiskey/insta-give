@@ -1,20 +1,16 @@
 'use strict';
-import React, { Component } from 'react';
+import React, { Component, Table, Fragment, useState  } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import Post from './components/Post';
 import "bootstrap/dist/css/bootstrap.min.css";
-import styled, { keyframes } from 'styled-components';
-
 import { Card, CardWrapper } from 'react-swipeable-cards';
+import styled from "styled-components";
+import { useTable, useSortBy } from "react-table";
 
-import { fadeInDown } from 'react-animations';
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const fadInDonwAnimation = keyframes`${fadeInDown}`;
-const fadeDiv = styled.div`
-  animation: 3s ${fadInDonwAnimation};
-`;
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -34,16 +30,11 @@ class App extends Component {
       usersMain: [],
       childVisible: false,
       followers: [],
+      allJoin: [],
       // cards: cards,
       // outOfCards: false
       expandedRows: [],
-      data: [
-        { id: 1, date: "2014-04-18", total: 121.0, status: "Shipped", name: "A", points: 5, percent: 50 },
-        { id: 2, date: "2014-04-21", total: 121.0, status: "Not Shipped", name: "B", points: 10, percent: 60 },
-        { id: 3, date: "2014-08-09", total: 121.0, status: "Not Shipped", name: "C", points: 15, percent: 70 },
-        { id: 4, date: "2014-04-24", total: 121.0, status: "Shipped", name: "D", points: 20, percent: 80 },
-        { id: 5, date: "2014-04-26", total: 121.0, status: "Shipped", name: "E", points: 25, percent: 90 },
-      ],
+      
     };
 
 
@@ -81,8 +72,31 @@ class App extends Component {
     }).catch(err => {
       console.log('caught it!', err);
     })
+    fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+      method: 'GET'
+    }).then(function (response) {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    }).then(function (data) {
+      self.setState({ allJoin: data });
+    }).catch(err => {
+      console.log('caught it!', err);
+    })
+
   }
 
+  // fetchMoreData = () => {
+  //   // a fake async api call like which sends
+  //   // 3 more records in 1.5 secs
+  //   setTimeout(() => {
+  //     this.setState({
+  //       usersMain: this.state.usersMain.concat(Array.from({ length: 3 }))
+  //     });
+  //   }, 1500);
+  // };
+  
   //Cards
   onSwipe(data) {
     console.log(data.name + " was swiped.");
@@ -155,6 +169,12 @@ class App extends Component {
     this.setState(prevState => ({ childVisible: !prevState.childVisible }));
   }
 
+  handleMouseEnter = (e) => {
+    this.setState({
+      left: e.target.getBoundingClientRect().x - 50,
+    });
+  }
+
   handleRowClick(rowId) {
     const currentExpandedRows = this.state.expandedRows;
     const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
@@ -168,8 +188,9 @@ class App extends Component {
 
   renderItem(item) {
     const clickCallback = () => this.handleRowClick(item.id);
+
     const itemRows = [
-      <tr onClick={clickCallback} key={"row-data-" + item.id}>
+      <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} key={"row-data-" + item.id}>
         <td>
         <a target="_blank" rel="noopener noreferrer" href={item.link}>
                         <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
@@ -185,22 +206,21 @@ class App extends Component {
       itemRows.push(
         <tr key={"row-expanded-" + item.id}>
 
-          <td>{item.followers}</td>
+          {/* <td>{item.followers}</td> */}
           
 
-          {this.state.followers.map(member => {
-            //if(this.props.item.username= member.ee_name)
+          {this.state.allJoin.map(member => {
+            if(item.username== member.username)
             return (
-              <tr key={member.ee_name}>
+              <tr key={member.id}>
                  <td>
-                  <a target="_blank" rel="noopener noreferrer" href={item.link}>
-                    <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                  <a target="_blank" rel="noopener noreferrer" href={member.link}>
+                    <img className="instaImage" border="0" alt="FollowImage" src={member.avatar} width="100" height="100"></img>
                   </a>
                 </td>
                 <td>
-                  <a target="_blank" rel="noopener noreferrer" href={member.link} class="btn btn-primary">{member.er_name}</a>
-                </td>
-                {/* <td dangerouslySetInnerHTML={{__html: member.Ban ? '<input checked="checked" class="check-box" disabled="disabled" type="checkbox">' : '<input class="check-box" disabled="disabled" type="checkbox">'}}></td> */}
+                  <a target="_blank" rel="noopener noreferrer" href={member.link} class="btn btn-primary">Подпишись</a>
+                </td>  
               </tr> );})}
 
           
@@ -254,8 +274,10 @@ class App extends Component {
     return <div className="App">
       <Header />
       <section className="App-main">
-        <div><h1>Giveaway на сегодня: </h1></div>
-        <center><table className="Giveaway-table">            <thead>
+        <div><h1>Активные Giveaway: </h1></div>
+        <center>
+          <table  className="Giveaway-table">            
+        <thead>
           <tr>
             <th>
               Аватар
@@ -268,7 +290,18 @@ class App extends Component {
                     </th>
           </tr>
         </thead>
-          <tbody>{allItemRows}   </tbody></table>
+          <tbody>
+          {/* <InfiniteScroll
+    dataLength={this.state.usersMain.length}
+    next={this.fetchMoreData}
+    hasMore={true}
+    loader={<h4>Загрузка...</h4>}
+  >
+
+  </InfiniteScroll> */}
+            {allItemRows}   
+          </tbody>
+          </table>
         </center>
 
         <div>

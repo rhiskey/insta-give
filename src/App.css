@@ -55,17 +55,23 @@
   height: auto;
 }
 table {
-  border-collapse: collapse;
+  width: 90%; /* Ширина таблицы */
+  /* border: 2px double black; Рамка вокруг таблицы */
+  border-collapse: collapse; /* Отображать только одинарные линии */
 }
 th  {
-  padding: 15px;
-  text-align: left;
-  background-color: #8134AF;
+
+  background-color: #8134AF; /*цвет ячеек */
   color: white;
+  text-align: left; /* Выравнивание по левому краю */
+
+  padding: 5px; /* Поля вокруг содержимого ячеек */
+  /* border: 1px solid black; Граница вокруг ячеек */
 }
 td {
-  padding: 15px;
   text-align: left;
+  padding: 5px; /* Поля вокруг содержимого ячеек */
+  /* border: 1px solid black; Граница вокруг ячеек */
 }
 @keyframes App-logo-spin {
   from {

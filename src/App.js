@@ -171,11 +171,11 @@ class App extends Component {
     const itemRows = [
       <tr onClick={clickCallback} key={"row-data-" + item.id}>
         <td>
-        <a href={item.link}>
+        <a target="_blank" rel="noopener noreferrer" href={item.link}>
                         <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                       </a>
         </td>
-        <td><a href={item.link}>{item.username}</a> </td>
+        <td><a target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </td>
         <td>{item.giveinfo}</td>
       </tr>
     ];
@@ -193,12 +193,12 @@ class App extends Component {
             return (
               <tr key={member.ee_name}>
                  <td>
-                  <a href={item.link}>
+                  <a target="_blank" rel="noopener noreferrer" href={item.link}>
                     <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                   </a>
                 </td>
                 <td>
-                  <a href={member.link} class="btn btn-primary">{member.er_name}</a>
+                  <a target="_blank" rel="noopener noreferrer" href={member.link} class="btn btn-primary">{member.er_name}</a>
                 </td>
                 {/* <td dangerouslySetInnerHTML={{__html: member.Ban ? '<input checked="checked" class="check-box" disabled="disabled" type="checkbox">' : '<input class="check-box" disabled="disabled" type="checkbox">'}}></td> */}
               </tr> );})}

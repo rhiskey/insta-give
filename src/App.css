@@ -58,7 +58,14 @@ table {
   width: 90%; /* Ширина таблицы */
   /* border: 2px double black; Рамка вокруг таблицы */
   border-collapse: collapse; /* Отображать только одинарные линии */
+  counter-reset: row-num;
 }
+table tr {
+  counter-increment: row-num;
+}
+/* table tr td:first-child::before {
+  content: counter(row-num) ". ";
+} */
 th  {
 
   background-color: #8134AF; /*цвет ячеек */
@@ -76,6 +83,9 @@ td {
 }
 tr:nth-child(even) {
   background-color: #f2f2f2;
+}
+.paddingRow{
+  padding: 5px 10px 5px 5px;
 }
 @keyframes App-logo-spin {
   from {

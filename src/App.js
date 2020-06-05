@@ -86,15 +86,15 @@ class App extends Component {
 
   }
 
-  // fetchMoreData = () => {
-  //   // a fake async api call like which sends
-  //   // 3 more records in 1.5 secs
-  //   setTimeout(() => {
-  //     this.setState({
-  //       usersMain: this.state.usersMain.concat(Array.from({ length: 3 }))
-  //     });
-  //   }, 1500);
-  // };
+  fetchMoreData = () => {
+    // a fake async api call like which sends
+    // 20 more records in 1.5 secs
+    setTimeout(() => {
+      this.setState({
+        //usersMain: this.state.usersMain.concat(Array.from({ length: 20 }))
+      });
+    }, 1500);
+  };
   
   //Cards
   onSwipe(data) {
@@ -194,7 +194,7 @@ class App extends Component {
 
   renderItem(item) {
     const clickCallback = () => this.handleRowClick(item.id);
-
+ 
     const itemRows = [
       <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave= {this.handleMouseLeave} key={"row-data-" + item.id}>
         <td>
@@ -202,7 +202,7 @@ class App extends Component {
                         <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                       </a>
 
-        <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> 
+                      <b><a className="App-give-text" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
         </td>
         <td className="App-give-text">{item.giveinfo}</td>
       </tr>
@@ -212,23 +212,23 @@ class App extends Component {
     if (this.state.expandedRows.includes(item.id)) {
       itemRows.push(
         <tr key={"row-expanded-" + item.id}>
-          Спонсоры:
           {/* <td>{item.followers}</td> */}
-          
+          Спонсоры:
 
-          {this.state.allJoin.map(follower => {
-            if(item.username== follower.username)
+          {this.state.allJoin.map(collumn => {
+            if(item.username== collumn.username)
             return (
-              <table key={follower.id}>
-                 <td>
-                  <a target="_blank" rel="noopener noreferrer" href={follower.link}>
-                    <img className="instaImage" border="0" alt="FollowImage" src={follower.avatar} width="100" height="100"></img>
+              <tr key={collumn.id}>
+                 <td className="paddingRow">>
+                  <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
+                    <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
                   </a>
+                  <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
                 </td>
                 <td>
-                  <a target="_blank" rel="noopener noreferrer" href={follower.link} class="btn btn-primary">Подпишись</a>
+                  <a align="right" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
                 </td>
-              </table> );})}
+              </tr> );})}
 
           
                  {/* <td>
@@ -306,7 +306,7 @@ class App extends Component {
   >
 
   </InfiniteScroll> */}
-            {allItemRows}   
+          {allItemRows}   
           </tbody>
           </table>
         </center>

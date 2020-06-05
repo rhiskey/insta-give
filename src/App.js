@@ -338,7 +338,7 @@ class App extends Component {
         buttonText="Войти через Instagram"
         onSuccess={responseInstagram}
         onFailure={responseInstagram}
-        implicitAuth = {getAccessToken}
+        //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
       />
       {/* document.getElementById('instagramButton') */}
       </div >

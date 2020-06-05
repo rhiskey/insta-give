@@ -276,30 +276,32 @@ class App extends Component {
       //respVar = response;
       
       //Передаем код авторизации для получения токена
-      // const backendresponse = axios({ //await
-      //   method: 'post',
-      //   url: 'https://dry-plains-18498.herokuapp.com/oauth',
-      //   data: response,
-      //   config: { headers: { 'Content-Type': 'multipart/form-data' } }
-      // })
-      //   .then(function (resp) {
-      //     console.log('👉 Returned data:', resp);
-      //   })
-      //   .catch(function (e) {
-      //     console.log(`😱 Axios request failed: ${e}`);
-      //   });
+      const backendresponse = axios({ //await
+        method: 'post',
+        url: 'https://dry-plains-18498.herokuapp.com/oauth',
+        data: response,
+        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+      })
+        .then(function (resp) {
+          console.log('👉 Returned data:', resp);
+        })
+        .catch(function (e) {
+          console.log(`😱 Axios request failed: ${e}`);
+        });
 
-        fetch('https://dry-plains-18498.herokuapp.com/oauth', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              user: {
-                  authCode: response
-              }
-          })
-      });
+      //   fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+      //     method: 'POST',
+      //     headers: {
+      //         'Content-Type': 'application/json'
+      //     },
+      //     body: JSON.stringify({
+      //         user: {
+      //             authCode: response
+      //         }
+      //     })
+      // });
+
+      // then get token from 'https://dry-plains-18498.herokuapp.com/accestoken'
 
     }
   

@@ -273,6 +273,8 @@ class App extends Component {
       respVar = response;
     }
 
+    var getAccessToken = true;
+
     // this.state.data.forEach(item => {
     //   const perItemRows = this.renderItem(item);
     //   allItemRows = allItemRows.concat(perItemRows);
@@ -327,35 +329,20 @@ class App extends Component {
       </CardWrapper> */}
 
         </div>
-
       </section>
-
-      
       <div>
         {/* <button className="instagramButton"></button> */}
-
-        {/* <InstagramLogin
-          clientId="5fd2f11482844c5eba963747a5f34556"
-          onSuccess={responseInstagram}
-          onFailure={responseInstagram}
-        >
-          <FontAwesome
-            name="instagram"
-          />
-          <span> Login with Instagram</span>
-        </InstagramLogin> */}
-
-        {respVar}
-
+        <InstagramLogin
+        clientId="296560698030895"
+        scope="user_profile,user_media"
+        buttonText="Войти через Instagram"
+        onSuccess={responseInstagram}
+        onFailure={responseInstagram}
+        implicitAuth = {getAccessToken}
+      />
+      {/* document.getElementById('instagramButton') */}
       </div >
-      <InstagramLogin
-    clientId="296560698030895"
-    scope="user_profile,user_media"
-    buttonText="Войти через Instagram"
-    onSuccess={responseInstagram}
-    onFailure={responseInstagram}
-  />
-  {/* document.getElementById('instagramButton') */}
+
     </div>
   }
 }

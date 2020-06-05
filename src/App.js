@@ -1,5 +1,5 @@
 'use strict';
-import React, { Component, Table, Fragment, useState  } from 'react';
+import React, { Component, Table, Fragment, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
@@ -10,6 +10,8 @@ import styled from "styled-components";
 import { useTable, useSortBy } from "react-table";
 
 import InfiniteScroll from "react-infinite-scroll-component";
+import InstagramLogin from 'react-instagram-login';
+import ReactDOM from 'react-dom';
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -33,7 +35,7 @@ class App extends Component {
       // cards: cards,
       // outOfCards: false
       expandedRows: [],
-      
+
     };
 
 
@@ -94,7 +96,7 @@ class App extends Component {
       });
     }, 1500);
   };
-  
+
   //Cards
   onSwipe(data) {
     console.log(data.name + " was swiped.");
@@ -178,7 +180,7 @@ class App extends Component {
     //e.target.style.background = 'white';
     e.target.borderWidth = 2;
   }
-    
+
 
   handleRowClick(rowId) {
     const currentExpandedRows = this.state.expandedRows;
@@ -195,14 +197,14 @@ class App extends Component {
     const clickCallback = () => this.handleRowClick(item.id);
 
     const itemRows = [
-      <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave= {this.handleMouseLeave} key={"row-data-" + item.id}>
+      <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
         <td>
-        <a target="_blank" rel="noopener noreferrer" href={item.link}>
-                        <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-                      </a>
+          <a target="_blank" rel="noopener noreferrer" href={item.link}>
+            <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+          </a>
 
-        
-        <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+
+          <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
         </td>
         <td className="App-give-text">{item.giveinfo}</td>
       </tr>
@@ -216,22 +218,23 @@ class App extends Component {
           Спонсоры:
 
           {this.state.allJoin.map(collumn => {
-            if(item.username== collumn.username)
-            return (
-              <tr key={collumn.id}>
-                 <td className="paddingRow">>
+            if (item.username == collumn.username)
+              return (
+                <tr key={collumn.id}>
+                  <td className="paddingRow">>
                   <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
-                    <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
-                  </a>
-                  <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
-                </td>
-                <td>
-                  <a align="right" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
-                </td>
-              </tr> );})}
+                      <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
+                    </a>
+                    <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
+                  </td>
+                  <td>
+                    <a align="right" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
+                  </td>
+                </tr>);
+          })}
 
-          
-                 {/* <td>
+
+          {/* <td>
                   <a href={item.link}>
                     <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                   </a>
@@ -261,9 +264,14 @@ class App extends Component {
       justifyContent: 'center',
       alignItems: 'center',
     }
-
     let allItemRows = [];
 
+
+    let respVar = "";
+    const responseInstagram = (response) => {
+      console.log(response);
+      respVar = response;
+    }
 
     // this.state.data.forEach(item => {
     //   const perItemRows = this.renderItem(item);
@@ -283,22 +291,22 @@ class App extends Component {
       <section className="App-main">
         <div><h1>Активные Giveaway: </h1></div>
         <center>
-          <table  className="Giveaway-table">            
-        <thead>
-          <tr>
-            {/* <th>
+          <table className="Giveaway-table">
+            <thead>
+              <tr>
+                {/* <th>
               
                     </th> */}
-            <th>
-              Организатор
+                <th>
+                  Организатор
                    </th>
-            <th>
-              Инфо раздачи
+                <th>
+                  Инфо раздачи
                     </th>
-          </tr>
-        </thead>
-          <tbody>
-          {/* <InfiniteScroll
+              </tr>
+            </thead>
+            <tbody>
+              {/* <InfiniteScroll
     dataLength={this.state.usersMain.length}
     next={this.fetchMoreData}
     hasMore={true}
@@ -306,8 +314,8 @@ class App extends Component {
   >
 
   </InfiniteScroll> */}
-          {allItemRows}   
-          </tbody>
+              {allItemRows}
+            </tbody>
           </table>
         </center>
 
@@ -322,11 +330,45 @@ class App extends Component {
 
       </section>
 
-      <a href=""class="btn btn-secondary">Войти через Instagram</a>
+      
+      <div>
+        {/* <button className="instagramButton"></button> */}
 
+        {/* <InstagramLogin
+          clientId="5fd2f11482844c5eba963747a5f34556"
+          onSuccess={responseInstagram}
+          onFailure={responseInstagram}
+        >
+          <FontAwesome
+            name="instagram"
+          />
+          <span> Login with Instagram</span>
+        </InstagramLogin> */}
+
+        {respVar}
+
+      </div >
+      <InstagramLogin
+    clientId="296560698030895"
+    scope="user_profile,user_media"
+    buttonText="Войти через Instagram"
+    onSuccess={responseInstagram}
+    onFailure={responseInstagram}
+  />
+  {/* document.getElementById('instagramButton') */}
     </div>
   }
 }
+
+// ReactDOM.render(
+//   <InstagramLogin
+//     clientId="296560698030895"
+//     buttonText="Login"
+//     onSuccess={responseInstagram}
+//     onFailure={responseInstagram}
+//   />,
+//   document.getElementById('instagramButton')
+// );
 
 // ReactDOM.render(
 //   <App />,

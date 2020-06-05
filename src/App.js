@@ -39,7 +39,6 @@ class App extends Component {
 
 
     this.onClickMainUser = this.onClickMainUser.bind(this);
-
   }
 
   componentDidMount() {
@@ -171,9 +170,16 @@ class App extends Component {
 
   handleMouseEnter = (e) => {
     this.setState({
-      left: e.target.getBoundingClientRect().x - 50,
+      left: e.target.getBoundingClientRect().x - 4,
     });
+    //e.target.style. = 'purple';
+    e.target.borderWidth = 2;
   }
+  handleMouseLeave = (e) => {
+    //e.target.style.background = 'white';
+    e.target.borderWidth = 2;
+  }
+    
 
   handleRowClick(rowId) {
     const currentExpandedRows = this.state.expandedRows;
@@ -190,14 +196,15 @@ class App extends Component {
     const clickCallback = () => this.handleRowClick(item.id);
 
     const itemRows = [
-      <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} key={"row-data-" + item.id}>
+      <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave= {this.handleMouseLeave} key={"row-data-" + item.id}>
         <td>
         <a target="_blank" rel="noopener noreferrer" href={item.link}>
                         <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                       </a>
+
+        <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> 
         </td>
-        <td><a target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </td>
-        <td>{item.giveinfo}</td>
+        <td className="App-give-text">{item.giveinfo}</td>
       </tr>
     ];
 
@@ -205,23 +212,23 @@ class App extends Component {
     if (this.state.expandedRows.includes(item.id)) {
       itemRows.push(
         <tr key={"row-expanded-" + item.id}>
-
+          Спонсоры:
           {/* <td>{item.followers}</td> */}
           
 
-          {this.state.allJoin.map(member => {
-            if(item.username== member.username)
+          {this.state.allJoin.map(follower => {
+            if(item.username== follower.username)
             return (
-              <tr key={member.id}>
+              <table key={follower.id}>
                  <td>
-                  <a target="_blank" rel="noopener noreferrer" href={member.link}>
-                    <img className="instaImage" border="0" alt="FollowImage" src={member.avatar} width="100" height="100"></img>
+                  <a target="_blank" rel="noopener noreferrer" href={follower.link}>
+                    <img className="instaImage" border="0" alt="FollowImage" src={follower.avatar} width="100" height="100"></img>
                   </a>
                 </td>
                 <td>
-                  <a target="_blank" rel="noopener noreferrer" href={member.link} class="btn btn-primary">Подпишись</a>
-                </td>  
-              </tr> );})}
+                  <a target="_blank" rel="noopener noreferrer" href={follower.link} class="btn btn-primary">Подпишись</a>
+                </td>
+              </table> );})}
 
           
                  {/* <td>
@@ -279,11 +286,11 @@ class App extends Component {
           <table  className="Giveaway-table">            
         <thead>
           <tr>
+            {/* <th>
+              
+                    </th> */}
             <th>
-              Аватар
-                    </th>
-            <th>
-              Имя пользователя
+              Организатор
                    </th>
             <th>
               Инфо раздачи

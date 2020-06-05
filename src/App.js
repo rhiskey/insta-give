@@ -12,6 +12,7 @@ import { useTable, useSortBy } from "react-table";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InstagramLogin from 'react-instagram-login';
 import ReactDOM from 'react-dom';
+import axios from "axios";
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -30,7 +31,7 @@ class App extends Component {
     this.state = {
       usersMain: [],
       childVisible: false,
-      followers: [],
+      //followers: [],
       allJoin: [],
       // cards: cards,
       // outOfCards: false
@@ -42,12 +43,12 @@ class App extends Component {
     this.onClickMainUser = this.onClickMainUser.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     //this.getUsers();
 
     //Subscribtion MAIN accs
     let self = this;
-    fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+    await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
       method: 'GET'
     }).then(function (response) {
       if (response.status >= 400) {
@@ -60,19 +61,19 @@ class App extends Component {
       console.log('caught it!', err);
     })
 
-    fetch('https://dry-plains-18498.herokuapp.com/follow', {
-      method: 'GET'
-    }).then(function (response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    }).then(function (data) {
-      self.setState({ followers: data });
-    }).catch(err => {
-      console.log('caught it!', err);
-    })
-    fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+    // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
+    //   method: 'GET'
+    // }).then(function (response) {
+    //   if (response.status >= 400) {
+    //     throw new Error("Bad response from server");
+    //   }
+    //   return response.json();
+    // }).then(function (data) {
+    //   self.setState({ followers: data });
+    // }).catch(err => {
+    //   console.log('caught it!', err);
+    // })
+    await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
       method: 'GET'
     }).then(function (response) {
       if (response.status >= 400) {
@@ -255,6 +256,7 @@ class App extends Component {
     return itemRows;
   }
 
+
   render() {
     const { users } = this.state;
     const selvalue = this.state.value;
@@ -268,10 +270,39 @@ class App extends Component {
 
 
     let respVar = "";
+
     const responseInstagram = (response) => {
       console.log(response);
-      respVar = response;
+      //respVar = response;
+      
+      //Передаем код авторизации для получения токена
+      // const backendresponse = axios({ //await
+      //   method: 'post',
+      //   url: 'https://dry-plains-18498.herokuapp.com/oauth',
+      //   data: response,
+      //   config: { headers: { 'Content-Type': 'multipart/form-data' } }
+      // })
+      //   .then(function (resp) {
+      //     console.log('👉 Returned data:', resp);
+      //   })
+      //   .catch(function (e) {
+      //     console.log(`😱 Axios request failed: ${e}`);
+      //   });
+
+        fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              user: {
+                  authCode: response
+              }
+          })
+      });
+
     }
+  
 
     var getAccessToken = true;
 
@@ -333,14 +364,14 @@ class App extends Component {
       <div>
         {/* <button className="instagramButton"></button> */}
         <InstagramLogin
-        clientId="296560698030895"
-        scope="user_profile,user_media"
-        buttonText="Войти через Instagram"
-        onSuccess={responseInstagram}
-        onFailure={responseInstagram}
+          clientId="296560698030895"
+          scope="user_profile,user_media"
+          buttonText="Войти через Instagram"
+          onSuccess={responseInstagram}
+          onFailure={responseInstagram}
         //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
-      />
-      {/* document.getElementById('instagramButton') */}
+        />
+        {/* document.getElementById('instagramButton') */}
       </div >
 
     </div>
@@ -371,7 +402,7 @@ class Child extends React.Component {
     };
 
   }
-  componentDidMount() {
+  async componentDidMount() {
     //this.getUsers();
 
     //Subscribtion accs

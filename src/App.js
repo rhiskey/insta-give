@@ -38,8 +38,6 @@ class App extends Component {
       expandedRows: [],
       acessToken: []
     };
-
-
     this.onClickMainUser = this.onClickMainUser.bind(this);
   }
 
@@ -267,9 +265,8 @@ class App extends Component {
       alignItems: 'center',
     }
     let allItemRows = [];
-
-
-    let respVar = "";
+    let respVar = "";  
+    var getAccessToken = true;
 
     const responseInstagram = (response) => {
       console.log(response);
@@ -288,7 +285,7 @@ class App extends Component {
       //   .catch(function (e) {
       //     console.log(`😱 Axios request failed: ${e}`);
       //   });
-
+  
         fetch('https://dry-plains-18498.herokuapp.com/oauth', {
           method: 'POST',
           headers: {
@@ -299,18 +296,13 @@ class App extends Component {
                   authCode: response
               }
           })
-      }).then(function (data) {
-        self.setState({ acessToken: data });
       }).catch(err => {
         console.log('caught it!', err);
       });
-
-      // then get token from 'https://dry-plains-18498.herokuapp.com/accestoken'
-
-    }
   
-
-    var getAccessToken = true;
+      // then get token from 'https://dry-plains-18498.herokuapp.com/accestoken'
+  
+    }
 
     // this.state.data.forEach(item => {
     //   const perItemRows = this.renderItem(item);

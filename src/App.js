@@ -322,11 +322,7 @@ class App extends Component {
 
       </section>
 
-      <a href="https://api.instagram.com/oauth/authorize
-?client_id=296560698030895
-  &redirect_uri=https://insta-give.herokuapp.com/auth
-  &scope=user_profile,user_followers,
-  &response_type=code"class="btn btn-secondary">Войти через Instagram</a>
+      <a href=""class="btn btn-secondary">Войти через Instagram</a>
 
     </div>
   }

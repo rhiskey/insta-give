@@ -11,7 +11,6 @@ import { useTable, useSortBy } from "react-table";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 
-
 // Create custom end card
 class MyEndCard extends Component {
   render() {
@@ -194,13 +193,15 @@ class App extends Component {
 
   renderItem(item) {
     const clickCallback = () => this.handleRowClick(item.id);
- 
+
     const itemRows = [
       <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave= {this.handleMouseLeave} key={"row-data-" + item.id}>
         <td>
         <a target="_blank" rel="noopener noreferrer" href={item.link}>
                         <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                       </a>
+
+        
         <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
         </td>
         <td className="App-give-text">{item.giveinfo}</td>
@@ -321,7 +322,11 @@ class App extends Component {
 
       </section>
 
-
+      <a href="https://api.instagram.com/oauth/authorize
+?client_id=296560698030895
+  &redirect_uri=https://insta-give.herokuapp.com/auth
+  &scope=user_profile,user_followers,
+  &response_type=code"class="btn btn-secondary">Войти через Instagram</a>
 
     </div>
   }

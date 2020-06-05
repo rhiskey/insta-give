@@ -201,8 +201,7 @@ class App extends Component {
         <a target="_blank" rel="noopener noreferrer" href={item.link}>
                         <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                       </a>
-
-                      <b><a className="App-give-text" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+        <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
         </td>
         <td className="App-give-text">{item.giveinfo}</td>
       </tr>

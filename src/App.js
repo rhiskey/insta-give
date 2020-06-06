@@ -286,17 +286,20 @@ class App extends Component {
       //     console.log(`😱 Axios request failed: ${e}`);
       //   });
   
-        fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+      fetch('https://dry-plains-18498.herokuapp.com/oauth', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              user: {
+              // user: {
                   authCode: response
-              }
+              // }
           })
-      }).catch(err => {
+      }).then(function (resp) {
+             console.log('👉 Returned access_token:', resp);
+      })
+      .catch(err => {
         console.log('caught it!', err);
       });
   

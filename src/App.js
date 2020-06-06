@@ -283,7 +283,8 @@ class App extends Component {
           })
       }).then(function (resp) {
         //Получаем обратно токен
-             console.log('👉 Returned access_token:', resp.access_token);
+        var user = JSON.parse(resp);
+             console.log('👉 Returned access_token:', user.access_token);
       })
       .catch(err => {
         console.log('caught it!', err);

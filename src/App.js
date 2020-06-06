@@ -40,12 +40,12 @@ class App extends Component {
     this.onClickMainUser = this.onClickMainUser.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     //this.getUsers();
 
     //Subscribtion MAIN accs
     let self = this;
-    await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+    fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
       method: 'GET'
     }).then(function (response) {
       if (response.status >= 400) {
@@ -70,7 +70,7 @@ class App extends Component {
     // }).catch(err => {
     //   console.log('caught it!', err);
     // })
-    await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+    fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
       method: 'GET'
     }).then(function (response) {
       if (response.status >= 400) {

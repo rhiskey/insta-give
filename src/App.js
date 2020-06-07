@@ -291,10 +291,15 @@ class App extends Component {
       // })
       .then(response2 => {
         if (response2.ok) { 
-            console.log(response2.text);
-            console.log(response2.body);}
+            //console.log(response2.text());
+            //console.log(response2.body);}
+            return response2.text();
+          }
           }
         )
+      .then(function(data) {
+        console.log(data); // this will be a string
+      })
       .catch(err => {
         console.log('caught it!', err);
       });

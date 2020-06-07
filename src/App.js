@@ -281,12 +281,20 @@ class App extends Component {
                   authCode: response
               // }
           })
-      }).then(function (resp) {
-        //Получаем обратно токен
-        //var user = JSON.parse(resp);
-             //console.log('👉 JSON Returned access_token:', user.access_token);
-             console.log('👉 Returned access_token:', resp.access_token);
-             console.log('👉 Returned response:', resp);
+      })
+      // .then(function (resp) {
+      //   //Получаем обратно токен
+      //   //var user = JSON.parse(resp);
+      //        //console.log('👉 JSON Returned access_token:', user.access_token);
+      //        console.log('👉 Returned access_token:', resp.access_token);
+      //        console.log('👉 Returned response:', resp);
+      // })
+      .then(response2 => {
+        if (response2.ok) {
+          response2.json().then(json => {
+            console.log(json);
+          });
+        }
       })
       .catch(err => {
         console.log('caught it!', err);

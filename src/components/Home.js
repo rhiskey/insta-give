@@ -1,10 +1,11 @@
 import React from 'react';
- 
+import './Home.css'
+
 const home = () => {
     return (
-       <div>
+       <div className="Home-menu">
           <h1>Insta-Give</h1>
-           <p>сервис проверенных раздач в Instagram</p>
+           <p>Сервис проверенных раздач в Instagram</p>
        </div>
     );
 }

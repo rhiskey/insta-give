@@ -1,11 +1,8 @@
-.App {
-    text-align: center;
-  }
-.Nav-text{
-    margin-left: 25px;
+.Home-menu{
+    margin-left: 50px;
     text-align: left;
     position: relative;
-    font-size: 40;
+    font-size: 20;
     padding-top: 10;
     padding-bottom: 10;
-}  
+  }

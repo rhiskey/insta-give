@@ -45,9 +45,12 @@ class App extends Component {
       // outOfCards: false
       expandedRows: [],
       accessToken: '',
+      isToggleOn: true //ПОдписка
 
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
+        // Эта привязка обязательна для работы `this` в колбэке.
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   async componentDidMount() {
@@ -190,6 +193,11 @@ class App extends Component {
     e.target.borderWidth = 2;
   }
 
+  handleButtonClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
 
   handleRowClick(rowId) {
     const currentExpandedRows = this.state.expandedRows;
@@ -227,7 +235,7 @@ class App extends Component {
           Спонсоры:
 
           {this.state.allJoin.map(collumn => {
-            if (item.username == collumn.username)
+            if (item.username == collumn.username) //Collumn - alljoin
               return (
                 <tr key={collumn.id}>
                   <td className="paddingRow">>
@@ -237,7 +245,9 @@ class App extends Component {
                     <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
                   </td>
                   <td>
-                    <a align="right" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
+                  <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a> 
+                  {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
+                    {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
                   </td>
                 </tr>);
           })}
@@ -286,16 +296,13 @@ class App extends Component {
         .then(function (data) {
           console.log(data); // this will be a AccessToken
           this.state.accessToken = data;
+          // https://www.instagram.com/web/friendships/5401182145/follow/
+          // https://www.instagram.com/web/friendships/5401182145/unfollow/
         })
         .catch(err => {
           console.log('caught it!', err);
         });
     }
-
-    // this.state.data.forEach(item => {
-    //   const perItemRows = this.renderItem(item);
-    //   allItemRows = allItemRows.concat(perItemRows);
-    // });
 
     this.state.usersMain.map(item => {
       const perItemRows = this.renderItem(item);
@@ -311,8 +318,8 @@ class App extends Component {
         <div>
           <Navigation />
           <Switch>
-            <Route path="/" component={Home} exact />         
-            <Route path="/about" component={About} /> 
+            <Route path="/" component={Home} exact />
+            <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/privacy" component={Privacy} />
             <Route path="/agreement" component={Agreement} />

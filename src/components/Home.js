@@ -3,8 +3,8 @@ import React from 'react';
 const home = () => {
     return (
        <div>
-          <h1>Home</h1>
-           <p>Главная страница</p>
+          <h1>Insta-Give</h1>
+           <p>сервис проверенных раздач в Instagram</p>
        </div>
     );
 }

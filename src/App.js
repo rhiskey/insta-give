@@ -290,12 +290,10 @@ class App extends Component {
       //        console.log('👉 Returned response:', resp);
       // })
       .then(response2 => {
-        if (response2.ok) {
-          response2.json().then(json => {
-            console.log(json);
-          });
-        }
-      })
+        if (response2.ok) { 
+            console.log(json);}
+          }
+        )
       .catch(err => {
         console.log('caught it!', err);
       });

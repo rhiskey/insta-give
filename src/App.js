@@ -12,6 +12,15 @@ import { useTable, useSortBy } from "react-table";
 import InfiniteScroll from "react-infinite-scroll-component";
 import InstagramLogin from 'react-instagram-login';
 import ReactDOM from 'react-dom';
+//Multi-pages
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Error from './components/Error';
+import Navigation from './components/Navigation';
+import Agreement from './components/Agreement';
+import Privacy from './components/Privacy';
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -35,7 +44,8 @@ class App extends Component {
       // cards: cards,
       // outOfCards: false
       expandedRows: [],
-      acessToken: []
+      accessToken: '',
+
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
   }
@@ -70,6 +80,7 @@ class App extends Component {
     // }).catch(err => {
     //   console.log('caught it!', err);
     // })
+
     await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
       method: 'GET'
     }).then(function (response) {
@@ -230,22 +241,6 @@ class App extends Component {
                   </td>
                 </tr>);
           })}
-
-
-          {/* <td>
-                  <a href={item.link}>
-                    <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-                  </a>
-                </td>
-                <td>
-                  <a href={item.link}>{item.username}</a></td>
-                <td>
-                  <a href={item.link} class="btn btn-primary">Подпишись</a>
-                </td> */}
-
-
-          {/* <td>{item.points}</td>
-                <td>{item.percent}</td> */}
         </tr>
       );
     }
@@ -264,7 +259,7 @@ class App extends Component {
       alignItems: 'center',
     }
     let allItemRows = [];
-    let respVar = "";  
+    let respVar = "";
     var getAccessToken = true;
 
     const responseInstagram = (response) => {
@@ -272,40 +267,29 @@ class App extends Component {
 
       // //Передаем код авторизации для получения токена
       fetch('https://dry-plains-18498.herokuapp.com/oauth', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-              // user: {
-                  authCode: response
-              // }
-          })
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          // user: {
+          authCode: response
+          // }
+        })
       })
-      // .then(function (resp) {
-      //   //Получаем обратно токен
-      //   //var user = JSON.parse(resp);
-      //        //console.log('👉 JSON Returned access_token:', user.access_token);
-      //        console.log('👉 Returned access_token:', resp.access_token);
-      //        console.log('👉 Returned response:', resp);
-      // })
-      .then(response2 => {
-        if (response2.ok) { 
-            //console.log(response2.text());
-            //console.log(response2.body);}
+        .then(response2 => {
+          if (response2.ok) {
             return response2.text();
           }
-          }
+        }
         )
-      .then(function(data) {
-        console.log(data); // this will be a string
-      })
-      .catch(err => {
-        console.log('caught it!', err);
-      });
-  
-      // then get token from 'https://dry-plains-18498.herokuapp.com/accestoken'
-  
+        .then(function (data) {
+          console.log(data); // this will be a AccessToken
+          this.state.accessToken = data;
+        })
+        .catch(err => {
+          console.log('caught it!', err);
+        });
     }
 
     // this.state.data.forEach(item => {
@@ -323,8 +307,22 @@ class App extends Component {
 
     return <div className="App">
       <Header />
+      <BrowserRouter>
+        <div>
+          <Navigation />
+          <Switch>
+            <Route path="/" component={Home} exact />         
+            <Route path="/about" component={About} /> 
+            <Route path="/contact" component={Contact} />
+            <Route path="/privacy" component={Privacy} />
+            <Route path="/agreement" component={Agreement} />
+            <Route component={Error} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+
       <section className="App-main">
-        <div><h1>Активные Giveaway: </h1></div>
+        <div><h4>Активные Giveaway: </h4></div>
         <center>
           <table className="Giveaway-table">
             <thead>
@@ -380,20 +378,7 @@ class App extends Component {
   }
 }
 
-// ReactDOM.render(
-//   <InstagramLogin
-//     clientId="296560698030895"
-//     buttonText="Login"
-//     onSuccess={responseInstagram}
-//     onFailure={responseInstagram}
-//   />,
-//   document.getElementById('instagramButton')
-// );
 
-// ReactDOM.render(
-//   <App />,
-//   mountNode
-// );
 export default App;
 
 class Child extends React.Component {

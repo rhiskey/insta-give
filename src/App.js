@@ -291,7 +291,7 @@ class App extends Component {
       // })
       .then(response2 => {
         if (response2.ok) { 
-            console.log(json);}
+            console.log(response2);}
           }
         )
       .catch(err => {

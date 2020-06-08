@@ -14,15 +14,15 @@ import InstagramLogin from 'react-instagram-login';
 import ReactDOM from 'react-dom';
 //Multi-pages
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Header/Home';
-import About from './components/Header/About';
-import Contact from './components/Header/Contact';
-import Error from './components/Header/Error';
-import Navigation from './components/Header/Navigation';
-import Agreement from './components/Header/Agreement';
-import Privacy from './components/Header/Privacy';
-
-import Loading from "./loading.js";
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Error from './components/Error';
+import Navigation from './components/Navigation';
+import Agreement from './components/Agreement';
+import Privacy from './components/Privacy';
+//
+// import Loading from "./loading.js";
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -328,9 +328,7 @@ class App extends Component {
                   </Switch>
                 </div>
               </BrowserRouter>
-      <div>
-        <Loading />
-      </div>
+
 
       <Footer>
       {/* <div>ООО "Сбермак решения" (C) 2020</div> */}

@@ -2,14 +2,6 @@
 import React from "react";
 
 import "./Header.css";
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-import Error from './Error';
-import Navigation from './Navigation';
-import Agreement from './Agreement';
-import Privacy from './Privacy';
 
 class Header extends React.Component {
   render() {

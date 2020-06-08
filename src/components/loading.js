@@ -8,7 +8,7 @@ import * as doneData from "./doneloading.json";
 import * as scrollFrames from "./scrollframesloading.json"
 import * as sckeletonFrames from "./skeletonframesloading.json"
 import * as rippleLoading from "./rippleloading.json"
-import './App.css';
+import './loading.css';
 
 const defaultOptions = {
     loop: true,
@@ -118,9 +118,9 @@ export default class Loading extends React.Component {
                     </a>
 
 
-                    <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+                    <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
                 </td>
-                <td className="App-give-text">{item.giveinfo}</td>
+                <td className="Loading-give-text">{item.giveinfo}</td>
             </tr>
         ];
 
@@ -129,7 +129,8 @@ export default class Loading extends React.Component {
             itemRows.push(
                 <tr key={"row-expanded-" + item.id}>
                     {/* <td>{item.followers}</td> */}
-          <th>Спонсоры:</th>
+          {/* <th>Спонсоры:</th>  */}
+          <p>Спонсоры:</p> 
 
           {this.state.allJoin.map(collumn => {
                         if (item.username == collumn.username) //Collumn - alljoin
@@ -139,7 +140,7 @@ export default class Loading extends React.Component {
                   <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
                                             <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
                                         </a>
-                                        <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
+                                        <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
                                     </td>
                                     <td>
                                         <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
@@ -163,7 +164,7 @@ export default class Loading extends React.Component {
         });
 
         return (
-            <section className="App-main">
+            <section className="Loading-main">
             <div><h4>Активные Giveaway: </h4></div>
             <center>
               <table className="Giveaway-table">
@@ -192,12 +193,12 @@ export default class Loading extends React.Component {
                   {!this.state.done ? (
                     <FadeIn>
                         <tr class="d-flex justify-content-center align-items-center">
-                            <h1>загружаем данные</h1>
-                            {!this.state.loading ? (
+                        <td><h5>Загрузка...</h5></td>
+                            <td>{!this.state.loading ? (
                                 <Lottie options={defaultOptions} height={120} width={120} />
                             ) : (
                                     <Lottie options={defaultOptions2} height={120} width={120} />
-                                )}
+                                )} </td>
                         </tr>
                     </FadeIn>
                 ) : (

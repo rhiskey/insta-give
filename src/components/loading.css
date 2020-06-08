@@ -1,0 +1,80 @@
+.Loading {
+    text-align: center;
+  }  
+  .Loading-link {
+    color: #61dafb;
+  }
+  .Loading-give-text{
+    margin-left: 10px;
+    text-align: left;
+    position: relative;
+    font-size: 20;
+    padding-top: 10;
+    padding-bottom: 10;
+  }
+  .Loading-give-user{
+    margin-left: 10px;
+    text-align: left;
+    /* position: relative;
+    font-size: 20;
+    padding-top: 10;
+    padding-bottom: 10; */
+  }
+  .Loading-giveaway-avatar{
+    height: 100%;
+    width: 100%;
+    vertical-align: "middle";
+  }
+  .instaImage {
+    border-radius: 50%;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+  }
+  .Loading-main{
+    width: 100%;
+    height: auto;
+  }
+
+  table {
+    width: 100%; /* Ширина таблицы была 90*/
+    /* border: 2px double black; Рамка вокруг таблицы */
+    border-collapse: collapse; /* Отображать только одинарные линии */
+    counter-reset: row-num;
+    table-layout: fixed;
+  }
+  table tr {
+    counter-increment: row-num;
+  }
+  /* Нумерация */
+  /* table tr td:first-child::before {
+    content: counter(row-num) ". ";
+  } */
+  table td {
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+  }
+  th  {
+  
+    background-color: #8134AF; /*цвет ячеек */
+    color: white;
+    text-align: left; /* Выравнивание по левому краю */
+  
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    /* border: 1px solid black; Граница вокруг ячеек */
+  }
+  td {
+    text-align: left;
+    padding: 5px; /* Поля вокруг содержимого ячеек
+    /* border: 1px solid black; Граница вокруг ячеек */
+    /* border-right: 1px solid #515BD4; */ /*вертикальный разделитель*/
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  .paddingRow{
+    padding: 5px 10px 5px 5px;
+  }
+
+
+  

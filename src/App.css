@@ -102,7 +102,7 @@ tr:nth-child(even) {
   padding: 5px 10px 5px 5px;
 }
 .footerStyle{
-  /* background-color: #8134AF; */
+  background-color: white;
   font-size: 20px;
   color: white;
   border-top: 1px solid #F56040;

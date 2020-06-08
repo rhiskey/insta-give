@@ -47,12 +47,11 @@ class App extends Component {
       // outOfCards: false
       expandedRows: [],
       accessToken: '',
-      isToggleOn: true //ПОдписка
+      // isToggleOn: true //ПОдписка
 
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
-    // Эта привязка обязательна для работы `this` в колбэке.
-    this.handleButtonClick = this.handleButtonClick.bind(this);
+
   }
 
   // async componentDidMount() {
@@ -181,23 +180,23 @@ class App extends Component {
     this.setState(prevState => ({ childVisible: !prevState.childVisible }));
   }
 
-  handleMouseEnter = (e) => {
-    this.setState({
-      left: e.target.getBoundingClientRect().x - 4,
-    });
-    //e.target.style. = 'purple';
-    e.target.borderWidth = 2;
-  }
-  handleMouseLeave = (e) => {
-    //e.target.style.background = 'white';
-    e.target.borderWidth = 2;
-  }
+  // handleMouseEnter = (e) => {
+  //   this.setState({
+  //     left: e.target.getBoundingClientRect().x - 4,
+  //   });
+  //   //e.target.style. = 'purple';
+  //   e.target.borderWidth = 2;
+  // }
+  // handleMouseLeave = (e) => {
+  //   //e.target.style.background = 'white';
+  //   e.target.borderWidth = 2;
+  // }
 
-  handleButtonClick() {
-    this.setState(state => ({
-      isToggleOn: !state.isToggleOn
-    }));
-  }
+  // handleButtonClick() {
+  //   this.setState(state => ({
+  //     isToggleOn: !state.isToggleOn
+  //   }));
+  // }
 
   // handleRowClick(rowId) {
   //   const currentExpandedRows = this.state.expandedRows;
@@ -303,22 +302,22 @@ class App extends Component {
     return <div className="App">
       <Header />
       <BrowserRouter>
-                <div>
-                  <Navigation />
-                  <Switch>
-                    <Route path="/" component={Home} exact />
-                    <Route path="/about" component={About} />
-                    <Route path="/contact" component={Contact} />
-                    <Route path="/privacy" component={Privacy} />
-                    <Route path="/agreement" component={Agreement} />
-                    <Route component={Error} />
-                  </Switch>
-                </div>
-              </BrowserRouter>
+        <div>
+          <Navigation />
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/privacy" component={Privacy} />
+            <Route path="/agreement" component={Agreement} />
+            <Route component={Error} />
+          </Switch>
+        </div>
+      </BrowserRouter>
 
 
       <Footer>
-      {/* <div>ООО "Сбермак решения" (C) 2020</div> */}
+        {/* <div>ООО "Сбермак решения" (C) 2020</div> */}
         <span className="">
           {/* <button className="instagramButton"></button> */}
           <InstagramLogin
@@ -331,7 +330,7 @@ class App extends Component {
           />
           {/* document.getElementById('instagramButton') */}
         </span >
-        
+
       </Footer>
     </div>
   }

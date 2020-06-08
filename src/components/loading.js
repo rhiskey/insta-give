@@ -38,13 +38,15 @@ export default class Loading extends React.Component {
             expandedRows: [],
             accessToken: '',
             isToggleOn: true, //ПОдписка
-            
+
         };
+        // Эта привязка обязательна для работы `this` в колбэке.
+        this.handleButtonClick = this.handleButtonClick.bind(this);
     }
-    state={
-        randomItem:''
+    state = {
+        randomItem: ''
     }
-  
+
     loadingTextArray = [
         'разгружаем вагоны...',
         "готовим пиццу...",
@@ -61,11 +63,29 @@ export default class Loading extends React.Component {
         "здесь будет таблица...",
     ];
     randomLoadingTextenerator = () => (
-        this.loadingTextArray[Math.floor(Math.random()*this.loadingTextArray.length)]
+        this.loadingTextArray[Math.floor(Math.random() * this.loadingTextArray.length)]
     )
+    handleMouseEnter = (e) => {
+        this.setState({
+            left: e.target.getBoundingClientRect().x - 4,
+        });
+        //e.target.style. = 'purple';
+        e.target.borderWidth = 2;
+    }
+    handleMouseLeave = (e) => {
+        //e.target.style.background = 'white';
+        e.target.borderWidth = 2;
+    }
+
+    handleButtonClick() {
+        this.setState(state => ({
+            isToggleOn: !state.isToggleOn
+        }));
+    }
+
     componentDidMount() {
 
-        this.setState({randomLoadingText:this.randomLoadingTextenerator()})
+        this.setState({ randomLoadingText: this.randomLoadingTextenerator() })
 
         // setTimeout(() => {
         //     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -115,7 +135,7 @@ export default class Loading extends React.Component {
                 console.log('caught it!', err);
             })
 
-            
+
         }, 1200);
 
     }
@@ -153,10 +173,10 @@ export default class Loading extends React.Component {
             itemRows.push(
                 <tr key={"row-expanded-" + item.id}>
                     {/* <td>{item.followers}</td> */}
-          {/* <th>Спонсоры:</th>  */}
-          <p>Спонсоры:</p> 
+                    {/* <th>Спонсоры:</th>  */}
+                    <p>Спонсоры:</p>
 
-          {this.state.allJoin.map(collumn => {
+                    {this.state.allJoin.map(collumn => {
                         if (item.username === collumn.username) //Collumn - alljoin
                             return (
                                 <tr key={collumn.id}>
@@ -181,15 +201,15 @@ export default class Loading extends React.Component {
     }
 
     render() {
-        
-    const wrapperStyle = {
-        backgroundColor: "#FFFFFF",
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }
-    //   let allItemRows = [];
-  
+
+        const wrapperStyle = {
+            backgroundColor: "#FFFFFF",
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        }
+        //   let allItemRows = [];
+
         let allItemRows = [];
         this.state.usersMain.map(item => {
             const perItemRows = this.renderItem(item);
@@ -199,24 +219,24 @@ export default class Loading extends React.Component {
 
         return (
             <section className="Loading-main">
-            <div><h4>Активные Giveaway: </h4></div>
-            <center>
-              <table className="Giveaway-table">
-                <thead>
-                  <tr>
-                    {/* <th>
+                <div><h4>Активные Giveaway: </h4></div>
+                <center>
+                    <table className="Giveaway-table">
+                        <thead>
+                            <tr>
+                                {/* <th>
                   
                         </th> */}
-                    <th>
-                      Организатор
+                                <th>
+                                    Организатор
                        </th>
-                    <th>
-                      Инфо раздачи
+                                <th>
+                                    Инфо раздачи
                         </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* <InfiniteScroll
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* <InfiniteScroll
         dataLength={this.state.usersMain.length}
         next={this.fetchMoreData}
         hasMore={true}
@@ -224,35 +244,35 @@ export default class Loading extends React.Component {
       >
     
       </InfiniteScroll> */}
-                  {!this.state.done ? (
-                    <FadeIn>
-                        <tr class="d-flex justify-content-center align-items-center">
-                        <td className="Loading-loadingText"><h2>{this.state.randomLoadingText}</h2></td>
-                            <td>{!this.state.loading ? (
-                                <Lottie options={defaultOptions} height={120} width={120} />
+                            {!this.state.done ? (
+                                <FadeIn>
+                                    <tr class="d-flex justify-content-center align-items-center">
+                                        <td className="Loading-loadingText"><h2>{this.state.randomLoadingText}</h2></td>
+                                        <td>{!this.state.loading ? (
+                                            <Lottie options={defaultOptions} height={120} width={120} />
+                                        ) : (
+                                                <Lottie options={defaultOptions2} height={120} width={120} />
+                                            )} </td>
+                                    </tr>
+                                </FadeIn>
                             ) : (
-                                    <Lottie options={defaultOptions2} height={120} width={120} />
-                                )} </td>
-                        </tr>
-                    </FadeIn>
-                ) : (
-                         allItemRows 
-                    )}
+                                    allItemRows
+                                )}
 
-                </tbody>
-    
-              </table>
-            </center>
-    
-            <div>
-    
-              {/* <CardWrapper addEndCard={this.getEndCard.bind(this)}  style={wrapperStyle} >
+                        </tbody>
+
+                    </table>
+                </center>
+
+                <div>
+
+                    {/* <CardWrapper addEndCard={this.getEndCard.bind(this)}  style={wrapperStyle} >
             
             {this.renderCards()}
           </CardWrapper> */}
-    
-            </div>
-          </section>
+
+                </div>
+            </section>
         );
     }
 }

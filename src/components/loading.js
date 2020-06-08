@@ -9,6 +9,7 @@ import * as scrollFrames from "./scrollframesloading.json"
 import * as sckeletonFrames from "./skeletonframesloading.json"
 import * as rippleLoading from "./rippleloading.json"
 import './loading.css';
+import Button from '@material-ui/core/Button';
 
 const defaultOptions = {
     loop: true,
@@ -117,7 +118,6 @@ export default class Loading extends React.Component {
             }).catch(err => {
                 console.log('caught it!', err);
             })
-
             fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
                 method: 'GET'
             }).then(function (response) {
@@ -187,6 +187,11 @@ export default class Loading extends React.Component {
                                         <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
                                     </td>
                                     <td>
+                                        
+                                    {/* <Button variant="contained" color="primary">
+                                     Hello World
+                                    </Button> */}
+
                                         <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
                                         {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
                                         {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
@@ -219,7 +224,7 @@ export default class Loading extends React.Component {
 
         return (
             <section className="Loading-main">
-                <div><h4>Активные Giveaway: </h4></div>
+                <div><h4>Активные Giveaways: </h4></div>
                 <center>
                     <table className="Giveaway-table">
                         <thead>

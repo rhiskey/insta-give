@@ -20,7 +20,14 @@ import Error from './components/Error';
 import Navigation from './components/Navigation';
 import Agreement from './components/Agreement';
 import Privacy from './components/Privacy';
-//
+// import FooterContent from './components/FooterContent';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import 'fontsource-roboto';
+
 // import Loading from "./loading.js";
 
 // Create custom end card
@@ -31,7 +38,6 @@ class MyEndCard extends Component {
     );
   }
 }
-
 
 class App extends Component {
   //state ={users: []}
@@ -53,7 +59,7 @@ class App extends Component {
     this.onClickMainUser = this.onClickMainUser.bind(this);
 
   }
-
+  
   // async componentDidMount() {
   //   //this.getUsers();
 
@@ -260,6 +266,9 @@ class App extends Component {
 
   render() {
     // const { users } = this.state;
+    const { index } = this.state;
+    // const classes = useStyles();
+    // const [value, setValue] = React.useState(0);
 
     const responseInstagram = (response) => {
       console.log(response);
@@ -292,7 +301,6 @@ class App extends Component {
           console.log('caught it!', err);
         });
     }
-
     // this.state.usersMain.map(item => {
     //   const perItemRows = this.renderItem(item);
     //   allItemRows = allItemRows.concat(perItemRows);
@@ -301,9 +309,12 @@ class App extends Component {
 
     return <div className="App">
       <Header />
+
       <BrowserRouter>
         <div>
           <Navigation />
+
+
           <Switch>
             <Route path="/" component={Home} exact />
             <Route path="/about" component={About} />
@@ -317,19 +328,34 @@ class App extends Component {
 
 
       <Footer>
-        {/* <div>ООО "Сбермак решения" (C) 2020</div> */}
-        <span className="">
-          {/* <button className="instagramButton"></button> */}
-          <InstagramLogin
-            clientId="296560698030895"
-            scope="user_profile,user_media"
-            buttonText="Войти через Instagram"
-            onSuccess={responseInstagram}
-            onFailure={responseInstagram}
-          //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
-          />
-          {/* document.getElementById('instagramButton') */}
-        </span >
+
+      <span className="">
+        {/* <button className="instagramButton"></button> */}
+{/* 
+         <BottomNavigation
+          // value={value}
+          onChange={(event, newValue) => {
+            // setValue(newValue);
+          }}
+          showLabels
+          // className={classes.root}
+        >
+          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+        </BottomNavigation>  */}
+
+        <InstagramLogin
+          clientId="296560698030895"
+          scope="user_profile,user_media"
+          buttonText="Войти через Instagram"
+          onSuccess={responseInstagram}
+          onFailure={responseInstagram}
+        //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
+        />
+        {/* document.getElementById('instagramButton') */}
+      </span >
+        {/* <FooterContent /> */}
 
       </Footer>
     </div>

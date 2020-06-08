@@ -193,7 +193,7 @@ export default class Loading extends React.Component {
                   {!this.state.done ? (
                     <FadeIn>
                         <tr class="d-flex justify-content-center align-items-center">
-                        <td><h5>Загрузка...</h5></td>
+                        <td className="Loading-loadingText"> Загрузка... </td>
                             <td>{!this.state.loading ? (
                                 <Lottie options={defaultOptions} height={120} width={120} />
                             ) : (

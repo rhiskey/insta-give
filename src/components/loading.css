@@ -35,6 +35,14 @@
     width: 100%;
     height: auto;
   }
+  .Loading-loadingText{
+    margin-left: 60px;
+    /* padding-left: 20px; */
+    margin-right: 50px;
+    font-size: 50;
+    text-align: center;
+    position: relative;
+  }
 
   table {
     width: 100%; /* Ширина таблицы была 90*/

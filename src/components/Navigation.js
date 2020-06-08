@@ -27,15 +27,15 @@ const stylesTab = {
       color: '#fff',
    },
    slide1: {
-      backgroundColor: '#405DE6',
-      color: 'white'
+      // backgroundColor: '#405DE6',
+      color: 'black'
    },
    slide2: {
-      backgroundColor: '#B3DC4A',
+      // backgroundColor: '#B3DC4A',
       color: 'black'
    },
    slide3: {
-      backgroundColor: '#F77737',
+      // backgroundColor: '#F77737',
       color: 'black'
    },
 };
@@ -82,7 +82,7 @@ class Navigation extends React.Component {
                </div>
                <div style={Object.assign({}, stylesTab.slide, stylesTab.slide2)}>
                   <h3>О сервисе</h3>
-                  <p>Чтобы сразу подписаться на аккаунты, необходимо авторизироваться в Инстаграм, нажав кнопку внизу страницы "Войти через Instagram"</p>
+                  {/* <p>Чтобы сразу подписаться на аккаунты, необходимо авторизироваться в Инстаграм, нажав кнопку внизу страницы "Войти через Instagram"</p> */}
                   <p>Вы можете участвовать в активных раздачах от реальных проверенных пользователей, подписавшись на спонсоров аккаунтов организаторов!</p>
                   {/* <Select value={10} autoWidth={false}>
               <MenuItem value="">

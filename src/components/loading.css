@@ -36,11 +36,11 @@
     height: auto;
   }
   .Loading-loadingText{
-    margin-left: 60px;
-    /* padding-left: 20px; */
+    margin-left: 100px;
+    padding-left: 100px;
     margin-right: 50px;
-    font-size: 50;
-    text-align: center;
+    font-size: 70;
+    text-align: left;
     position: relative;
   }
 

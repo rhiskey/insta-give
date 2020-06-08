@@ -56,9 +56,6 @@ import "./Post.css";
 //   export default Post;
 
 class Post extends Component {
-  constructor(props) {
-    super(props);
-  }
   
   render() {
     const nickname = this.props.nickname;

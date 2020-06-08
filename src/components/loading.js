@@ -37,12 +37,36 @@ export default class Loading extends React.Component {
             allJoin: [],
             expandedRows: [],
             accessToken: '',
-            isToggleOn: true //ПОдписка
-      
+            isToggleOn: true, //ПОдписка
+            
         };
     }
-
+    state={
+        randomItem:''
+    }
+  
+    loadingTextArray = [
+        'разгружаем вагоны...',
+        "готовим пиццу...",
+        "ждем такси...",
+        "участвуем в розыгрышах...",
+        "загрузка...",
+        "приводим все в порядок...",
+        "самоизолируемся...",
+        "подгружаем данные...",
+        "общаемся с организаторами...",
+        "встречаемся со спонсорами...",
+        "обновляем список...",
+        "читаем мануал...",
+        "здесь будет таблица...",
+    ];
+    randomLoadingTextenerator = () => (
+        this.loadingTextArray[Math.floor(Math.random()*this.loadingTextArray.length)]
+    )
     componentDidMount() {
+
+        this.setState({randomLoadingText:this.randomLoadingTextenerator()})
+
         // setTimeout(() => {
         //     fetch("https://jsonplaceholder.typicode.com/posts")
         //         .then(response => response.json())
@@ -133,7 +157,7 @@ export default class Loading extends React.Component {
           <p>Спонсоры:</p> 
 
           {this.state.allJoin.map(collumn => {
-                        if (item.username == collumn.username) //Collumn - alljoin
+                        if (item.username === collumn.username) //Collumn - alljoin
                             return (
                                 <tr key={collumn.id}>
                                     <td className="paddingRow">>
@@ -157,10 +181,20 @@ export default class Loading extends React.Component {
     }
 
     render() {
+        
+    const wrapperStyle = {
+        backgroundColor: "#FFFFFF",
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }
+    //   let allItemRows = [];
+  
         let allItemRows = [];
         this.state.usersMain.map(item => {
             const perItemRows = this.renderItem(item);
             allItemRows = allItemRows.concat(perItemRows);
+            return allItemRows;
         });
 
         return (
@@ -193,7 +227,7 @@ export default class Loading extends React.Component {
                   {!this.state.done ? (
                     <FadeIn>
                         <tr class="d-flex justify-content-center align-items-center">
-                        <td className="Loading-loadingText"> Загрузка... </td>
+                        <td className="Loading-loadingText"><h2>{this.state.randomLoadingText}</h2></td>
                             <td>{!this.state.loading ? (
                                 <Lottie options={defaultOptions} height={120} width={120} />
                             ) : (

@@ -1,17 +1,16 @@
-'use strict';
 import React, { Component, Table, Fragment, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
-import Post from './components/Post';
+// import Post from './components/Post';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, CardWrapper } from 'react-swipeable-cards';
 import styled from "styled-components";
-import { useTable, useSortBy } from "react-table";
+// import { useTable, useSortBy } from "react-table";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import InstagramLogin from 'react-instagram-login';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 //Multi-pages
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
@@ -133,8 +132,6 @@ class App extends Component {
 
     //show users in page after card
     this.setState(prevState => ({ childVisible: !prevState.childVisible }));
-    {/* more posts */ }
-
   }
 
   renderCards() {
@@ -263,17 +260,7 @@ class App extends Component {
 
 
   render() {
-    const { users } = this.state;
-
-    const wrapperStyle = {
-      backgroundColor: "#FFFFFF",
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-    }
-    let allItemRows = [];
-    let respVar = "";
-    var getAccessToken = true;
+    // const { users } = this.state;
 
     const responseInstagram = (response) => {
       console.log(response);
@@ -298,7 +285,7 @@ class App extends Component {
         )
         .then(function (data) {
           console.log(data); // this will be a AccessToken
-          this.state.accessToken = data;
+          this.setState.accessToken = data;
           // https://www.instagram.com/web/friendships/5401182145/follow/
           // https://www.instagram.com/web/friendships/5401182145/unfollow/
         })
@@ -390,7 +377,7 @@ class Child extends React.Component {
   }
 
   render() {
-    const { users } = this.state;
+    // const { users } = this.state;
 
     return (<div id="posts-containter">
       <h3>Подпишись на эти аккаунты:</h3>

@@ -54,7 +54,8 @@ class App extends Component {
       expandedRows: [],
       accessToken: '',
       // isToggleOn: true //ПОдписка
-
+      navitem: undefined,
+      setNav: undefined
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
 
@@ -268,8 +269,8 @@ class App extends Component {
     // const { users } = this.state;
     const { index } = this.state;
     // const classes = useStyles();
-    // const [value, setValue] = React.useState(0);
-
+    const navitem= this.state.navitem;
+    const setNav = this.state.setNav;
     const responseInstagram = (response) => {
       console.log(response);
 
@@ -331,28 +332,27 @@ class App extends Component {
 
       <span className="">
         {/* <button className="instagramButton"></button> */}
-{/* 
+
          <BottomNavigation
-          // value={value}
+          value={this.navitem}
           onChange={(event, newValue) => {
-            // setValue(newValue);
+            this.state.setNav=newValue;
           }}
           showLabels
           // className={classes.root}
         >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-        </BottomNavigation>  */}
-
-        <InstagramLogin
+          <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Избранные раздачи" icon={<FavoriteIcon />} />
+          <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} />
+          <InstagramLogin
           clientId="296560698030895"
           scope="user_profile,user_media"
           buttonText="Войти через Instagram"
           onSuccess={responseInstagram}
           onFailure={responseInstagram}
-        //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
         />
+        </BottomNavigation> 
+
         {/* document.getElementById('instagramButton') */}
       </span >
         {/* <FooterContent /> */}

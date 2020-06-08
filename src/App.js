@@ -14,13 +14,15 @@ import InstagramLogin from 'react-instagram-login';
 import ReactDOM from 'react-dom';
 //Multi-pages
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
-import Error from './components/Error';
-import Navigation from './components/Navigation';
-import Agreement from './components/Agreement';
-import Privacy from './components/Privacy';
+import Home from './components/Header/Home';
+import About from './components/Header/About';
+import Contact from './components/Header/Contact';
+import Error from './components/Header/Error';
+import Navigation from './components/Header/Navigation';
+import Agreement from './components/Header/Agreement';
+import Privacy from './components/Header/Privacy';
+
+import Loading from "./loading.js";
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -30,6 +32,7 @@ class MyEndCard extends Component {
     );
   }
 }
+
 
 class App extends Component {
   //state ={users: []}
@@ -49,55 +52,55 @@ class App extends Component {
 
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
-        // Эта привязка обязательна для работы `this` в колбэке.
+    // Эта привязка обязательна для работы `this` в колбэке.
     this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
-  async componentDidMount() {
-    //this.getUsers();
+  // async componentDidMount() {
+  //   //this.getUsers();
 
-    //Subscribtion MAIN accs
-    let self = this;
-    await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
-      method: 'GET'
-    }).then(function (response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    }).then(function (data) {
-      self.setState({ usersMain: data });
-    }).catch(err => {
-      console.log('caught it!', err);
-    })
+  //   //Subscribtion MAIN accs
+  //   let self = this;
+  //   await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+  //     method: 'GET'
+  //   }).then(function (response) {
+  //     if (response.status >= 400) {
+  //       throw new Error("Bad response from server");
+  //     }
+  //     return response.json();
+  //   }).then(function (data) {
+  //     self.setState({ usersMain: data });
+  //   }).catch(err => {
+  //     console.log('caught it!', err);
+  //   })
 
-    // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
-    //   method: 'GET'
-    // }).then(function (response) {
-    //   if (response.status >= 400) {
-    //     throw new Error("Bad response from server");
-    //   }
-    //   return response.json();
-    // }).then(function (data) {
-    //   self.setState({ followers: data });
-    // }).catch(err => {
-    //   console.log('caught it!', err);
-    // })
+  //   // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
+  //   //   method: 'GET'
+  //   // }).then(function (response) {
+  //   //   if (response.status >= 400) {
+  //   //     throw new Error("Bad response from server");
+  //   //   }
+  //   //   return response.json();
+  //   // }).then(function (data) {
+  //   //   self.setState({ followers: data });
+  //   // }).catch(err => {
+  //   //   console.log('caught it!', err);
+  //   // })
 
-    await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
-      method: 'GET'
-    }).then(function (response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    }).then(function (data) {
-      self.setState({ allJoin: data });
-    }).catch(err => {
-      console.log('caught it!', err);
-    })
+  //   await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+  //     method: 'GET'
+  //   }).then(function (response) {
+  //     if (response.status >= 400) {
+  //       throw new Error("Bad response from server");
+  //     }
+  //     return response.json();
+  //   }).then(function (data) {
+  //     self.setState({ allJoin: data });
+  //   }).catch(err => {
+  //     console.log('caught it!', err);
+  //   })
 
-  }
+  // }
 
   fetchMoreData = () => {
     // a fake async api call like which sends
@@ -199,69 +202,69 @@ class App extends Component {
     }));
   }
 
-  handleRowClick(rowId) {
-    const currentExpandedRows = this.state.expandedRows;
-    const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
+  // handleRowClick(rowId) {
+  //   const currentExpandedRows = this.state.expandedRows;
+  //   const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
 
-    const newExpandedRows = isRowCurrentlyExpanded ?
-      currentExpandedRows.filter(id => id !== rowId) :
-      currentExpandedRows.concat(rowId);
+  //   const newExpandedRows = isRowCurrentlyExpanded ?
+  //     currentExpandedRows.filter(id => id !== rowId) :
+  //     currentExpandedRows.concat(rowId);
 
-    this.setState({ expandedRows: newExpandedRows });
-  }
+  //   this.setState({ expandedRows: newExpandedRows });
+  // }
 
-  renderItem(item) {
-    const clickCallback = () => this.handleRowClick(item.id);
+  // renderItem(item) {
+  //   const clickCallback = () => this.handleRowClick(item.id);
 
-    const itemRows = [
-      <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
-        <td>
-          <a target="_blank" rel="noopener noreferrer" href={item.link}>
-            <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-          </a>
+  //   const itemRows = [
+  //     <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
+  //       <td>
+  //         <a target="_blank" rel="noopener noreferrer" href={item.link}>
+  //           <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+  //         </a>
 
 
-          <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
-        </td>
-        <td className="App-give-text">{item.giveinfo}</td>
-      </tr>
-    ];
+  //         <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+  //       </td>
+  //       <td className="App-give-text">{item.giveinfo}</td>
+  //     </tr>
+  //   ];
 
-    //Followers
-    if (this.state.expandedRows.includes(item.id)) {
-      itemRows.push(
-        <tr key={"row-expanded-" + item.id}>
-          {/* <td>{item.followers}</td> */}
-          Спонсоры:
+  //   //Followers
+  //   if (this.state.expandedRows.includes(item.id)) {
+  //     itemRows.push(
+  //       <tr key={"row-expanded-" + item.id}>
+  //         {/* <td>{item.followers}</td> */}
+  //         Спонсоры:
 
-          {this.state.allJoin.map(collumn => {
-            if (item.username == collumn.username) //Collumn - alljoin
-              return (
-                <tr key={collumn.id}>
-                  <td className="paddingRow">>
-                  <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
-                      <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
-                    </a>
-                    <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
-                  </td>
-                  <td>
-                  <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a> 
-                  {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
-                    {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
-                  </td>
-                </tr>);
-          })}
-        </tr>
-      );
-    }
+  //         {this.state.allJoin.map(collumn => {
+  //           if (item.username == collumn.username) //Collumn - alljoin
+  //             return (
+  //               <tr key={collumn.id}>
+  //                 <td className="paddingRow">>
+  //                 <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
+  //                     <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
+  //                   </a>
+  //                   <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
+  //                 </td>
+  //                 <td>
+  //                 <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a> 
+  //                 {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
+  //                   {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
+  //                 </td>
+  //               </tr>);
+  //         })}
+  //       </tr>
+  //     );
+  //   }
 
-    return itemRows;
-  }
+  //   return itemRows;
+  // }
 
 
   render() {
     const { users } = this.state;
-    const selvalue = this.state.value;
+
     const wrapperStyle = {
       backgroundColor: "#FFFFFF",
       flex: 1,
@@ -304,89 +307,62 @@ class App extends Component {
         });
     }
 
-    this.state.usersMain.map(item => {
-      const perItemRows = this.renderItem(item);
-      allItemRows = allItemRows.concat(perItemRows);
-    });
-
-    // this.state.followers.map(user => {
+    // this.state.usersMain.map(item => {
+    //   const perItemRows = this.renderItem(item);
+    //   allItemRows = allItemRows.concat(perItemRows);
     // });
+
 
     return <div className="App">
       <Header />
       <BrowserRouter>
-        <div>
-          <Navigation />
-          <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/agreement" component={Agreement} />
-            <Route component={Error} />
-          </Switch>
-        </div>
-      </BrowserRouter>
-
-      <section className="App-main">
-        <div><h4>Активные Giveaway: </h4></div>
-        <center>
-          <table className="Giveaway-table">
-            <thead>
-              <tr>
-                {/* <th>
-              
-                    </th> */}
-                <th>
-                  Организатор
-                   </th>
-                <th>
-                  Инфо раздачи
-                    </th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* <InfiniteScroll
-    dataLength={this.state.usersMain.length}
-    next={this.fetchMoreData}
-    hasMore={true}
-    loader={<h4>Загрузка...</h4>}
-  >
-
-  </InfiniteScroll> */}
-              {allItemRows}
-            </tbody>
-          </table>
-        </center>
-
-        <div>
-
-          {/* <CardWrapper addEndCard={this.getEndCard.bind(this)}  style={wrapperStyle} >
-        
-        {this.renderCards()}
-      </CardWrapper> */}
-
-        </div>
-      </section>
+                <div>
+                  <Navigation />
+                  <Switch>
+                    <Route path="/" component={Home} exact />
+                    <Route path="/about" component={About} />
+                    <Route path="/contact" component={Contact} />
+                    <Route path="/privacy" component={Privacy} />
+                    <Route path="/agreement" component={Agreement} />
+                    <Route component={Error} />
+                  </Switch>
+                </div>
+              </BrowserRouter>
       <div>
-        {/* <button className="instagramButton"></button> */}
-        <InstagramLogin
-          clientId="296560698030895"
-          scope="user_profile,user_media"
-          buttonText="Войти через Instagram"
-          onSuccess={responseInstagram}
-          onFailure={responseInstagram}
-        //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
-        />
-        {/* document.getElementById('instagramButton') */}
-      </div >
+        <Loading />
+      </div>
 
+      <Footer>
+      {/* <div>ООО "Сбермак решения" (C) 2020</div> */}
+        <span className="">
+          {/* <button className="instagramButton"></button> */}
+          <InstagramLogin
+            clientId="296560698030895"
+            scope="user_profile,user_media"
+            buttonText="Войти через Instagram"
+            onSuccess={responseInstagram}
+            onFailure={responseInstagram}
+          //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
+          />
+          {/* document.getElementById('instagramButton') */}
+        </span >
+        
+      </Footer>
     </div>
   }
 }
 
 
 export default App;
+
+function Footer({ children }) {
+  return (
+    <div>
+      <div className="phantomStyle" />
+      <div className="footerStyle">{children}</div>
+    </div>
+  );
+}
 
 class Child extends React.Component {
   constructor(props) {

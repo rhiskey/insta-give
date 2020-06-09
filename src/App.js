@@ -27,6 +27,42 @@ import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import 'fontsource-roboto';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { ThemeProvider } from '@material-ui/styles';
+// import ThemeSwitch from './components/ThemeSwitch'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switcher from '@material-ui/core/Switch';
+import {lightTheme, darkTheme } from './theme';
+import MiniMenu from './miniDrawer';
+
+import {
+  AppBar,
+  CssBaseline,
+  Typography,
+  createMuiTheme
+} from "@material-ui/core";
+
+// const theme = createMuiTheme({
+//   palette: {
+//     type: "dark"
+//   }
+// });
+const theme1 = createMuiTheme(lightTheme);
+const theme2 = createMuiTheme(darkTheme)
+
+// function getTheme(theme) {
+//   return createMuiTheme({
+//     palette: {
+//       type: theme.paletteType,
+//       background: {
+//         default: theme.paletteType === 'light' ? 'light' : 'dark',
+//       },
+//     },
+//   });
+// }
+// const theme = getTheme({
+//   paletteType: 'light',
+// });
 
 // import Loading from "./loading.js";
 
@@ -38,6 +74,28 @@ class MyEndCard extends Component {
     );
   }
 }
+
+// function App() {
+//   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+//   const theme = React.useMemo(
+//     () =>
+//       createMuiTheme({
+//         palette: {
+//           type: prefersDarkMode ? 'dark' : 'light',
+//         },
+//       }),
+//     [prefersDarkMode],
+//   );
+
+//   return (
+//     <ThemeProvider theme={theme}>
+//       <CssBaseline/>
+//       <Routes />
+//     </ThemeProvider>
+//   );
+// }
+
 
 class App extends Component {
   //state ={users: []}
@@ -55,12 +113,20 @@ class App extends Component {
       accessToken: '',
       // isToggleOn: true //ПОдписка
       navitem: undefined,
-      setNav: undefined
+      setNav: undefined,
+      // isThemeLight: false
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
-
+    // this.onThemeChange = this.onThemeChange.bind(this);
   }
-  
+  state = {
+    isThemeLight: true
+  }
+  onThemeChange = ( ) => {
+    this.setState=({ 
+      // isThemeLight = false,
+     })
+  }
   // async componentDidMount() {
   //   //this.getUsers();
 
@@ -266,10 +332,39 @@ class App extends Component {
 
 
   render() {
+
+    // const [theme, setTheme] = useState('light');
+
+    // const toggleTheme = () => {
+    //   // getTheme()
+    //   if (theme.paletteType === 'light') {
+    //      theme.paletteType = 'dark'
+    //   } else {
+    //     theme.paletteType = 'light'
+    //   }
+    // }
+
+    // let theme = createMuiTheme({
+    //   palette: {
+    //     primary: {
+    //       light: lightGreen[300],
+    //       main: lightGreen[500],
+    //       dark: lightGreen[700]
+    //     },
+    //     secondary: {
+    //       light: blueGrey[300],
+    //       main: blueGrey[500],
+    //       dark: blueGrey[700]
+    //     },
+    //     type: this.state.themeType
+    //   }
+    // });
+
+    const { isThemeLight } =  this.state  ;
     // const { users } = this.state;
     const { index } = this.state;
     // const classes = useStyles();
-    const navitem= this.state.navitem;
+    const navitem = this.state.navitem;
     const setNav = this.state.setNav;
     const responseInstagram = (response) => {
       console.log(response);
@@ -309,29 +404,68 @@ class App extends Component {
 
 
     return <div className="App">
-      <Header />
+      {/* <ThemeProvider theme={theme}> */}
+      <ThemeProvider theme= {isThemeLight ? theme1 : theme2}>
+        <CssBaseline />
+        <Typography style={{ marginTop: 60 }}>
+          {/* Text should be white, background should be dark */}
+        </Typography>
 
-      <BrowserRouter>
-        <div>
-          <Navigation />
+
+        <Header />
+
+              <MiniMenu />
+        {/* <CssBaseline />
+      <Typography style={{ marginTop: 50 }}>
+        Text should be white, background should be dark
+      </Typography>
+      <AppBar color="inherit">
+        <Typography variant="h6">App bar background should be dark!</Typography>
+      </AppBar> */}
 
 
-          <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/about" component={About} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/agreement" component={Agreement} />
-            <Route component={Error} />
-          </Switch>
+        <BrowserRouter>
+          <div>
+            <Navigation />
+
+
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/about" component={About} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/agreement" component={Agreement} />
+              <Route component={Error} />
+            </Switch>
+          </div>
+        </BrowserRouter>
+
+        <div style={{ marginLeft: 0 }}>
+          
+          <InstagramLogin
+            clientId="296560698030895"
+            scope="user_profile,user_media"
+            buttonText="Войти через Instagram"
+            onSuccess={responseInstagram}
+            onFailure={responseInstagram}
+          />
+          {/* <Toggle theme={theme} toggleTheme={toggleTheme} /> */}
+          <FormControlLabel
+            control={
+              <Switcher
+                checked={isThemeLight}
+                onChange={this.onThemeChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label={isThemeLight ? "Светлая тема" : "Темная тема"}
+          />
+          {/* <ThemeSwitch/> */}
         </div>
-      </BrowserRouter>
-
-
-      <Footer>
+        {/* <Footer>
 
       <span className="">
-        {/* <button className="instagramButton"></button> */}
 
          <BottomNavigation
           value={this.navitem}
@@ -339,7 +473,6 @@ class App extends Component {
             this.state.setNav=newValue;
           }}
           showLabels
-          // className={classes.root}
         >
           <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
           <BottomNavigationAction label="Избранные раздачи" icon={<FavoriteIcon />} />
@@ -352,12 +485,10 @@ class App extends Component {
           onFailure={responseInstagram}
         />
         </BottomNavigation> 
-
-        {/* document.getElementById('instagramButton') */}
       </span >
-        {/* <FooterContent /> */}
+      </Footer> */}
 
-      </Footer>
+      </ThemeProvider>
     </div>
   }
 }

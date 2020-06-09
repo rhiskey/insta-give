@@ -82,11 +82,16 @@ table td {
 }
 th  {
 
-  background-color: #8134AF; /*цвет ячеек */
+  /* background-color: #8134AF;  */
+  /*цвет ячеек */
+/* 
   color: white;
-  text-align: left; /* Выравнивание по левому краю */
+  text-align: left;  */
 
-  padding: 5px; /* Поля вокруг содержимого ячеек */
+  /* Выравнивание по левому краю */
+
+  padding: 5px; 
+  /* Поля вокруг содержимого ячеек */
   /* border: 1px solid black; Граница вокруг ячеек */
 }
 td {
@@ -95,14 +100,14 @@ td {
   /* border: 1px solid black; Граница вокруг ячеек */
   /* border-right: 1px solid #515BD4; */ /*вертикальный разделитель*/
 }
-tr:nth-child(even) {
+/* tr:nth-child(even) {
   background-color: #f2f2f2;
-}
+} */
 .paddingRow{
   padding: 5px 10px 5px 5px;
 }
 .footerStyle{
-  background-color: white;
+  /* background-color: white; */
   font-size: 20px;
   color: white;
   border-top: 1px solid #F56040;

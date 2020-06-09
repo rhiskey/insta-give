@@ -18,25 +18,25 @@ const stylesTab = {
       position: 'relative',
     },
    tabs: {
-      background: '#fff',
+      // background: '#fff',
 
    },
    slide: {
       padding: 15,
       minHeight: 100,
-      color: '#fff',
+      // color: '#fff',
    },
    slide1: {
       // backgroundColor: '#405DE6',
-      color: 'black'
+      // color: 'black'
    },
    slide2: {
       // backgroundColor: '#B3DC4A',
-      color: 'black'
+      // color: 'black'
    },
    slide3: {
       // backgroundColor: '#F77737',
-      color: 'black'
+      // color: 'black'
    },
 };
 
@@ -67,8 +67,8 @@ class Navigation extends React.Component {
          <div className="Nav-text">
 
             <Tabs value={index} fullWidth onChange={this.handleChange} style={stylesTab.tabs}>
-               <Tab label="Главная" />
-               <Tab label="О сервисе" />
+            <NavLink to="/"><Tab label="Главная" /></NavLink>
+               <NavLink to="/about"><Tab label="О сервисе" /></NavLink>
                <Tab label="Организаторам" />
             </Tabs>
 

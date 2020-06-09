@@ -108,7 +108,7 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <div className={classes.root} onTouchEnd= {handleDrawerOpen}>
+    <div className={classes.root} onTouchEnd= {handleDrawerOpen} onMouseUp= {handleDrawerOpen}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -134,7 +134,7 @@ export default function PersistentDrawerLeft() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer disableBackdropTransition={!iOS} disableDiscovery={iOS} onTouchEnd= {handleDrawerClose}
+      <Drawer disableBackdropTransition={!iOS} disableDiscovery={iOS} onTouchEnd= {handleDrawerClose} onMouseLeave = {handleDrawerClose} 
         className={classes.drawer}
         variant="persistent"
         anchor="left"

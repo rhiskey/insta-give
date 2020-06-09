@@ -58,13 +58,15 @@ function Row(props) {
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
-                <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                {/* <TableCell> */}
+                    {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
+                    </IconButton> */}
+                {/* </TableCell> */}
                 <TableCell component="th" scope="row">
-                    {row.avatar} - {row.name}
+                <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    </IconButton> {row.avatar} - {row.name}
                 </TableCell>
                 {/* <TableCell align="right">{row.name}</TableCell> */}
                 <TableCell align="right">{row.info}</TableCell>

@@ -440,30 +440,7 @@ class App extends Component {
           </div>
         </BrowserRouter>
 
-        <div style={{ marginLeft: 0 }}>
-          
-          <InstagramLogin
-            clientId="296560698030895"
-            scope="user_profile,user_media"
-            buttonText="Войти через Instagram"
-            onSuccess={responseInstagram}
-            onFailure={responseInstagram}
-          />
-          {/* <Toggle theme={theme} toggleTheme={toggleTheme} /> */}
-          <FormControlLabel
-            control={
-              <Switcher
-                checked={isThemeLight}
-                onChange={this.onThemeChange}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label={isThemeLight ? "Светлая тема" : "Темная тема"}
-          />
-          {/* <ThemeSwitch/> */}
-        </div>
-        {/* <Footer>
+         <Footer>
 
       <span className="">
 
@@ -474,9 +451,9 @@ class App extends Component {
           }}
           showLabels
         >
-          <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
+          {/* <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
           <BottomNavigationAction label="Избранные раздачи" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} />
+          <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} /> */}
           <InstagramLogin
           clientId="296560698030895"
           scope="user_profile,user_media"
@@ -484,9 +461,20 @@ class App extends Component {
           onSuccess={responseInstagram}
           onFailure={responseInstagram}
         />
+                  <FormControlLabel
+            control={
+              <Switcher
+                checked={isThemeLight}
+                onChange={this.onThemeChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label={isThemeLight ? "Светлая тема" : "Темная тема"}
+          />
         </BottomNavigation> 
       </span >
-      </Footer> */}
+      </Footer> 
 
       </ThemeProvider>
     </div>

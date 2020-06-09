@@ -189,12 +189,14 @@ export default function PersistentDrawerLeft() {
           ))}
         </List> */}
       </Drawer>
-      <main
+      {/* <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        {/* <BrowserRouter>
+
+
+        <BrowserRouter>
           <div>
             <Navigation />
 
@@ -208,10 +210,10 @@ export default function PersistentDrawerLeft() {
               <Route component={Error} />
             </Switch>
           </div>
-        </BrowserRouter> */}
+        </BrowserRouter>
 
 
-      </main>
+      </main> */}
     </div>
   );
 }

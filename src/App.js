@@ -120,7 +120,7 @@ class App extends Component {
     // this.onThemeChange = this.onThemeChange.bind(this);
   }
   state = {
-    isThemeLight: true
+    isThemeLight: false
   }
   onThemeChange = ( ) => {
     this.setState=({ 

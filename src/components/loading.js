@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import ReactLoading from "react-loading";
@@ -57,16 +57,17 @@ function Row(props) {
 
     return (
         <React.Fragment>
-            <TableRow className={classes.root}>
+            <TableRow className={classes.root} >
                 {/* <TableCell> */}
-                    {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton> */}
                 {/* </TableCell> */}
-                <TableCell component="th" scope="row">
-                <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                <TableCell component="th" scope="row" >
+                    {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton> {row.avatar} - {row.name}
+                    </IconButton>  */}
+                    {row.avatar} - {row.name}
                 </TableCell>
                 {/* <TableCell align="right">{row.name}</TableCell> */}
                 <TableCell align="right">{row.info}</TableCell>
@@ -182,22 +183,22 @@ export default class Loading extends React.Component {
     }
     state = {
         randomItem: '',
-        
+
         setOpen: undefined
     }
 
     loadingTextArray = [
         'разгружаем вагоны...',
         "готовим пиццу...",
-        "ждем такси...",
+        "ждем...",
         "участвуем в...",
         "загрузка...",
-        "приводим все в порядок...",
+        "приводим в порядок...",
         // "...",
-        "подгружаем данные...",
-        "общаемся с организаторами...",
-        "встречаемся со спонсорами...",
-        "обновляем список...",
+        "подгружаем ...",
+        "общаемся...",
+        "встречаемся...",
+        "обновляем...",
         "читаем мануал...",
         "здесь будет таблица...",
     ];
@@ -287,32 +288,36 @@ export default class Loading extends React.Component {
             currentExpandedRows.concat(rowId);
 
         this.setState({ expandedRows: newExpandedRows });
-        this.state.open = true;
+         this.state.open = true;
+        // this.setState(prevState => ({ open: !prevState.open }));
     }
 
     renderItem(item) {
-        const clickCallback = () => this.handleRowClick(item.id);
-
+        const clickCallback = () => { 
+            this.handleRowClick(item.id);
+            //    this.setState(prevState => ({ open: !prevState.open })) 
+            };
+        // onClick={() => setOpen(!open)
         const itemRows = [
             <React.Fragment>
-                        {/* <TableCell>
+                {/* <TableCell>
 
         </TableCell> */}
-            <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
-                {/* <TableCell component="th" scope="row"> */}
-                <TableCell scope="row"> 
-                <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({open: !prevState.open }))  }>
-            {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-                    <a target="_blank" rel="noopener noreferrer" href={item.link}>
-                        <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-                    </a>
+                <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
+                    {/* <TableCell component="th" scope="row"> */}
+                    <TableCell scope="row">
+                        <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
+                            {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        </IconButton>
+                        <a target="_blank" rel="noopener noreferrer" href={item.link}>
+                            <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                        </a>
 
 
-                    <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
-                </TableCell>
-                <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
-            </TableRow>
+                        <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+                    </TableCell>
+                    <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
+                </TableRow>
             </React.Fragment>
         ];
 
@@ -320,37 +325,37 @@ export default class Loading extends React.Component {
 
         if (this.state.expandedRows.includes(item.id)) {
             itemRows.push(
-<Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                <TableRow key={"row-expanded-" + item.id}>
-                    {/* <td>{item.followers}</td> */}
-                    {/* <th>Спонсоры:</th>  */}
-                    <Typography variant="h7" gutterBottom component="div">
-                        Спонсоры:
+                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                    <TableRow key={"row-expanded-" + item.id}>
+                        {/* <td>{item.followers}</td> */}
+                        {/* <th>Спонсоры:</th>  */}
+                        <Typography variant="h7" gutterBottom component="div">
+                            Спонсоры:
                     </Typography>
 
-                    {this.state.allJoin.map(collumn => {
-                        if (item.username === collumn.username) //Collumn - alljoin
-                            return (
-                                <TableRow key={collumn.id}>
-                                    <TableCell className="paddingRow">>
+                        {this.state.allJoin.map(collumn => {
+                            if (item.username === collumn.username) //Collumn - alljoin
+                                return (
+                                    <TableRow key={collumn.id}>
+                                        <TableCell className="paddingRow">>
                   <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
-                                            <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
-                                        </a>
-                                        <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
-                                    </TableCell>
-                                    <TableCell>
+                                                <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
+                                            </a>
+                                            <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
+                                        </TableCell>
+                                        <TableCell>
 
-                                        {/* <Button variant="contained" color="primary">
+                                            {/* <Button variant="contained" color="primary">
                                      Hello World
                                     </Button> */}
 
-                                        <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
-                                        {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
-                                        {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
-                                    </TableCell>
-                                </TableRow>);
-                    })}
-                </TableRow>
+                                            <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
+                                            {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
+                                            {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
+                                        </TableCell>
+                                    </TableRow>);
+                        })}
+                    </TableRow>
                 </Collapse>
             );
         }

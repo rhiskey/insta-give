@@ -13,7 +13,7 @@
     padding-bottom: 10;
   }
   .Loading-give-user{
-    margin-left: 10px;
+    margin-left: 5px;
     text-align: left;
     /* position: relative;
     font-size: 20;
@@ -74,7 +74,8 @@ th  {
   /* color: white; */
   text-align: left; /* Выравнивание по левому краю */
 
-  padding: 5px; /* Поля вокруг содержимого ячеек */
+  padding: 5px;
+   /* Поля вокруг содержимого ячеек */
   /* border: 1px solid black; Граница вокруг ячеек */
 }
 td {

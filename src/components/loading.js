@@ -329,9 +329,9 @@ export default class Loading extends React.Component {
                     <TableRow key={"row-expanded-" + item.id}>
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
-                        <Typography variant="h7" gutterBottom component="div">
+                        <Typography variant="h7" gutterBottom component="div" style={{marginLeft: 5}}>
                             Спонсоры:
-                    </Typography>
+                        </Typography>
 
                         {this.state.allJoin.map(collumn => {
                             if (item.username === collumn.username) //Collumn - alljoin

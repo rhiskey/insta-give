@@ -1,6 +1,7 @@
 .Home-menu{
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 10px;  
+    /* Таблица и все что внутри */
+    margin-right: 10px;
     text-align: left;
     position: relative;
     font-size: 20;

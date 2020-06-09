@@ -22,7 +22,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 // import { NavLink } from 'react-router-dom';
 import Loading from "./loading.js";
-
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
 import Navigation from './Navigation';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -34,6 +34,7 @@ import Error from './Error';
 import Agreement from './Agreement';
 import Privacy from './Privacy';
 
+const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -107,7 +108,7 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} onTouchEnd= {handleDrawerOpen}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -121,6 +122,8 @@ export default function PersistentDrawerLeft() {
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
+            onTouchStart={handleDrawerOpen}
+            onTouchMove={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
@@ -131,7 +134,7 @@ export default function PersistentDrawerLeft() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
+      <Drawer disableBackdropTransition={!iOS} disableDiscovery={iOS} onTouchEnd= {handleDrawerClose}
         className={classes.drawer}
         variant="persistent"
         anchor="left"

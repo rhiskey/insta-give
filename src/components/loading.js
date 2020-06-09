@@ -37,6 +37,7 @@ const useRowStyles = makeStyles({
         },
     },
 });
+ 
 
 function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
     return {

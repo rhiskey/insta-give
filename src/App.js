@@ -120,18 +120,19 @@ class App extends Component {
       // isToggleOn: true //ПОдписка
       navitem: undefined,
       setNav: undefined,
-      // isThemeLight: true
+      isThemeLight: true
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
     // this.onThemeChange = this.onThemeChange.bind(this);
   }
   state = {
-    isThemeLight: true
+    // isThemeLight: false
   }
   onThemeChange = ( ) => {  
-    this.setState({
-      isThemeLight: !this.state.isThemeLight
-    });
+    // this.setState({
+    //   isThemeLight: !this.state.isThemeLight
+    // });
+    this.setState(prevState => ({ isThemeLight: !prevState.isThemeLight }));
   }
   // async componentDidMount() {
   //   //this.getUsers();

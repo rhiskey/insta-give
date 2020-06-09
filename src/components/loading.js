@@ -26,6 +26,9 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fade from '@material-ui/core/Fade';
+import Zoom from '@material-ui/core/Zoom';
 
 const useRowStyles = makeStyles({
     root: {
@@ -57,23 +60,27 @@ function Row(props) {
 
     return (
         <React.Fragment>
+             
             <TableRow className={classes.root} >
                 {/* <TableCell> */}
                 {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton> */}
                 {/* </TableCell> */}
+               
                 <TableCell component="th" scope="row" >
                     {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>  */}
-                    {row.avatar} - {row.name}
+                     <Tooltip title="Нажми сюда для просмотра спонсоров" arrow>{row.avatar} - {row.name}</Tooltip>
                 </TableCell>
+
                 {/* <TableCell align="right">{row.name}</TableCell> */}
                 <TableCell align="right">{row.info}</TableCell>
                 {/* <TableCell align="right">{row.carbs}</TableCell>
           <TableCell align="right">{row.protein}</TableCell> */}
             </TableRow>
+    
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
@@ -191,7 +198,7 @@ export default class Loading extends React.Component {
         'разгружаем вагоны...',
         "готовим пиццу...",
         "ждем...",
-        "участвуем в...",
+        "учавствуем в...",
         "загрузка...",
         "приводим в порядок...",
         // "...",
@@ -303,8 +310,10 @@ export default class Loading extends React.Component {
                 {/* <TableCell>
 
         </TableCell> */}
+         <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
                 <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
                     {/* <TableCell component="th" scope="row"> */}
+                    {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
                     <TableCell scope="row">
                         <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
                             {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -316,8 +325,10 @@ export default class Loading extends React.Component {
 
                         <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
                     </TableCell>
+                    {/* </Tooltip> */}
                     <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
                 </TableRow>
+                </Tooltip>
             </React.Fragment>
         ];
 

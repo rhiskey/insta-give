@@ -20,6 +20,7 @@ import Error from './components/Error';
 import Navigation from './components/Navigation';
 import Agreement from './components/Agreement';
 import Privacy from './components/Privacy';
+
 // import FooterContent from './components/FooterContent';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -33,7 +34,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switcher from '@material-ui/core/Switch';
 import {lightTheme, darkTheme } from './theme';
-import MiniMenu from './miniDrawer';
+import MiniMenu from './components/miniDrawer';
 
 import {
   AppBar,
@@ -424,7 +425,7 @@ class App extends Component {
       </AppBar> */}
 
 
-        <BrowserRouter>
+        {/* <BrowserRouter>
           <div>
             <Navigation />
 
@@ -438,7 +439,7 @@ class App extends Component {
               <Route component={Error} />
             </Switch>
           </div>
-        </BrowserRouter>
+        </BrowserRouter> */}
 
          <Footer>
 
@@ -454,6 +455,7 @@ class App extends Component {
           {/* <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
           <BottomNavigationAction label="Избранные раздачи" icon={<FavoriteIcon />} />
           <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} /> */}
+          
           <InstagramLogin
           clientId="296560698030895"
           scope="user_profile,user_media"

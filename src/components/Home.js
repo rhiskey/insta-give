@@ -9,7 +9,7 @@ const home = () => {
             <p>Сервис проверенных раздач в Instagram</p>
             {/* Перенести сюда таблицу */}
             <div>
-                <Loading />
+                {/* <Loading /> */}
             </div>
         </div>
     );

@@ -33,7 +33,7 @@ import { ThemeProvider } from '@material-ui/styles';
 // import ThemeSwitch from './components/ThemeSwitch'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switcher from '@material-ui/core/Switch';
-import {lightTheme, darkTheme } from './theme';
+import { lightTheme, darkTheme } from './theme';
 import MiniMenu from './components/miniDrawer';
 
 import {
@@ -43,11 +43,16 @@ import {
   createMuiTheme
 } from "@material-ui/core";
 
-// const theme = createMuiTheme({
-//   palette: {
-//     type: "dark"
-//   }
-// });
+const themeLight = createMuiTheme({
+  palette: {
+    type: "light"
+  }
+});
+const themeDark = createMuiTheme({
+  palette: {
+    type: "dark"
+  }
+});
 const theme1 = createMuiTheme(lightTheme);
 const theme2 = createMuiTheme(darkTheme)
 
@@ -115,18 +120,18 @@ class App extends Component {
       // isToggleOn: true //ПОдписка
       navitem: undefined,
       setNav: undefined,
-      // isThemeLight: false
+      // isThemeLight: true
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
     // this.onThemeChange = this.onThemeChange.bind(this);
   }
   state = {
-    isThemeLight: false
+    isThemeLight: true
   }
-  onThemeChange = ( ) => {
-    this.setState=({ 
-      // isThemeLight = false,
-     })
+  onThemeChange = ( ) => {  
+    this.setState({
+      isThemeLight: !this.state.isThemeLight
+    });
   }
   // async componentDidMount() {
   //   //this.getUsers();
@@ -361,7 +366,8 @@ class App extends Component {
     //   }
     // });
 
-    const { isThemeLight } =  this.state  ;
+    const { isThemeLight } =  this.state;
+    
     // const { users } = this.state;
     const { index } = this.state;
     // const classes = useStyles();
@@ -405,8 +411,8 @@ class App extends Component {
 
 
     return <div className="App">
-      {/* <ThemeProvider theme={theme}> */}
-      <ThemeProvider theme= {isThemeLight ? theme1 : theme2}>
+      {/* <ThemeProvider theme={themeLight}> */}
+      <ThemeProvider theme={ isThemeLight ? themeLight : themeDark}>
         <CssBaseline />
         <Typography style={{ marginTop: 60 }}>
           {/* Text should be white, background should be dark */}
@@ -415,7 +421,7 @@ class App extends Component {
 
         <Header />
 
-              <MiniMenu />
+        <MiniMenu />
         {/* <CssBaseline />
       <Typography style={{ marginTop: 50 }}>
         Text should be white, background should be dark
@@ -425,7 +431,7 @@ class App extends Component {
       </AppBar> */}
 
 
-        {/* <BrowserRouter>
+        <BrowserRouter>
           <div>
             <Navigation />
 
@@ -439,46 +445,46 @@ class App extends Component {
               <Route component={Error} />
             </Switch>
           </div>
-        </BrowserRouter> */}
+        </BrowserRouter>
 
-         <Footer>
+        <Footer>
 
-      <span >
+          <span >
 
-         <BottomNavigation
-          value={this.navitem}
-          onChange={(event, newValue) => {
-            this.state.setNav=newValue;
-          }}
-          showLabels
-        >
-          {/* <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
+            <BottomNavigation
+              value={this.navitem}
+              onChange={(event, newValue) => {
+                this.state.setNav = newValue;
+              }}
+              showLabels
+            >
+              {/* <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
           <BottomNavigationAction label="Избранные раздачи" icon={<FavoriteIcon />} />
           <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} /> */}
-          
-          <InstagramLogin
-          clientId="296560698030895"
-          scope="user_profile,user_media"
-          buttonText="Войти через Instagram"
-          onSuccess={responseInstagram}
-          onFailure={responseInstagram}
-        />
-        <span style = {{marginLeft: 15}}>
-                  <FormControlLabel
-            control={
-              <Switcher
-                checked={isThemeLight}
-                onChange={this.onThemeChange}
-                name="checkedB"
-                color="primary"
+
+              <InstagramLogin
+                clientId="296560698030895"
+                scope="user_profile,user_media"
+                buttonText="Войти через Instagram"
+                onSuccess={responseInstagram}
+                onFailure={responseInstagram}
               />
-            }
-            label={isThemeLight ? "Светлая тема" : "Темная тема"}
-          />
-          </span>
-        </BottomNavigation> 
-      </span >
-      </Footer> 
+              <span style={{ marginLeft: 15 }}>
+                <FormControlLabel
+                  control={
+                    <Switcher
+                      checked={isThemeLight}
+                      onChange={this.onThemeChange}
+                      name="checkedB"
+                      color="primary"
+                    />
+                  }
+                  label={isThemeLight ? "Светлая тема" : "Темная тема"}
+                />
+              </span>
+            </BottomNavigation>
+          </span >
+        </Footer>
 
       </ThemeProvider>
     </div>

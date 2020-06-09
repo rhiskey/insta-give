@@ -60,19 +60,19 @@ function Row(props) {
 
     return (
         <React.Fragment>
-             
+
             <TableRow className={classes.root} >
                 {/* <TableCell> */}
                 {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton> */}
                 {/* </TableCell> */}
-               
+
                 <TableCell component="th" scope="row" >
                     {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>  */}
-                     <Tooltip title="Нажми сюда для просмотра спонсоров" arrow>{row.avatar} - {row.name}</Tooltip>
+                    <Tooltip title="Нажми сюда для просмотра спонсоров" arrow>{row.avatar} - {row.name}</Tooltip>
                 </TableCell>
 
                 {/* <TableCell align="right">{row.name}</TableCell> */}
@@ -80,7 +80,7 @@ function Row(props) {
                 {/* <TableCell align="right">{row.carbs}</TableCell>
           <TableCell align="right">{row.protein}</TableCell> */}
             </TableRow>
-    
+
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
@@ -295,39 +295,39 @@ export default class Loading extends React.Component {
             currentExpandedRows.concat(rowId);
 
         this.setState({ expandedRows: newExpandedRows });
-         this.state.open = true;
+        this.state.open = true;
         // this.setState(prevState => ({ open: !prevState.open }));
     }
 
     renderItem(item) {
-        const clickCallback = () => { 
+        const clickCallback = () => {
             this.handleRowClick(item.id);
             //    this.setState(prevState => ({ open: !prevState.open })) 
-            };
+        };
         // onClick={() => setOpen(!open)
         const itemRows = [
             <React.Fragment>
                 {/* <TableCell>
 
         </TableCell> */}
-         <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
-                <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
-                    {/* <TableCell component="th" scope="row"> */}
-                    {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
-                    <TableCell scope="row">
-                        <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
-                            {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                        </IconButton>
-                        <a target="_blank" rel="noopener noreferrer" href={item.link}>
-                            <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-                        </a>
+                <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
+                    <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
+                        {/* <TableCell component="th" scope="row"> */}
+                        {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
+                        <TableCell scope="row">
+                            <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
+                                {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                            </IconButton>
+                            <a target="_blank" rel="noopener noreferrer" href={item.link}>
+                                <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                            </a>
 
 
-                        <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
-                    </TableCell>
-                    {/* </Tooltip> */}
-                    <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
-                </TableRow>
+                            <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+                        </TableCell>
+                        {/* </Tooltip> */}
+                        <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
+                    </TableRow>
                 </Tooltip>
             </React.Fragment>
         ];
@@ -340,7 +340,7 @@ export default class Loading extends React.Component {
                     <TableRow key={"row-expanded-" + item.id}>
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
-                        <Typography variant="h7" gutterBottom component="div" style={{marginLeft: 5}}>
+                        <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
                             Спонсоры:
                         </Typography>
 

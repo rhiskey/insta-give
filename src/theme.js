@@ -1,14 +1,14 @@
 // theme.js
 export const lightTheme = {
-  direction: 'ltr',
+  // direction: 'ltr',
   palette: {
     type: 'light',
-    //  primary: {
-    //    main: '#37b44e',
-    //  },
-    //  secondary: {
-    //    main: '#000',
-    //  },
+     primary: {
+       main: '#37b44e',
+     },
+     secondary: {
+       main: '#000',
+     },
   },
   }
   

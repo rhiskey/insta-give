@@ -155,6 +155,7 @@ export default function PersistentDrawerLeft() {
 
             </ListItem>
           </a>
+          <Divider />
           <a href="/">
             <ListItem button >
               <ListItemIcon>{<MonetizationOnIcon />}</ListItemIcon>
@@ -193,7 +194,7 @@ export default function PersistentDrawerLeft() {
           [classes.contentShift]: open,
         })}
       >
-               <BrowserRouter>
+        {/* <BrowserRouter>
           <div>
             <Navigation />
 
@@ -207,9 +208,8 @@ export default function PersistentDrawerLeft() {
               <Route component={Error} />
             </Switch>
           </div>
-        </BrowserRouter>
+        </BrowserRouter> */}
 
-        <Loading />
 
       </main>
     </div>

@@ -442,7 +442,7 @@ class App extends Component {
 
          <Footer>
 
-      <span className="">
+      <span >
 
          <BottomNavigation
           value={this.navitem}
@@ -461,6 +461,7 @@ class App extends Component {
           onSuccess={responseInstagram}
           onFailure={responseInstagram}
         />
+        <span style = {{marginLeft: 15}}>
                   <FormControlLabel
             control={
               <Switcher
@@ -472,6 +473,7 @@ class App extends Component {
             }
             label={isThemeLight ? "Светлая тема" : "Темная тема"}
           />
+          </span>
         </BottomNavigation> 
       </span >
       </Footer> 

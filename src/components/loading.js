@@ -12,7 +12,7 @@ import './loading.css';
 import Button from '@material-ui/core/Button';
 
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
@@ -29,6 +29,18 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
 import Zoom from '@material-ui/core/Zoom';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
+import Grid from '@material-ui/core/Grid';
+
+import Skeleton from '@material-ui/lab/Skeleton';
+import Rating from '@material-ui/lab/Rating';
+
+
+// import clsx from 'clsx';
+// import { AutoSizer, Column, Table } from 'react-virtualized';
 
 const useRowStyles = makeStyles({
     root: {
@@ -37,7 +49,19 @@ const useRowStyles = makeStyles({
         },
     },
 });
- 
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(0.5),
+        },
+    },
+}));
+
+
 
 function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
     return {
@@ -205,7 +229,7 @@ export default class Loading extends React.Component {
         // "...",
         "подгружаем ...",
         "общаемся...",
-        "встречаемся...",
+        // "встречаемся...",
         "обновляем...",
         "читаем мануал...",
         "здесь будет таблица...",
@@ -230,6 +254,10 @@ export default class Loading extends React.Component {
             isToggleOn: !state.isToggleOn
         }));
     }
+
+    handleChipClick = () => {
+        console.info('You clicked the Chip.');
+    };
 
     componentDidMount() {
 
@@ -300,6 +328,7 @@ export default class Loading extends React.Component {
         // this.setState(prevState => ({ open: !prevState.open }));
     }
 
+
     renderItem(item) {
         const clickCallback = () => {
             this.handleRowClick(item.id);
@@ -316,18 +345,23 @@ export default class Loading extends React.Component {
                         {/* <TableCell component="th" scope="row"> */}
                         {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
                         <TableCell scope="row">
-                            <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
-                                {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                            </IconButton>
-                            <a target="_blank" rel="noopener noreferrer" href={item.link}>
-                                <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-                            </a>
-
-
-                            <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+                            {!this.state.done ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                                <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
+                                    {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                </IconButton>
+                            )}
+                            {!this.state.done ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                                <a target="_blank" rel="noopener noreferrer" href={item.link}>
+                                    <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
+                                </a>
+                            )}
+                            {!this.state.done ? (<Skeleton />) : (
+                                <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
+                            )}
                         </TableCell>
-                        {/* </Tooltip> */}
-                        <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
+                        {!this.state.done ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
+                            <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
+                        )}
                     </TableRow>
                 </Tooltip>
             </React.Fragment>
@@ -350,21 +384,34 @@ export default class Loading extends React.Component {
                                 return (
                                     <TableRow key={collumn.id}>
                                         <TableCell className="paddingRow">>
-                  <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
+                                        {/* <Grid item xs 
+                                        container
+                                        direction="row"
+                                        justify="center"
+                                        alignItems="center"
+                                        > */}
+                                            <Chip
+                                                component="a" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} clickable
+                                                avatar={<Avatar alt="SponsorAvatart" src={collumn.avatarFollower} />}
+                                                label={collumn.usernameFollower /*+ " Подпишись"*/}
+                                            // onClick={handleChipClick}
+                                            />
+                                            {/* </Grid>   */}
+                                        </TableCell>
+
+                                        {/* OLD */}
+
+                                        {/* <TableCell className="paddingRow">>
+                 <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
                                                 <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
                                             </a>
                                             <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
                                         </TableCell>
                                         <TableCell>
-
-                                            {/* <Button variant="contained" color="primary">
-                                     Hello World
-                                    </Button> */}
-
                                             <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
-                                            {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
-                                            {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
-                                        </TableCell>
+                                        </TableCell> */}
+
+                                        {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
                                     </TableRow>);
                         })}
                     </TableRow>
@@ -414,40 +461,58 @@ export default class Loading extends React.Component {
                     </Table>
                 </TableContainer> */}
 
+                {/* <Typography variant="h5">
+                    {!this.state.loading ? <Skeleton width="300px" /> : 'Активные Giveaways:'}
+                </Typography> */}
+
+
                 <div><h4>Активные Giveaways: </h4></div>
                 <center>
+
                     <TableContainer component={Paper}>
-                        <Table aria-label="collapsible table" className="Giveaway-table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>
-                                        Организатор
+                        <Table aria-label="collapsible table" className="Giveaway-table" size="small" >
+                            {!this.state.done ? (<Skeleton variant="rect" width="100%" />) : (
+
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>
+                                            {/* {!this.state.done ? (<Skeleton  width="100%" />):( */}
+                                            <Typography>Организатор</Typography>
+                                            {/* )} */}
+                                        </TableCell>
+                                        <TableCell>
+                                            Инфо раздачи
                                     </TableCell>
-                                    <TableCell>
-                                        Инфо раздачи
-                                    </TableCell>
-                                </TableRow>
-                            </TableHead>
+                                    </TableRow>
+                                </TableHead>
+                            )}
                             <TableBody>
                                 {!this.state.done ? (
                                     <FadeIn>
                                         <tr class="d-flex justify-content-center align-items-center">
+
                                             <td className="Loading-loadingText"><h2>{this.state.randomLoadingText}</h2></td>
                                             <td>{!this.state.loading ? (
+
                                                 <Lottie options={defaultOptions} height={120} width={120} />
+
                                             ) : (
                                                     <Lottie options={defaultOptions2} height={120} width={120} />
                                                 )} </td>
                                         </tr>
                                     </FadeIn>
-                                ) : (
-                                        allItemRows
-                                    )}
+                                ) : (allItemRows)}
+
+                                {/* {!this.state.loading ? (<Skeleton variant="rect" width="100%" />) : (
+                                    allItemRows
+                                )} */}
 
                             </TableBody>
 
                         </Table>
                     </TableContainer>
+
+
                     {/* <table className="Giveaway-table">
                         <thead>
                             <tr>

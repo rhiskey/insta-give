@@ -69,7 +69,7 @@ class Navigation extends React.Component {
             <Tabs value={index} fullWidth onChange={this.handleChange} style={stylesTab.tabs}>
             <NavLink to="/"><Tab label="Главная" /></NavLink>
                <NavLink to="/about"><Tab label="О сервисе" /></NavLink>
-               <Tab label="Организаторам" />
+               <Tab label="FAQ" />
             </Tabs>
 
          <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex} >
@@ -91,7 +91,7 @@ class Navigation extends React.Component {
               <MenuItem value={10}>Ten</MenuItem>
             </Select> */}
                </div>
-               <div style={Object.assign({}, stylesTab.slide, stylesTab.slide3)}>Вы начинаете раздачу и в панели управления добавляете ссылку на пост в Instagram, в комментариях пишите условия раздачи.</div>
+               <div style={Object.assign({}, stylesTab.slide, stylesTab.slide3)}>В панели управления добавляете ссылку на свой аккаунт/пост в Instagram.</div>
             {/* </SwipeableViews> */}
             </AutoPlaySwipeableViews>
        <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} /> 

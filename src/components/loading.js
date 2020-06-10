@@ -203,6 +203,8 @@ export default class Loading extends React.Component {
         this.state = {
             done: undefined,
             loading: undefined,
+            loadingFollowers: undefined,
+            doneFollowers: undefined,
             usersMain: [],
             allJoin: [],
             expandedRows: [],
@@ -301,10 +303,10 @@ export default class Loading extends React.Component {
                 }
                 return response.json();
             }).then(function (data) {
-                self.setState({ loading: true });
+                self.setState({ loadingFollowers: true });
                 self.setState({ allJoin: data });
                 setTimeout(() => {
-                    self.setState({ done: true });
+                    self.setState({ doneFollowers: true });
                 }, 1000);
             }).catch(err => {
                 console.log('caught it!', err);
@@ -345,21 +347,32 @@ export default class Loading extends React.Component {
                         {/* <TableCell component="th" scope="row"> */}
                         {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
                         <TableCell scope="row">
-                            {!this.state.done ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                            {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
                                     {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                                 </IconButton>
                             )}
-                            {!this.state.done ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+
+                            {/* OnClick сделать раскрытие */}
+                            {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                            <Chip  color="primary" 
+                                                component="a" target="_blank" rel="noopener noreferrer" href={item.link} clickable
+                                                avatar={<Avatar alt="SponsorAvatart" src={item.avatar} />}
+                                                label={item.username /*+ " Подпишись"*/}
+                                            // onClick={handleChipClick}
+                            />
+                            )}
+
+                            {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <a target="_blank" rel="noopener noreferrer" href={item.link}>
                                     <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                                 </a>
                             )}
-                            {!this.state.done ? (<Skeleton />) : (
+                            {!this.state.doneFollowers ? (<Skeleton />) : (
                                 <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
-                            )}
+                            )} */}
                         </TableCell>
-                        {!this.state.done ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
+                        {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
                             <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
                         )}
                     </TableRow>
@@ -390,7 +403,7 @@ export default class Loading extends React.Component {
                                         justify="center"
                                         alignItems="center"
                                         > */}
-                                            <Chip
+                                            <Chip color="secondary" size="small"
                                                 component="a" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} clickable
                                                 avatar={<Avatar alt="SponsorAvatart" src={collumn.avatarFollower} />}
                                                 label={collumn.usernameFollower /*+ " Подпишись"*/}

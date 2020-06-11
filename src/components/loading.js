@@ -397,8 +397,7 @@ export default class Loading extends React.Component {
                             if (item.username === collumn.username) //Collumn - alljoin
                                 return (
                                     <TableRow key={collumn.id}>
-                                        <TableCell className="paddingRow">
-                                        <Typography> ></Typography>
+                                        <TableCell className="paddingRow">>
                                         {/* <Grid item xs 
                                         container
                                         direction="row"

@@ -398,6 +398,11 @@ class App extends Component {
         .then(function (data) {
           console.log(data); // this will be a AccessToken
           this.setState.accessToken = data;
+
+          // this.setState((state, props)=>({
+          //   accessToken: data
+          // }))
+
           // https://www.instagram.com/web/friendships/5401182145/follow/
           // https://www.instagram.com/web/friendships/5401182145/unfollow/
         })
@@ -455,7 +460,10 @@ class App extends Component {
             <BottomNavigation
               value={this.navitem}
               onChange={(event, newValue) => {
-                this.state.setNav = newValue;
+                // this.state.setNav = newValue;
+                this.setState((state,props) => ({
+                  setNav: newValue
+                }))
               }}
               showLabels
             >
@@ -464,7 +472,7 @@ class App extends Component {
           <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} /> */}
 
               <InstagramLogin
-                clientId="296560698030895"
+                clientId='296560698030895'
                 scope="user_profile,user_media"
                 buttonText="Войти через Instagram"
                 onSuccess={responseInstagram}
@@ -515,20 +523,21 @@ class Child extends React.Component {
   async componentDidMount() {
     //this.getUsers();
 
-    //Subscribtion accs
-    let self = this;
-    fetch('https://dry-plains-18498.herokuapp.com/accounts', {
-      method: 'GET'
-    }).then(function (response) {
-      if (response.status >= 400) {
-        throw new Error("Bad response from server");
-      }
-      return response.json();
-    }).then(function (data) {
-      self.setState({ users: data });
-    }).catch(err => {
-      console.log('caught it!', err);
-    })
+    // //Subscribtion accs
+    // let self = this;
+    // fetch('https://dry-plains-18498.herokuapp.com/accounts', {
+    //   method: 'GET'
+    // }).then(function (response) {
+    //   if (response.status >= 400) {
+    //     throw new Error("Bad response from server");
+    //   }
+    //   return response.json();
+    // }).then(function (data) {
+    //   self.setState({ users: data });
+    // }).catch(err => {
+    //   console.log('caught it!', err);
+    // })
+
   }
 
   render() {

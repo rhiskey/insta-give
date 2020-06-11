@@ -295,6 +295,7 @@ export default class Loading extends React.Component {
             }).catch(err => {
                 console.log('caught it!', err);
             })
+
             fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
                 method: 'GET'
             }).then(function (response) {
@@ -325,8 +326,8 @@ export default class Loading extends React.Component {
             currentExpandedRows.filter(id => id !== rowId) :
             currentExpandedRows.concat(rowId);
 
-        this.setState({ expandedRows: newExpandedRows });
-        this.state.open = true;
+        this.setState({ expandedRows: newExpandedRows, open: true });
+        // this.state.open = true;
         // this.setState(prevState => ({ open: !prevState.open }));
     }
 
@@ -396,7 +397,8 @@ export default class Loading extends React.Component {
                             if (item.username === collumn.username) //Collumn - alljoin
                                 return (
                                     <TableRow key={collumn.id}>
-                                        <TableCell className="paddingRow">>
+                                        <TableCell className="paddingRow">
+                                        <Typography> ></Typography>
                                         {/* <Grid item xs 
                                         container
                                         direction="row"

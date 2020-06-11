@@ -9,6 +9,9 @@ import Select from '@material-ui/core/Select';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import Pagination from './Pagination';
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/Info';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 // import 'fontsource-roboto';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -67,8 +70,8 @@ class Navigation extends React.Component {
          <div className="Nav-text">
 
             <Tabs value={index} fullWidth onChange={this.handleChange} style={stylesTab.tabs}>
-            <NavLink to="/"><Tab label="Главная" /></NavLink>
-               <NavLink to="/about"><Tab label="О сервисе" /></NavLink>
+            <NavLink to="/"><HomeIcon/><Tab label="Главная" /></NavLink>
+               <NavLink to="/about"><InfoIcon/><Tab label="О сервисе" /></NavLink>
                <Tab label="FAQ" />
             </Tabs>
 

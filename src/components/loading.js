@@ -37,8 +37,10 @@ import Grid from '@material-ui/core/Grid';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 import Rating from '@material-ui/lab/Rating';
-
-
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import ChatIcon from '@material-ui/icons/Chat';
+import PaymentIcon from '@material-ui/icons/Payment';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 // import clsx from 'clsx';
 // import { AutoSizer, Column, Table } from 'react-virtualized';
 
@@ -358,7 +360,7 @@ export default class Loading extends React.Component {
                             {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                             <Chip  color="primary" 
                                                 component="a" target="_blank" rel="noopener noreferrer" href={item.link} clickable
-                                                avatar={<Avatar alt="SponsorAvatart" src={item.avatar} />}
+                                                avatar={<Avatar alt="SponsorAvatar" src={item.avatar} />}
                                                 label={item.username /*+ " Подпишись"*/}
                                             // onClick={handleChipClick}
                             />
@@ -390,7 +392,7 @@ export default class Loading extends React.Component {
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
                         <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
-                            Спонсоры:
+                            <AccountBalanceWalletIcon/>Спонсоры:
                         </Typography>
 
                         {this.state.allJoin.map(collumn => {
@@ -480,7 +482,7 @@ export default class Loading extends React.Component {
                 </Typography> */}
 
 
-                <div><h4>Активные Giveaways: </h4></div>
+                <div><h4><PaymentIcon/>Активные Giveaways: </h4></div>
                 <center>
 
                     <TableContainer component={Paper}>
@@ -491,11 +493,11 @@ export default class Loading extends React.Component {
                                     <TableRow>
                                         <TableCell>
                                             {/* {!this.state.done ? (<Skeleton  width="100%" />):( */}
-                                            <Typography>Организатор</Typography>
+                                                <Typography> <MonetizationOnIcon/> Организатор</Typography> 
                                             {/* )} */}
                                         </TableCell>
                                         <TableCell>
-                                            Инфо раздачи
+                                          <ChatIcon/> Инфо раздачи
                                     </TableCell>
                                     </TableRow>
                                 </TableHead>

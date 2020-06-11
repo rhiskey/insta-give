@@ -33,6 +33,7 @@ import Error from './Error';
 // import Navigation from './components/Navigation';
 import Agreement from './Agreement';
 import Privacy from './Privacy';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const drawerWidth = 240;
@@ -170,6 +171,15 @@ export default function PersistentDrawerLeft() {
             <ListItem button >
               <ListItemIcon>{<AssignmentIndIcon />}</ListItemIcon>
               <ListItemText primary="Организаторам" />
+
+            </ListItem>
+          </a>
+
+          <Divider />
+          <a href="https://dry-plains-18498.herokuapp.com/">
+            <ListItem button >
+              <ListItemIcon>{<GroupWorkIcon />}</ListItemIcon>
+              <ListItemText primary="Панель управления" />
 
             </ListItem>
           </a>

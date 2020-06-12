@@ -56,6 +56,21 @@ const themeDark = createMuiTheme({
 const theme1 = createMuiTheme(lightTheme);
 const theme2 = createMuiTheme(darkTheme)
 
+// function AutoTheme(){
+// const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+// const theme = React.useMemo(
+//   () =>
+//     createMuiTheme({
+//       palette: {
+//         type: prefersDarkMode ? 'dark' : 'light',
+//       },
+//     }),
+//   [prefersDarkMode],
+// );
+// return theme;
+//   }
+
 // function getTheme(theme) {
 //   return createMuiTheme({
 //     palette: {
@@ -128,6 +143,8 @@ class App extends Component {
   state = {
     // isThemeLight: false
   }
+
+  
   onThemeChange = ( ) => {  
     // this.setState({
     //   isThemeLight: !this.state.isThemeLight
@@ -260,6 +277,15 @@ class App extends Component {
     this.setState(prevState => ({ childVisible: !prevState.childVisible }));
   }
 
+  // componentDidCatch(error, info) {
+  //   // Пример "componentStack":
+  //   //   in ComponentThatThrows (created by App)
+  //   //   in ErrorBoundary (created by App)
+  //   //   in div (created by App)
+  //   //   in App
+  //   logComponentStackToMyService(info.componentStack);
+  // }
+
   // handleMouseEnter = (e) => {
   //   this.setState({
   //     left: e.target.getBoundingClientRect().x - 4,
@@ -368,7 +394,7 @@ class App extends Component {
     // });
 
     const { isThemeLight } =  this.state;
-    
+    // const theme = AutoTheme;
     // const { users } = this.state;
     const { index } = this.state;
     // const classes = useStyles();
@@ -417,7 +443,7 @@ class App extends Component {
 
 
     return <div className="App">
-      {/* <ThemeProvider theme={themeLight}> */}
+      {/* <ThemeProvider theme={theme}> */}
       <ThemeProvider theme={ isThemeLight ? themeLight : themeDark}>
         <CssBaseline />
         <Typography style={{ marginTop: 60 }}>

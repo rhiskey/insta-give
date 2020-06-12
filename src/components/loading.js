@@ -29,6 +29,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
 import Zoom from '@material-ui/core/Zoom';
+import Grow from '@material-ui/core/Grow';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
@@ -215,7 +216,7 @@ export default class Loading extends React.Component {
             open: false,
         };
         // Эта привязка обязательна для работы `this` в колбэке.
-        this.handleButtonClick = this.handleButtonClick.bind(this);
+        // this.handleButtonClick = this.handleButtonClick.bind(this);
     }
     state = {
         randomItem: '',
@@ -253,11 +254,11 @@ export default class Loading extends React.Component {
         e.target.borderWidth = 2;
     }
 
-    handleButtonClick() {
-        this.setState(state => ({
-            isToggleOn: !state.isToggleOn
-        }));
-    }
+    // handleButtonClick() {
+    //     this.setState(state => ({
+    //         isToggleOn: !state.isToggleOn
+    //     }));
+    // }
 
     handleChipClick = () => {
         console.info('You clicked the Chip.');
@@ -320,6 +321,34 @@ export default class Loading extends React.Component {
 
     }
 
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     if (this.props.color !== nextProps.color) {
+    //       return true;
+    //     }
+    //     if (this.state.count !== nextState.count) {
+    //       return true;
+    //     }
+    //     return false;
+    //   }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // return this.state.usersMain != nextState.usersMain;
+    //   }
+
+    // componentDidUpdate(prevProps) { //
+    //     // Популярный пример (не забудьте сравнить пропсы):
+    //     if (this.props.userID !== prevProps.userID) {
+    //         this.fetchData(this.props.userID);
+    //     }
+    // }
+
+    // componentWillUpdate(prevProps) { //
+    //     // Популярный пример (не забудьте сравнить пропсы):
+    //     if (this.props.userID !== prevProps.userID) {
+    //         this.fetchData(this.props.userID);
+    //     }
+    // }
+
     handleRowClick(rowId) {
         const currentExpandedRows = this.state.expandedRows;
         const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
@@ -358,12 +387,12 @@ export default class Loading extends React.Component {
 
                             {/* OnClick сделать раскрытие */}
                             {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
-                            <Chip  color="primary" 
-                                                component="a" target="_blank" rel="noopener noreferrer" href={item.link} clickable
-                                                avatar={<Avatar alt="SponsorAvatar" src={item.avatar} />}
-                                                label={item.username /*+ " Подпишись"*/}
-                                            // onClick={handleChipClick}
-                            />
+                                <Chip color="primary"
+                                    component="a" target="_blank" rel="noopener noreferrer" href={item.link} clickable
+                                    avatar={<Avatar alt="SponsorAvatar" src={item.avatar} />}
+                                    label={item.username /*+ " Подпишись"*/}
+                                // onClick={handleChipClick}
+                                />
                             )}
 
                             {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
@@ -387,12 +416,13 @@ export default class Loading extends React.Component {
 
         if (this.state.expandedRows.includes(item.id)) {
             itemRows.push(
-                <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                <FadeIn in={this.state.open}>
+                {/* <Collapse  in={this.state.open} {...(this.state.open ? { timeout: 1000 } : {})} unmountOnExit> */}
                     <TableRow key={"row-expanded-" + item.id}>
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
                         <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
-                            <AccountBalanceWalletIcon/>Спонсоры:
+                            <AccountBalanceWalletIcon />Спонсоры:
                         </Typography>
 
                         {this.state.allJoin.map(collumn => {
@@ -431,7 +461,8 @@ export default class Loading extends React.Component {
                                     </TableRow>);
                         })}
                     </TableRow>
-                </Collapse>
+                {/* </Collapse> */}
+                </FadeIn>
             );
         }
 
@@ -482,7 +513,7 @@ export default class Loading extends React.Component {
                 </Typography> */}
 
 
-                <div><h4><PaymentIcon/>Активные Giveaways: </h4></div>
+                <div><h4><PaymentIcon />Активные Giveaways: </h4></div>
                 <center>
 
                     <TableContainer component={Paper}>
@@ -493,11 +524,11 @@ export default class Loading extends React.Component {
                                     <TableRow>
                                         <TableCell>
                                             {/* {!this.state.done ? (<Skeleton  width="100%" />):( */}
-                                                <Typography> <MonetizationOnIcon/> Организатор</Typography> 
+                                            <Typography> <MonetizationOnIcon /> Организатор</Typography>
                                             {/* )} */}
                                         </TableCell>
                                         <TableCell>
-                                          <ChatIcon/> Инфо раздачи
+                                            <ChatIcon /> Инфо раздачи
                                     </TableCell>
                                     </TableRow>
                                 </TableHead>

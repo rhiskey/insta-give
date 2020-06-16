@@ -144,6 +144,12 @@ class App extends Component {
     // isThemeLight: false
   }
 
+  componentDidMount(){
+
+  }
+  componentWillUnmount(){
+    
+  }
   
   onThemeChange = ( ) => {  
     // this.setState({

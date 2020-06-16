@@ -200,11 +200,77 @@ const defaultOptions2 = {
     }
 };
 
+function OrganisatorInfo(props) {
+    return (
+        <Chip color="primary"
+            component="a" target="_blank" rel="noopener noreferrer" href={props.user.link} clickable
+            avatar={<Avatar alt="OrganisatorAvatar" src={props.user.avatar} />}
+            label={props.user.username /*+ " Подпишись"*/}
+        // onClick={handleChipClick}
+        />
+    )
+}
+function SponsorInfo(props) {
+    return (
+        //Возможно несогласвание ключа
+        <TableRow key={props.follower.id} >
+            <TableCell className="paddingRow">>
+        {/* <Grid item xs 
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        > */}
+                <Chip color="secondary" size="small"
+                    component="a" target="_blank" rel="noopener noreferrer" href={props.follower.linkFollower} clickable
+                    avatar={<Avatar alt="SponsorAvatart" src={props.follower.avatarFollower} />}
+                    label={props.follower.usernameFollower /*+ " Подпишись"*/}
+                // onClick={handleChipClick}
+                />
+                {/* </Grid>   */}
+            </TableCell>
+
+            {/* OLD */}
+
+            {/* <TableCell className="paddingRow">>
+<a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
+                <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
+            </a>
+            <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
+        </TableCell>
+        <TableCell>
+            <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
+        </TableCell> */}
+
+            {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
+        </TableRow>
+    )
+}
+// Пример отправки POST запроса:
+async function postData(url = '', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *client
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
+}
+
 export default class Loading extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             done: undefined,
+            // user: undefined,
             loading: undefined,
             loadingFollowers: undefined,
             doneFollowers: undefined,
@@ -214,9 +280,12 @@ export default class Loading extends React.Component {
             accessToken: '',
             isToggleOn: true, //ПОдписка
             open: false,
+            clickedUserFollowers: [], //Для спонсоров
         };
         // Эта привязка обязательна для работы `this` в колбэке.
         // this.handleButtonClick = this.handleButtonClick.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+
     }
     state = {
         randomItem: '',
@@ -320,7 +389,9 @@ export default class Loading extends React.Component {
         }, 1200);
 
     }
-
+    componentWillUnmount() {
+        this.setState({ loading: true, loadingFollowers: true, allJoin: undefined, usersMain: undefined, doneFollowers: false, done: false, clickedUserFollowers: undefined })
+    }
     // shouldComponentUpdate(nextProps, nextState) {
     //     if (this.props.color !== nextProps.color) {
     //       return true;
@@ -349,7 +420,22 @@ export default class Loading extends React.Component {
     //     }
     // }
 
-    handleRowClick(rowId) {
+    handleRowClick(rowId, username2Get) {
+        //Load Data
+        let self = this;
+        // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
+
+        postData('https://dry-plains-18498.herokuapp.com/getfollowers', { username: username2Get })
+            .then((data) => {
+                // console.log(data); // JSON data parsed by `response.json()` call
+                // self.setState({ loadingFollowers: true });
+                self.setState({ clickedUserFollowers: data });
+                console.log(this.state.clickedUserFollowers);
+                // setTimeout(() => {
+                //     self.setState({ doneFollowers: true });
+                // }, 1000);
+            });
+
         const currentExpandedRows = this.state.expandedRows;
         const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
 
@@ -358,6 +444,32 @@ export default class Loading extends React.Component {
             currentExpandedRows.concat(rowId);
 
         this.setState({ expandedRows: newExpandedRows, open: true });
+
+        {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */ }
+
+
+        // setTimeout(() => {
+
+        // fetch('https://dry-plains-18498.herokuapp.com/getfollowers', {
+        //     method: 'POST'
+        // }).then(function (response) {
+        //     if (response.status >= 400) {
+        //         throw new Error("Bad response from server");
+        //     }
+        //     return response.json();
+        // }).then(function (data) {
+        //     // self.setState({ loadingFollowers: true });
+        //     self.setState({ clickedUserFollowers: data });
+        //     // setTimeout(() => {
+        //     //     self.setState({ doneFollowers: true });
+        //     // }, 1000);
+        // }).catch(err => {
+        //     console.log('caught it!', err);
+        // })
+
+        // }, 1200);
+
+
         // this.state.open = true;
         // this.setState(prevState => ({ open: !prevState.open }));
     }
@@ -365,7 +477,8 @@ export default class Loading extends React.Component {
 
     renderItem(item) {
         const clickCallback = () => {
-            this.handleRowClick(item.id);
+            this.handleRowClick(item.id, item.username);
+            //Load Data
             //    this.setState(prevState => ({ open: !prevState.open })) 
         };
         // onClick={() => setOpen(!open)
@@ -385,14 +498,8 @@ export default class Loading extends React.Component {
                                 </IconButton>
                             )}
 
-                            {/* OnClick сделать раскрытие */}
                             {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
-                                <Chip color="primary"
-                                    component="a" target="_blank" rel="noopener noreferrer" href={item.link} clickable
-                                    avatar={<Avatar alt="SponsorAvatar" src={item.avatar} />}
-                                    label={item.username /*+ " Подпишись"*/}
-                                // onClick={handleChipClick}
-                                />
+                                <OrganisatorInfo user={item} />
                             )}
 
                             {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
@@ -417,7 +524,7 @@ export default class Loading extends React.Component {
         if (this.state.expandedRows.includes(item.id)) {
             itemRows.push(
                 <FadeIn in={this.state.open}>
-                {/* <Collapse  in={this.state.open} {...(this.state.open ? { timeout: 1000 } : {})} unmountOnExit> */}
+                    {/* <Collapse  in={this.state.open} {...(this.state.open ? { timeout: 1000 } : {})} unmountOnExit> */}
                     <TableRow key={"row-expanded-" + item.id}>
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
@@ -425,43 +532,29 @@ export default class Loading extends React.Component {
                             <AccountBalanceWalletIcon />Спонсоры:
                         </Typography>
 
+                        {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */}
+
+                        {/* NEW */}
+                        {/* {this.state.clickedUserFollowers.map(collumn => { //Проблема в том что 1 за раз отображает. Для каждого юзера придется свой список
+                            // if (item.username === collumn.usernameFollower)
+                            return (
+                                // Возможно несогласование ID
+                                <SponsorInfo follower={collumn} />
+
+                            );
+                        })} */}
+
+                        {/* OLD */}
                         {this.state.allJoin.map(collumn => {
                             if (item.username === collumn.username) //Collumn - alljoin
                                 return (
-                                    <TableRow key={collumn.id}>
-                                        <TableCell className="paddingRow">>
-                                        {/* <Grid item xs 
-                                        container
-                                        direction="row"
-                                        justify="center"
-                                        alignItems="center"
-                                        > */}
-                                            <Chip color="secondary" size="small"
-                                                component="a" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower} clickable
-                                                avatar={<Avatar alt="SponsorAvatart" src={collumn.avatarFollower} />}
-                                                label={collumn.usernameFollower /*+ " Подпишись"*/}
-                                            // onClick={handleChipClick}
-                                            />
-                                            {/* </Grid>   */}
-                                        </TableCell>
+                                    // Возможно несогласование ID
+                                    <SponsorInfo follower={collumn} />
 
-                                        {/* OLD */}
-
-                                        {/* <TableCell className="paddingRow">>
-                 <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
-                                                <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
-                                            </a>
-                                            <a className="Loading-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
-                                        </TableCell>
-                                        <TableCell>
-                                            <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a>
-                                        </TableCell> */}
-
-                                        {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
-                                    </TableRow>);
+                                );
                         })}
                     </TableRow>
-                {/* </Collapse> */}
+                    {/* </Collapse> */}
                 </FadeIn>
             );
         }

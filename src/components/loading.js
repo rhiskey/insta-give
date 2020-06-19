@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
-import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
-import * as legoData from "./legoloading.json";
 import * as doneData from "./doneloading.json";
-import * as scrollFrames from "./scrollframesloading.json"
-import * as sckeletonFrames from "./skeletonframesloading.json"
 import * as rippleLoading from "./rippleloading.json"
 import './loading.css';
-import Button from '@material-ui/core/Button';
 
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -28,16 +23,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
-import Zoom from '@material-ui/core/Zoom';
-import Grow from '@material-ui/core/Grow';
+
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
-import Grid from '@material-ui/core/Grid';
+
 
 import Skeleton from '@material-ui/lab/Skeleton';
-import Rating from '@material-ui/lab/Rating';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ChatIcon from '@material-ui/icons/Chat';
 import PaymentIcon from '@material-ui/icons/Payment';

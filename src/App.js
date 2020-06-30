@@ -434,6 +434,7 @@ class App extends Component {
     // const classes = useStyles();
     const navitem = this.state.navitem;
     const setNav = this.state.setNav;
+    
     const responseInstagram = (response) => {
       console.log(response);
 

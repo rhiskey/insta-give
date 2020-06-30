@@ -45,6 +45,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 // import clsx from 'clsx';
 // import { AutoSizer, Column, Table } from 'react-virtualized';
 
+
 const useRowStyles = makeStyles({
     root: {
         '& > *': {
@@ -65,6 +66,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+const splitEvery = (array, length) =>
+    array.reduce(
+        (result, item, index) => {
+            if (index % length === 0) result.push([])
+            result[Math.floor(index / length)].push(item)
+            return result
+        },
+        []
+    )
+
+const numItemsPerRow = 4;
+
+const containerStyle = {
+    display: "flex",
+    width: "100%",
+    flexWrap: "wrap"
+};
+
+const itemStyle = {
+    minWidth: `${100 / numItemsPerRow}%`,
+    textAlign: "center",
+    // border: "1px solid black",
+    boxSizing: "border-box"
+};
 
 function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
     return {
@@ -130,7 +155,7 @@ function Row(props) {
                                         // row.sponsors.map((sponsorsRow) => ( 
                                         // if(row.name) sponsorsRow.nameOrganisator //Collumn - alljoin
 
-                                        <TableRow key={sponsorsRow.nameSponsor}>
+                                        <TableRow key={sponsorsRow.nameSponsor} >
                                             <TableCell component="th" scope="row">
                                                 {sponsorsRow.avatarSponsor} - {sponsorsRow.nameSponsor}
                                             </TableCell>
@@ -213,7 +238,7 @@ function OrganisatorInfo(props) {
 function SponsorInfo(props) {
     return (
         <TableRow key={props.follower.id} >
-            <TableCell className="paddingRow">>
+            <TableCell className="paddingRow">
         {/* <Grid item xs 
         container
         direction="row"
@@ -387,6 +412,20 @@ export default class Loading extends React.Component {
 
         }, 1200);
 
+
+        //         //Followers
+        // const size = 100;
+        // // const size = 4;
+        // var rsponsors = [...this.state.allJoin];
+        // const res = rsponsors.reduce((acc, curr, i) => {
+        //     if (!(i % size)) {    // if index is 0 or can be divided by the `size`...
+        //         acc.push(rsponsors.slice(i, i + size));   // ..push a chunk of the original array to the accumulator
+        //     }
+        //     return acc;
+        // }, []);
+
+        // this.setState({allJoin: res})
+
     }
     componentWillUnmount() {
         this.setState({ loading: true, loadingFollowers: true, allJoin: undefined, usersMain: undefined, doneFollowers: false, done: false, clickedUserFollowers: undefined })
@@ -474,12 +513,16 @@ export default class Loading extends React.Component {
     }
 
 
+
     renderItem(item) {
         const clickCallback = () => {
             this.handleRowClick(item.id, item.username);
             //Load Data
             //    this.setState(prevState => ({ open: !prevState.open })) 
         };
+
+
+        // const chunked = _chunk(this.state.allJoin, 100);
         // onClick={() => setOpen(!open)
         const itemRows = [
             <React.Fragment>
@@ -518,8 +561,6 @@ export default class Loading extends React.Component {
             </React.Fragment>
         ];
 
-        //Followers
-
         if (this.state.expandedRows.includes(item.id)) {
             itemRows.push(
                 <FadeIn in={this.state.open}>
@@ -544,14 +585,20 @@ export default class Loading extends React.Component {
                         })} */}
 
                         {/* OLD */}
-                        {this.state.allJoin.map(collumn => {
-                            if (item.username === collumn.username) //Collumn - alljoin
-                                return (
-                                    // Возможно несогласование ID
-                                    <SponsorInfo follower={collumn} />
+                        <TableCell >
 
-                                );
-                        })}
+                            <div style={containerStyle}>
+                                {this.state.allJoin.map(collumn => {
+                                    if (item.username === collumn.username) //Collumn - alljoin
+                                        return (
+                                            <div style={itemStyle}>
+                                                {/* // Возможно несогласование ID */}
+                                                <SponsorInfo follower={collumn} />
+                                            </div>
+                                        );
+                                })}
+                            </div>
+                        </TableCell>
                     </TableRow>
                     {/* </Collapse> */}
                 </FadeIn>
@@ -607,50 +654,50 @@ export default class Loading extends React.Component {
 
                 <div><h4><PaymentIcon />Активные Giveaways: </h4></div>
                 <center>
-<>
-                    <TableContainer component={Paper}>
-                        <Table aria-label="collapsible table" className="Giveaway-table" size="small" >
-                            {!this.state.done ? (<Skeleton variant="rect" width="100%" />) : (
+                    <>
+                        <TableContainer component={Paper}>
+                            <Table aria-label="collapsible table" className="Giveaway-table" size="small" >
+                                {!this.state.done ? (<Skeleton variant="rect" width="100%" />) : (
 
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>
-                                            {/* {!this.state.done ? (<Skeleton  width="100%" />):( */}
-                                            <Typography> <MonetizationOnIcon /> Организатор</Typography>
-                                            {/* )} */}
-                                        </TableCell>
-                                        <TableCell>
-                                            <ChatIcon /> Инфо раздачи
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>
+                                                {/* {!this.state.done ? (<Skeleton  width="100%" />):( */}
+                                                <Typography> <MonetizationOnIcon /> Организатор</Typography>
+                                                {/* )} */}
+                                            </TableCell>
+                                            <TableCell>
+                                                <ChatIcon /> Инфо раздачи
                                     </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                            )}
-                            <TableBody>
-                                {!this.state.done ? (
-                                    <FadeIn>
-                                        <tr class="d-flex justify-content-center align-items-center">
+                                        </TableRow>
+                                    </TableHead>
+                                )}
+                                <TableBody>
+                                    {!this.state.done ? (
+                                        <FadeIn>
+                                            <tr class="d-flex justify-content-center align-items-center">
 
-                                            <td className="Loading-loadingText"><h2>{this.state.randomLoadingText}</h2></td>
-                                            <td>{!this.state.loading ? (
+                                                <td className="Loading-loadingText"><h2>{this.state.randomLoadingText}</h2></td>
+                                                <td>{!this.state.loading ? (
 
-                                                <Lottie options={defaultOptions} height={120} width={120} />
+                                                    <Lottie options={defaultOptions} height={120} width={120} />
 
-                                            ) : (
-                                                    <Lottie options={defaultOptions2} height={120} width={120} />
-                                                )} </td>
-                                        </tr>
-                                    </FadeIn>
-                                ) : (allItemRows)}
+                                                ) : (
+                                                        <Lottie options={defaultOptions2} height={120} width={120} />
+                                                    )} </td>
+                                            </tr>
+                                        </FadeIn>
+                                    ) : (allItemRows)}
 
-                                {/* {!this.state.loading ? (<Skeleton variant="rect" width="100%" />) : (
+                                    {/* {!this.state.loading ? (<Skeleton variant="rect" width="100%" />) : (
                                     allItemRows
                                 )} */}
 
-                            </TableBody>
+                                </TableBody>
 
-                        </Table>
-                    </TableContainer>
-</>
+                            </Table>
+                        </TableContainer>
+                    </>
 
                     {/* <table className="Giveaway-table">
                         <thead>

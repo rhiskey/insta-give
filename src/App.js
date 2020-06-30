@@ -187,7 +187,49 @@ class App extends Component {
   }
   // async componentDidMount() {
   //   //this.getUsers();
- //}
+
+  //   //Subscribtion MAIN accs
+  //   let self = this;
+  //   await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+  //     method: 'GET'
+  //   }).then(function (response) {
+  //     if (response.status >= 400) {
+  //       throw new Error("Bad response from server");
+  //     }
+  //     return response.json();
+  //   }).then(function (data) {
+  //     self.setState({ usersMain: data });
+  //   }).catch(err => {
+  //     console.log('caught it!', err);
+  //   })
+
+  //   // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
+  //   //   method: 'GET'
+  //   // }).then(function (response) {
+  //   //   if (response.status >= 400) {
+  //   //     throw new Error("Bad response from server");
+  //   //   }
+  //   //   return response.json();
+  //   // }).then(function (data) {
+  //   //   self.setState({ followers: data });
+  //   // }).catch(err => {
+  //   //   console.log('caught it!', err);
+  //   // })
+
+  //   await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+  //     method: 'GET'
+  //   }).then(function (response) {
+  //     if (response.status >= 400) {
+  //       throw new Error("Bad response from server");
+  //     }
+  //     return response.json();
+  //   }).then(function (data) {
+  //     self.setState({ allJoin: data });
+  //   }).catch(err => {
+  //     console.log('caught it!', err);
+  //   })
+
+  // }
 
   fetchMoreData = () => {
     // a fake async api call like which sends
@@ -396,7 +438,7 @@ class App extends Component {
       console.log(response);
 
       // //Передаем код авторизации для получения токена
-      fetch('/oauth', {
+      fetch('https://dry-plains-18498.herokuapp.com/oauth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -548,7 +590,7 @@ class Child extends React.Component {
 
     // //Subscribtion accs
     // let self = this;
-    // fetch('/accounts', {
+    // fetch('https://dry-plains-18498.herokuapp.com/accounts', {
     //   method: 'GET'
     // }).then(function (response) {
     //   if (response.status >= 400) {

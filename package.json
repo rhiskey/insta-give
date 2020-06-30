@@ -1,7 +1,7 @@
 {
   "name": "insta_give",
   "version": "0.1.1",
-  "proxy" : "https://dry-plains-18498.herokuapp.com",
+
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.1",

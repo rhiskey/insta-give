@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
+import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
+import * as legoData from "./legoloading.json";
 import * as doneData from "./doneloading.json";
+import * as scrollFrames from "./scrollframesloading.json"
+import * as sckeletonFrames from "./skeletonframesloading.json"
 import * as rippleLoading from "./rippleloading.json"
 import './loading.css';
+import Button from '@material-ui/core/Button';
 
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -23,12 +28,16 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
-
+import Zoom from '@material-ui/core/Zoom';
+import Grow from '@material-ui/core/Grow';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
+import Grid from '@material-ui/core/Grid';
 
 import Skeleton from '@material-ui/lab/Skeleton';
+import Rating from '@material-ui/lab/Rating';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ChatIcon from '@material-ui/icons/Chat';
 import PaymentIcon from '@material-ui/icons/Payment';
@@ -341,7 +350,7 @@ export default class Loading extends React.Component {
         //Subscribtion MAIN accs
         let self = this;
         setTimeout(() => {
-            fetch('/mainusers', {
+            fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -358,7 +367,7 @@ export default class Loading extends React.Component {
                 console.log('caught it!', err);
             })
 
-            fetch('/alljoin', {
+            fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -415,7 +424,7 @@ export default class Loading extends React.Component {
         let self = this;
         // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
 
-        postData('/getfollowers', { username: username2Get })
+        postData('https://dry-plains-18498.herokuapp.com/getfollowers', { username: username2Get })
             .then((data) => {
                 // console.log(data); // JSON data parsed by `response.json()` call
                 // self.setState({ loadingFollowers: true });
@@ -440,7 +449,7 @@ export default class Loading extends React.Component {
 
         // setTimeout(() => {
 
-        // fetch('/getfollowers', {
+        // fetch('https://dry-plains-18498.herokuapp.com/getfollowers', {
         //     method: 'POST'
         // }).then(function (response) {
         //     if (response.status >= 400) {

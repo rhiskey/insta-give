@@ -76,11 +76,12 @@ const splitEvery = (array, length) =>
         []
     )
 
-const numItemsPerRow = 4;
+//Для таблицы
+const numItemsPerRow = 8; //Максимально элементов в строке для полноэкранного
 
 const containerStyle = {
     display: "flex",
-    width: "100%",
+    width: "200%", // Трюк, чтобы охватить 2 столбца. Костыль
     flexWrap: "wrap"
 };
 
@@ -90,6 +91,7 @@ const itemStyle = {
     // border: "1px solid black",
     boxSizing: "border-box"
 };
+//Для таблицы
 
 function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
     return {
@@ -239,7 +241,7 @@ function SponsorInfo(props) {
     return (
         <TableRow key={props.follower.id} >
             <TableCell className="paddingRow">
-        {/* <Grid item xs 
+                {/* <Grid item xs 
         container
         direction="row"
         justify="center"
@@ -463,16 +465,16 @@ export default class Loading extends React.Component {
         let self = this;
         // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
 
-        postData('https://dry-plains-18498.herokuapp.com/getfollowers', { username: username2Get })
-            .then((data) => {
-                // console.log(data); // JSON data parsed by `response.json()` call
-                // self.setState({ loadingFollowers: true });
-                self.setState({ clickedUserFollowers: data });
-                // console.log(this.state.clickedUserFollowers);
-                // setTimeout(() => {
-                //     self.setState({ doneFollowers: true });
-                // }, 1000);
-            });
+        // postData('https://dry-plains-18498.herokuapp.com/getfollowers', { username: username2Get })
+        //     .then((data) => {
+        //         // console.log(data); // JSON data parsed by `response.json()` call
+        //         // self.setState({ loadingFollowers: true });
+        //         self.setState({ clickedUserFollowers: data });
+        //         // console.log(this.state.clickedUserFollowers);
+        //         // setTimeout(() => {
+        //         //     self.setState({ doneFollowers: true });
+        //         // }, 1000);
+        //     });
 
         const currentExpandedRows = this.state.expandedRows;
         const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
@@ -568,8 +570,11 @@ export default class Loading extends React.Component {
                     <TableRow key={"row-expanded-" + item.id}>
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
-                        <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
-                            <AccountBalanceWalletIcon />Спонсоры:
+
+                        <TableCell/> 
+
+                            <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
+                                <AccountBalanceWalletIcon />Спонсоры:
                         </Typography>
 
                         {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */}
@@ -585,7 +590,8 @@ export default class Loading extends React.Component {
                         })} */}
 
                         {/* OLD */}
-                        <TableCell >
+                        
+                        {/* <TableCell/> */}
 
                             <div style={containerStyle}>
                                 {this.state.allJoin.map(collumn => {
@@ -598,7 +604,7 @@ export default class Loading extends React.Component {
                                         );
                                 })}
                             </div>
-                        </TableCell>
+                        {/* </TableCell> */}
                     </TableRow>
                     {/* </Collapse> */}
                 </FadeIn>

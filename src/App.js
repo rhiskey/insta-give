@@ -1,4 +1,4 @@
-import React, { Component, Table, Fragment, useState } from 'react';
+import React, { Component, Table, Fragment, useState, Suspense, lazy } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
@@ -13,13 +13,7 @@ import InstagramLogin from 'react-instagram-login';
 // import ReactDOM from 'react-dom';
 //Multi-pages
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
-import Error from './components/Error';
-import Navigation from './components/Navigation';
-import Agreement from './components/Agreement';
-import Privacy from './components/Privacy';
+
 
 // import FooterContent from './components/FooterContent';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -43,6 +37,24 @@ import {
   createMuiTheme
 } from "@material-ui/core";
 
+//ROUTES
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
+import Error from './components/Error';
+import Navigation from'./components/Navigation';
+import Agreement from'./components/Agreement';
+import Privacy from './components/Privacy';
+// //FUCK GG Theme not change in all elements нужно через CONTEXT
+// const Home = lazy(()=>import('./components/Home'));
+// const About = lazy(()=>import( './components/About'));
+// const Contact = lazy(()=>import( './components/Contact'));
+// const Error = lazy(()=>import( './components/Error'));
+// const Navigation = lazy(()=>import( './components/Navigation'));
+// const Agreement = lazy(()=>import( './components/Agreement'));
+// const Privacy = lazy(()=>import( './components/Privacy'));
+
+
 const themeLight = createMuiTheme({
   palette: {
     type: "light"
@@ -53,8 +65,9 @@ const themeDark = createMuiTheme({
     type: "dark"
   }
 });
-const theme1 = createMuiTheme(lightTheme);
-const theme2 = createMuiTheme(darkTheme)
+// const theme1 = createMuiTheme(lightTheme);
+// const theme2 = createMuiTheme(darkTheme)
+// const ThemeContext = React.createContext('light');
 
 // function AutoTheme(){
 // const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -117,6 +130,21 @@ class MyEndCard extends Component {
 //   );
 // }
 
+// function Toolbar(props){
+//   return(
+//     <FormControlLabel
+//     control={
+//       <Switcher
+//         checked={props.isThemeLight}
+//         onChange={props.onThemeChange}
+//         name="checkedB"
+//         color="primary"
+//       />
+//     }
+//     label={props.isThemeLight ? "Светлая тема" : "Темная тема"}
+//   />
+//   )
+// }
 
 class App extends Component {
   //state ={users: []}
@@ -159,49 +187,7 @@ class App extends Component {
   }
   // async componentDidMount() {
   //   //this.getUsers();
-
-  //   //Subscribtion MAIN accs
-  //   let self = this;
-  //   await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
-  //     method: 'GET'
-  //   }).then(function (response) {
-  //     if (response.status >= 400) {
-  //       throw new Error("Bad response from server");
-  //     }
-  //     return response.json();
-  //   }).then(function (data) {
-  //     self.setState({ usersMain: data });
-  //   }).catch(err => {
-  //     console.log('caught it!', err);
-  //   })
-
-  //   // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
-  //   //   method: 'GET'
-  //   // }).then(function (response) {
-  //   //   if (response.status >= 400) {
-  //   //     throw new Error("Bad response from server");
-  //   //   }
-  //   //   return response.json();
-  //   // }).then(function (data) {
-  //   //   self.setState({ followers: data });
-  //   // }).catch(err => {
-  //   //   console.log('caught it!', err);
-  //   // })
-
-  //   await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
-  //     method: 'GET'
-  //   }).then(function (response) {
-  //     if (response.status >= 400) {
-  //       throw new Error("Bad response from server");
-  //     }
-  //     return response.json();
-  //   }).then(function (data) {
-  //     self.setState({ allJoin: data });
-  //   }).catch(err => {
-  //     console.log('caught it!', err);
-  //   })
-
-  // }
+ //}
 
   fetchMoreData = () => {
     // a fake async api call like which sends
@@ -410,7 +396,7 @@ class App extends Component {
       console.log(response);
 
       // //Передаем код авторизации для получения токена
-      fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+      fetch('/oauth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -447,15 +433,16 @@ class App extends Component {
     //   allItemRows = allItemRows.concat(perItemRows);
     // });
 
+  
 
     return <div className="App">
       {/* <ThemeProvider theme={theme}> */}
+      <Suspense fallback={<div>Загрузка...</div>}>
       <ThemeProvider theme={ isThemeLight ? themeLight : themeDark}>
         <CssBaseline />
         <Typography style={{ marginTop: 60 }}>
           {/* Text should be white, background should be dark */}
         </Typography>
-
 
         <Header />
 
@@ -473,15 +460,16 @@ class App extends Component {
           <div>
             <Navigation />
 
-
+          
             <Switch>
-              <Route path="/" component={Home} exact />
+              <Route  path="/" component={Home} exact />
               <Route path="/about" component={About} />
               <Route path="/contact" component={Contact} />
               <Route path="/privacy" component={Privacy} />
               <Route path="/agreement" component={Agreement} />
               <Route component={Error} />
             </Switch>
+
           </div>
         </BrowserRouter>
 
@@ -511,6 +499,7 @@ class App extends Component {
                 onFailure={responseInstagram}
               />
               <span style={{ marginLeft: 15 }}>
+                {/* <Toolbar isThemeLight = {isThemeLight} onThemeChange = {this.onThemeChange}/> */}
                 <FormControlLabel
                   control={
                     <Switcher
@@ -528,7 +517,9 @@ class App extends Component {
         </Footer>
 
       </ThemeProvider>
+      </Suspense>
     </div>
+    
   }
 }
 
@@ -557,7 +548,7 @@ class Child extends React.Component {
 
     // //Subscribtion accs
     // let self = this;
-    // fetch('https://dry-plains-18498.herokuapp.com/accounts', {
+    // fetch('/accounts', {
     //   method: 'GET'
     // }).then(function (response) {
     //   if (response.status >= 400) {

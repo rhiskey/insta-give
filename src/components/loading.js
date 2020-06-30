@@ -212,7 +212,6 @@ function OrganisatorInfo(props) {
 }
 function SponsorInfo(props) {
     return (
-        //Возможно несогласвание ключа
         <TableRow key={props.follower.id} >
             <TableCell className="paddingRow">>
         {/* <Grid item xs 
@@ -351,7 +350,7 @@ export default class Loading extends React.Component {
         //Subscribtion MAIN accs
         let self = this;
         setTimeout(() => {
-            fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+            fetch('/mainusers', {
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -368,7 +367,7 @@ export default class Loading extends React.Component {
                 console.log('caught it!', err);
             })
 
-            fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+            fetch('/alljoin', {
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -425,12 +424,12 @@ export default class Loading extends React.Component {
         let self = this;
         // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
 
-        postData('https://dry-plains-18498.herokuapp.com/getfollowers', { username: username2Get })
+        postData('/getfollowers', { username: username2Get })
             .then((data) => {
                 // console.log(data); // JSON data parsed by `response.json()` call
                 // self.setState({ loadingFollowers: true });
                 self.setState({ clickedUserFollowers: data });
-                console.log(this.state.clickedUserFollowers);
+                // console.log(this.state.clickedUserFollowers);
                 // setTimeout(() => {
                 //     self.setState({ doneFollowers: true });
                 // }, 1000);
@@ -450,7 +449,7 @@ export default class Loading extends React.Component {
 
         // setTimeout(() => {
 
-        // fetch('https://dry-plains-18498.herokuapp.com/getfollowers', {
+        // fetch('/getfollowers', {
         //     method: 'POST'
         // }).then(function (response) {
         //     if (response.status >= 400) {
@@ -608,7 +607,7 @@ export default class Loading extends React.Component {
 
                 <div><h4><PaymentIcon />Активные Giveaways: </h4></div>
                 <center>
-
+<>
                     <TableContainer component={Paper}>
                         <Table aria-label="collapsible table" className="Giveaway-table" size="small" >
                             {!this.state.done ? (<Skeleton variant="rect" width="100%" />) : (
@@ -651,7 +650,7 @@ export default class Loading extends React.Component {
 
                         </Table>
                     </TableContainer>
-
+</>
 
                     {/* <table className="Giveaway-table">
                         <thead>

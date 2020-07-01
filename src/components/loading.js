@@ -37,6 +37,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 import Rating from '@material-ui/lab/Rating';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ChatIcon from '@material-ui/icons/Chat';
 import PaymentIcon from '@material-ui/icons/Payment';
@@ -64,6 +65,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const StyledRating = withStyles({
+    iconFilled: {
+        color: '#ff6d75',
+    },
+    iconHover: {
+        color: '#ff3d47',
+    },
+})(Rating);
 
 const splitEvery = (array, length) =>
     array.reduce(
@@ -106,108 +115,109 @@ function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set
     };
 }
 
+// Пытаемся перейти к новой версии, когда подгрузка только по клику 
 
-function Row(props) {
-    const { row } = props;
-    const [open, setOpen] = React.useState(false);
-    const classes = useRowStyles();
+// function Row(props) {
+//     const { row } = props;
+//     const [open, setOpen] = React.useState(false);
+//     const classes = useRowStyles();
 
-    return (
-        <React.Fragment>
+//     return (
+//         <React.Fragment>
 
-            <TableRow className={classes.root} >
-                {/* <TableCell> */}
-                {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton> */}
-                {/* </TableCell> */}
+//             <TableRow className={classes.root} >
+//                 {/* <TableCell> */}
+//                 {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+//                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+//                     </IconButton> */}
+//                 {/* </TableCell> */}
 
-                <TableCell component="th" scope="row" >
-                    {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>  */}
-                    <Tooltip title="Нажми сюда для просмотра спонсоров" arrow>{row.avatar} - {row.name}</Tooltip>
-                </TableCell>
+//                 <TableCell component="th" scope="row" >
+//                     {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+//                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+//                     </IconButton>  */}
+//                     <Tooltip title="Нажми сюда для просмотра спонсоров" arrow>{row.avatar} - {row.name}</Tooltip>
+//                 </TableCell>
 
-                {/* <TableCell align="right">{row.name}</TableCell> */}
-                <TableCell align="right">{row.info}</TableCell>
-                {/* <TableCell align="right">{row.carbs}</TableCell>
-          <TableCell align="right">{row.protein}</TableCell> */}
-            </TableRow>
+//                 {/* <TableCell align="right">{row.name}</TableCell> */}
+//                 <TableCell align="right">{row.info}</TableCell>
+//                 {/* <TableCell align="right">{row.carbs}</TableCell>
+//           <TableCell align="right">{row.protein}</TableCell> */}
+//             </TableRow>
 
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box margin={1}>
-                            <Typography variant="h6" gutterBottom component="div">
-                                Спонсоры:
-                            </Typography>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Имя</TableCell>
-                                        <TableCell>Ссылка</TableCell>
-                                        {/* <TableCell align="right">Ссылка</TableCell> */}
-                                        {/* <TableCell align="right">Total price ($)</TableCell> */}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {row.sponsors.map((sponsorsRow) => (
-                                        // row.sponsors.map((sponsorsRow) => ( 
-                                        // if(row.name) sponsorsRow.nameOrganisator //Collumn - alljoin
+//             <TableRow>
+//                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
+//                     <Collapse in={open} timeout="auto" unmountOnExit>
+//                         <Box margin={1}>
+//                             <Typography variant="h6" gutterBottom component="div">
+//                                 Спонсоры:
+//                             </Typography>
+//                             <Table size="small" aria-label="purchases">
+//                                 <TableHead>
+//                                     <TableRow>
+//                                         <TableCell>Имя</TableCell>
+//                                         <TableCell>Ссылка</TableCell>
+//                                         {/* <TableCell align="right">Ссылка</TableCell> */}
+//                                         {/* <TableCell align="right">Total price ($)</TableCell> */}
+//                                     </TableRow>
+//                                 </TableHead>
+//                                 <TableBody>
+//                                     {row.sponsors.map((sponsorsRow) => (
+//                                         // row.sponsors.map((sponsorsRow) => ( 
+//                                         // if(row.name) sponsorsRow.nameOrganisator //Collumn - alljoin
 
-                                        <TableRow key={sponsorsRow.nameSponsor} >
-                                            <TableCell component="th" scope="row">
-                                                {sponsorsRow.avatarSponsor} - {sponsorsRow.nameSponsor}
-                                            </TableCell>
-                                            {/* <TableCell>{sponsorsRow.nameSponsor}</TableCell> */}
-                                            {/* <TableCell align="right">{sponsorsRow.linkSponsor}</TableCell> */}
-                                            <TableCell  >{sponsorsRow.linkSponsor}</TableCell>
-                                            {/* <TableCell align="right">
-                          {Math.round(historyRow.amount * row.price * 100) / 100}
-                        </TableCell> */}
-                                        </TableRow>
+//                                         <TableRow key={sponsorsRow.nameSponsor} >
+//                                             <TableCell component="th" scope="row">
+//                                                 {sponsorsRow.avatarSponsor} - {sponsorsRow.nameSponsor}
+//                                             </TableCell>
+//                                             {/* <TableCell>{sponsorsRow.nameSponsor}</TableCell> */}
+//                                             {/* <TableCell align="right">{sponsorsRow.linkSponsor}</TableCell> */}
+//                                             <TableCell  >{sponsorsRow.linkSponsor}</TableCell>
+//                                             {/* <TableCell align="right">
+//                           {Math.round(historyRow.amount * row.price * 100) / 100}
+//                         </TableCell> */}
+//                                         </TableRow>
 
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </Box>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        </React.Fragment>
-    );
+//                                     ))}
+//                                 </TableBody>
+//                             </Table>
+//                         </Box>
+//                     </Collapse>
+//                 </TableCell>
+//             </TableRow>
+//         </React.Fragment>
+//     );
 
-}
+// }
 
-Row.propTypes = {
-    row: PropTypes.shape({
-        avatar: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        info: PropTypes.string.isRequired,
-        link: PropTypes.string.isRequired,
-        sponsors: PropTypes.arrayOf(
-            PropTypes.shape({
-                avatarSponsor: PropTypes.string.isRequired,
-                nameSponsor: PropTypes.string.isRequired,
-                linkSponsor: PropTypes.string.isRequired,
-                nameOrganisator: PropTypes.string.isRequired,
-            }),
-        ).isRequired,
-        //   name: PropTypes.string.isRequired,
-        //   price: PropTypes.number.isRequired,
-        //   protein: PropTypes.number.isRequired,
-    }).isRequired,
-};
+// Row.propTypes = {
+//     row: PropTypes.shape({
+//         avatar: PropTypes.string.isRequired,
+//         name: PropTypes.string.isRequired,
+//         info: PropTypes.string.isRequired,
+//         link: PropTypes.string.isRequired,
+//         sponsors: PropTypes.arrayOf(
+//             PropTypes.shape({
+//                 avatarSponsor: PropTypes.string.isRequired,
+//                 nameSponsor: PropTypes.string.isRequired,
+//                 linkSponsor: PropTypes.string.isRequired,
+//                 nameOrganisator: PropTypes.string.isRequired,
+//             }),
+//         ).isRequired,
+//         //   name: PropTypes.string.isRequired,
+//         //   price: PropTypes.number.isRequired,
+//         //   protein: PropTypes.number.isRequired,
+//     }).isRequired,
+// };
 
-const rows = [
-    createData('Avatar', "Name1", "info", "link", "sponsor Ava 1", "sponsor name", "sponsor link", "Name1"),
-    createData('Avatar2', "Name2", "info", "link", "sponsor Ava1", "sponsor name", "sponsor link", "Name1")
-    // createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-    // createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-    // createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-    // createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-];
+// const rows = [
+//     createData('Avatar', "Name1", "info", "link", "sponsor Ava 1", "sponsor name", "sponsor link", "Name1"),
+//     createData('Avatar2', "Name2", "info", "link", "sponsor Ava1", "sponsor name", "sponsor link", "Name1")
+//     // createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
+//     // createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
+//     // createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
+//     // createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
+// ];
 
 const defaultOptions = {
     loop: true,
@@ -495,6 +505,7 @@ export default class Loading extends React.Component {
 
     renderItem(item) {
         const clickCallback = () => {
+            // Сделать разворот только при нажатии на поле (на ник не должно ничего происходить)
             this.handleRowClick(item.id, item.username);
             //Load Data
             //    this.setState(prevState => ({ open: !prevState.open })) 
@@ -531,10 +542,24 @@ export default class Loading extends React.Component {
                             {!this.state.doneFollowers ? (<Skeleton />) : (
                                 <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
                             )} */}
+
+                            {/* Текст раздачи */}
                         </TableCell>
                         {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
-                            <TableCell className="Loading-give-text">{item.giveinfo}</TableCell>
+                            <TableCell className="Loading-give-text">{item.giveinfo}
+                            </TableCell>
                         )}
+                        {/* Рейтинг */}
+                        {/* <TableCell>
+                            <Box component="fieldset" mb={3} borderColor="transparent">
+                                <StyledRating
+                                    name="customized-color"
+                                    defaultValue={5}
+                                    getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                    precision={0.5}
+                                    icon={<FavoriteIcon fontSize="inherit" />}/>
+                            </Box>
+                        </TableCell> */}
                     </TableRow>
                 </Tooltip>
             </React.Fragment>

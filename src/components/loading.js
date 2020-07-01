@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
-import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
 import * as legoData from "./legoloading.json";
 import * as doneData from "./doneloading.json";
 import * as scrollFrames from "./scrollframesloading.json"
-import * as sckeletonFrames from "./skeletonframesloading.json"
+// import * as sckeletonFrames from "./skeletonframesloading.json"
 import * as rippleLoading from "./rippleloading.json"
 import './loading.css';
 import Button from '@material-ui/core/Button';
@@ -32,8 +31,8 @@ import Zoom from '@material-ui/core/Zoom';
 import Grow from '@material-ui/core/Grow';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
+// import FaceIcon from '@material-ui/icons/Face';
+// import DoneIcon from '@material-ui/icons/Done';
 import Grid from '@material-ui/core/Grid';
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -137,12 +136,12 @@ function Row(props) {
             </TableRow>
 
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                             <Typography variant="h6" gutterBottom component="div">
                                 Спонсоры:
-                </Typography>
+                            </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
@@ -488,28 +487,6 @@ export default class Loading extends React.Component {
         {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */ }
 
 
-        // setTimeout(() => {
-
-        // fetch('https://dry-plains-18498.herokuapp.com/getfollowers', {
-        //     method: 'POST'
-        // }).then(function (response) {
-        //     if (response.status >= 400) {
-        //         throw new Error("Bad response from server");
-        //     }
-        //     return response.json();
-        // }).then(function (data) {
-        //     // self.setState({ loadingFollowers: true });
-        //     self.setState({ clickedUserFollowers: data });
-        //     // setTimeout(() => {
-        //     //     self.setState({ doneFollowers: true });
-        //     // }, 1000);
-        // }).catch(err => {
-        //     console.log('caught it!', err);
-        // })
-
-        // }, 1200);
-
-
         // this.state.open = true;
         // this.setState(prevState => ({ open: !prevState.open }));
     }
@@ -571,10 +548,10 @@ export default class Loading extends React.Component {
                         {/* <td>{item.followers}</td> */}
                         {/* <th>Спонсоры:</th>  */}
 
-                        <TableCell/> 
+                        {/* <TableCell /> */}
 
-                            <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
-                                <AccountBalanceWalletIcon />Спонсоры:
+                        <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
+                            <AccountBalanceWalletIcon />Спонсоры:
                         </Typography>
 
                         {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */}
@@ -590,20 +567,20 @@ export default class Loading extends React.Component {
                         })} */}
 
                         {/* OLD */}
-                        
+
                         {/* <TableCell/> */}
 
-                            <div style={containerStyle}>
-                                {this.state.allJoin.map(collumn => {
-                                    if (item.username === collumn.username) //Collumn - alljoin
-                                        return (
-                                            <div style={itemStyle}>
-                                                {/* // Возможно несогласование ID */}
-                                                <SponsorInfo follower={collumn} />
-                                            </div>
-                                        );
-                                })}
-                            </div>
+                        <div style={containerStyle}>
+                            {this.state.allJoin.map(collumn => {
+                                if (item.username === collumn.username) //Collumn - alljoin
+                                    return (
+                                        <div style={itemStyle}>
+                                            {/* // Возможно несогласование ID */}
+                                            <SponsorInfo follower={collumn} />
+                                        </div>
+                                    );
+                            })}
+                        </div>
                         {/* </TableCell> */}
                     </TableRow>
                     {/* </Collapse> */}

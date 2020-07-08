@@ -316,6 +316,7 @@ export default class Loading extends React.Component {
             isToggleOn: true, //ПОдписка
             open: false,
             clickedUserFollowers: [], //Для спонсоров
+            showGive: undefined // Показать раздачи?
         };
         // Эта привязка обязательна для работы `this` в колбэке.
         // this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -386,7 +387,9 @@ export default class Loading extends React.Component {
         //Subscribtion MAIN accs
         let self = this;
         setTimeout(() => {
-            fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+            // only show =1 
+            fetch('https://dry-plains-18498.herokuapp.com/onlyshow',{
+            //fetch('https://dry-plains-18498.herokuapp.com/mainusers', { 
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -514,12 +517,18 @@ export default class Loading extends React.Component {
 
         // const chunked = _chunk(this.state.allJoin, 100);
         // onClick={() => setOpen(!open)
+        // const isShow = item.show;
+        // if (isShow == 1) {
+        //     self.setState({ showGive = true });
+        // } else { self.setState({ showGive = false }); }
+
         const itemRows = [
             <React.Fragment>
                 {/* <TableCell>
 
         </TableCell> */}
                 <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
+
                     <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
                         {/* <TableCell component="th" scope="row"> */}
                         {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
@@ -631,6 +640,8 @@ export default class Loading extends React.Component {
             allItemRows = allItemRows.concat(perItemRows);
             return allItemRows;
         });
+
+        // Если show=1 -> показывать, иначе скрыть раздачу
 
         return (
 

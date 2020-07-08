@@ -388,8 +388,8 @@ export default class Loading extends React.Component {
         let self = this;
         setTimeout(() => {
             // only show =1 
-            fetch('https://dry-plains-18498.herokuapp.com/onlyshow',{
-            //fetch('https://dry-plains-18498.herokuapp.com/mainusers', { 
+            fetch('https://dry-plains-18498.herokuapp.com/onlyshow', {
+                //fetch('https://dry-plains-18498.herokuapp.com/mainusers', { 
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -583,7 +583,6 @@ export default class Loading extends React.Component {
                         {/* <th>Спонсоры:</th>  */}
 
                         {/* <TableCell /> */}
-
                         <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
                             <AccountBalanceWalletIcon />Спонсоры:
                         </Typography>
@@ -609,6 +608,7 @@ export default class Loading extends React.Component {
                                 if (item.username === collumn.username) //Collumn - alljoin
                                     return (
                                         <div style={itemStyle}>
+
                                             {/* // Возможно несогласование ID */}
                                             <SponsorInfo follower={collumn} />
                                         </div>

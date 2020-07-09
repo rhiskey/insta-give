@@ -47,6 +47,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
 // require('dotenv').config({ path: __dirname + '/./../.env' }) //Загружаем файл с переменными среды
 
+const apilink = "http://api.instagive.ga/";
 
 const StyledRating = withStyles({
     iconFilled: {
@@ -356,7 +357,7 @@ export default class Loading extends React.Component {
         let self = this;
         setTimeout(() => {
             // only show =1 
-            fetch("https://dry-plains-18498.herokuapp.com" + '/onlyshow', {
+            fetch(apilink + 'onlyshow', {
                 //fetch('https://dry-plains-18498.herokuapp.com/mainusers', { 
                 method: 'GET'
             }).then(function (response) {
@@ -374,7 +375,7 @@ export default class Loading extends React.Component {
                 console.log('caught it!', err);
             })
 
-            fetch("https://dry-plains-18498.herokuapp.com" + '/alljoin', {
+            fetch(apilink + 'alljoin', {
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {

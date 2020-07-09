@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import React, { Component } from 'react';
 import axios from 'axios';
-
+const apilink = "http://api.instagive.ga/";
 
 class Offer extends Component {
     // const Offer = () => {
@@ -33,7 +33,7 @@ class Offer extends Component {
         };
 
         axios
-            .post("https://dry-plains-18498.herokuapp.com" + '/offer', offer)
+            .post(apilink + 'offer', offer)
             .then(() => console.log('Offer Created'))
             .catch(err => {
                 console.error(err);

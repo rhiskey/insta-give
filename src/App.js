@@ -56,7 +56,7 @@ import Offer from './components/Offer';
 // const Navigation = lazy(()=>import( './components/Navigation'));
 // const Agreement = lazy(()=>import( './components/Agreement'));
 // const Privacy = lazy(()=>import( './components/Privacy'));
-
+const apilink = "http://api.instagive.ga/";
 
 const themeLight = createMuiTheme({
   palette: {
@@ -197,7 +197,7 @@ class App extends Component {
 
   //   //Subscribtion MAIN accs
   //   let self = this;
-  //   await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
+  //   await fetch('mainusers', {
   //     method: 'GET'
   //   }).then(function (response) {
   //     if (response.status >= 400) {
@@ -210,7 +210,7 @@ class App extends Component {
   //     console.log('caught it!', err);
   //   })
 
-  //   // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
+  //   // await fetch('/follow', {
   //   //   method: 'GET'
   //   // }).then(function (response) {
   //   //   if (response.status >= 400) {
@@ -223,7 +223,7 @@ class App extends Component {
   //   //   console.log('caught it!', err);
   //   // })
 
-  //   await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+  //   await fetch('/alljoin', {
   //     method: 'GET'
   //   }).then(function (response) {
   //     if (response.status >= 400) {
@@ -446,7 +446,7 @@ class App extends Component {
       console.log(response);
 
       // //Передаем код авторизации для получения токена
-      fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+      fetch(apilink+'oauth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -470,9 +470,6 @@ class App extends Component {
           // this.setState((state, props)=>({
           //   accessToken: data
           // }))
-
-          // https://www.instagram.com/web/friendships/5401182145/follow/
-          // https://www.instagram.com/web/friendships/5401182145/unfollow/
         })
         .catch(err => {
           console.log('caught it!', err);
@@ -601,7 +598,7 @@ function Footer({ children }) {
 
 //     // //Subscribtion accs
 //     // let self = this;
-//     // fetch('https://dry-plains-18498.herokuapp.com/accounts', {
+//     // fetch('/accounts', {
 //     //   method: 'GET'
 //     // }).then(function (response) {
 //     //   if (response.status >= 400) {

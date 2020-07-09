@@ -37,6 +37,7 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const drawerWidth = 240;
+const apilink = "http://api.instagive.ga/";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -178,7 +179,7 @@ export default function PersistentDrawerLeft() {
 
 
           <Divider />
-          <a href="https://dry-plains-18498.herokuapp.com/">
+          <a href={apilink}>
             <ListItem button >
               <ListItemIcon>{<GroupWorkIcon />}</ListItemIcon>
               <ListItemText primary="Панель управления" />

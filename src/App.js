@@ -1,14 +1,14 @@
-import React, { Component, Table, Fragment, useState, Suspense, lazy } from 'react';
-import logo from './logo.svg';
+import React, { Component, Suspense } from 'react';
+// import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 // import Post from './components/Post';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, CardWrapper } from 'react-swipeable-cards';
-import styled from "styled-components";
+// import styled from "styled-components";
 // import { useTable, useSortBy } from "react-table";
 
-import InfiniteScroll from "react-infinite-scroll-component";
+// import InfiniteScroll from "react-infinite-scroll-component";
 import InstagramLogin from 'react-instagram-login';
 // import ReactDOM from 'react-dom';
 //Multi-pages
@@ -17,17 +17,17 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 // import FooterContent from './components/FooterContent';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
+// import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+// import RestoreIcon from '@material-ui/icons/Restore';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import LocationOnIcon from '@material-ui/icons/LocationOn';
 import 'fontsource-roboto';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+// import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ThemeProvider } from '@material-ui/styles';
 // import ThemeSwitch from './components/ThemeSwitch'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switcher from '@material-ui/core/Switch';
-import { lightTheme, darkTheme } from './theme';
+// import { lightTheme, darkTheme } from './theme';
 import MiniMenu from './components/miniDrawer';
 
 import {
@@ -54,6 +54,8 @@ import Privacy from './components/Privacy';
 // const Agreement = lazy(()=>import( './components/Agreement'));
 // const Privacy = lazy(()=>import( './components/Privacy'));
 
+//Config
+// require('dotenv').config();
 
 const themeLight = createMuiTheme({
   palette: {
@@ -65,40 +67,7 @@ const themeDark = createMuiTheme({
     type: "dark"
   }
 });
-// const theme1 = createMuiTheme(lightTheme);
-// const theme2 = createMuiTheme(darkTheme)
-// const ThemeContext = React.createContext('light');
 
-// function AutoTheme(){
-// const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-// const theme = React.useMemo(
-//   () =>
-//     createMuiTheme({
-//       palette: {
-//         type: prefersDarkMode ? 'dark' : 'light',
-//       },
-//     }),
-//   [prefersDarkMode],
-// );
-// return theme;
-//   }
-
-// function getTheme(theme) {
-//   return createMuiTheme({
-//     palette: {
-//       type: theme.paletteType,
-//       background: {
-//         default: theme.paletteType === 'light' ? 'light' : 'dark',
-//       },
-//     },
-//   });
-// }
-// const theme = getTheme({
-//   paletteType: 'light',
-// });
-
-// import Loading from "./loading.js";
 
 // Create custom end card
 class MyEndCard extends Component {
@@ -185,51 +154,6 @@ class App extends Component {
     // });
     this.setState(prevState => ({ isThemeLight: !prevState.isThemeLight }));
   }
-  // async componentDidMount() {
-  //   //this.getUsers();
-
-  //   //Subscribtion MAIN accs
-  //   let self = this;
-  //   await fetch('https://dry-plains-18498.herokuapp.com/mainusers', {
-  //     method: 'GET'
-  //   }).then(function (response) {
-  //     if (response.status >= 400) {
-  //       throw new Error("Bad response from server");
-  //     }
-  //     return response.json();
-  //   }).then(function (data) {
-  //     self.setState({ usersMain: data });
-  //   }).catch(err => {
-  //     console.log('caught it!', err);
-  //   })
-
-  //   // await fetch('https://dry-plains-18498.herokuapp.com/follow', {
-  //   //   method: 'GET'
-  //   // }).then(function (response) {
-  //   //   if (response.status >= 400) {
-  //   //     throw new Error("Bad response from server");
-  //   //   }
-  //   //   return response.json();
-  //   // }).then(function (data) {
-  //   //   self.setState({ followers: data });
-  //   // }).catch(err => {
-  //   //   console.log('caught it!', err);
-  //   // })
-
-  //   await fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
-  //     method: 'GET'
-  //   }).then(function (response) {
-  //     if (response.status >= 400) {
-  //       throw new Error("Bad response from server");
-  //     }
-  //     return response.json();
-  //   }).then(function (data) {
-  //     self.setState({ allJoin: data });
-  //   }).catch(err => {
-  //     console.log('caught it!', err);
-  //   })
-
-  // }
 
   fetchMoreData = () => {
     // a fake async api call like which sends
@@ -311,121 +235,7 @@ class App extends Component {
     this.setState(prevState => ({ childVisible: !prevState.childVisible }));
   }
 
-  // componentDidCatch(error, info) {
-  //   // Пример "componentStack":
-  //   //   in ComponentThatThrows (created by App)
-  //   //   in ErrorBoundary (created by App)
-  //   //   in div (created by App)
-  //   //   in App
-  //   logComponentStackToMyService(info.componentStack);
-  // }
-
-  // handleMouseEnter = (e) => {
-  //   this.setState({
-  //     left: e.target.getBoundingClientRect().x - 4,
-  //   });
-  //   //e.target.style. = 'purple';
-  //   e.target.borderWidth = 2;
-  // }
-  // handleMouseLeave = (e) => {
-  //   //e.target.style.background = 'white';
-  //   e.target.borderWidth = 2;
-  // }
-
-  // handleButtonClick() {
-  //   this.setState(state => ({
-  //     isToggleOn: !state.isToggleOn
-  //   }));
-  // }
-
-  // handleRowClick(rowId) {
-  //   const currentExpandedRows = this.state.expandedRows;
-  //   const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
-
-  //   const newExpandedRows = isRowCurrentlyExpanded ?
-  //     currentExpandedRows.filter(id => id !== rowId) :
-  //     currentExpandedRows.concat(rowId);
-
-  //   this.setState({ expandedRows: newExpandedRows });
-  // }
-
-  // renderItem(item) {
-  //   const clickCallback = () => this.handleRowClick(item.id);
-
-  //   const itemRows = [
-  //     <tr onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
-  //       <td>
-  //         <a target="_blank" rel="noopener noreferrer" href={item.link}>
-  //           <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
-  //         </a>
-
-
-  //         <b><a className="App-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
-  //       </td>
-  //       <td className="App-give-text">{item.giveinfo}</td>
-  //     </tr>
-  //   ];
-
-  //   //Followers
-  //   if (this.state.expandedRows.includes(item.id)) {
-  //     itemRows.push(
-  //       <tr key={"row-expanded-" + item.id}>
-  //         {/* <td>{item.followers}</td> */}
-  //         Спонсоры:
-
-  //         {this.state.allJoin.map(collumn => {
-  //           if (item.username == collumn.username) //Collumn - alljoin
-  //             return (
-  //               <tr key={collumn.id}>
-  //                 <td className="paddingRow">>
-  //                 <a target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>
-  //                     <img className="instaImage" border="0" alt="FollowImage" src={collumn.avatarFollower} width="100" height="100"></img>
-  //                   </a>
-  //                   <a className="App-give-text" target="_blank" rel="noopener noreferrer" href={collumn.linkFollower}>{collumn.usernameFollower}</a>
-  //                 </td>
-  //                 <td>
-  //                 <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={collumn.linkFollower} class="btn btn-primary">Подпишись</a> 
-  //                 {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + "/follow/"} class="btn btn-primary">Подпишись</a> */}
-  //                   {/* <a align="right" target="_blank" rel="noopener noreferrer" onClick={this.handleButtonClick} href={"https://www.instagram.com/web/friendships/"+ collumn.useridFollower + this.state.isToggleOn ? '/follow/' : '/unfollow/'} class="btn btn-primary"> {this.state.isToggleOn ? 'Подпишись' : 'Отписаться'}</a> */}
-  //                 </td>
-  //               </tr>);
-  //         })}
-  //       </tr>
-  //     );
-  //   }
-
-  //   return itemRows;
-  // }
-
-
   render() {
-
-    // const [theme, setTheme] = useState('light');
-
-    // const toggleTheme = () => {
-    //   // getTheme()
-    //   if (theme.paletteType === 'light') {
-    //      theme.paletteType = 'dark'
-    //   } else {
-    //     theme.paletteType = 'light'
-    //   }
-    // }
-
-    // let theme = createMuiTheme({
-    //   palette: {
-    //     primary: {
-    //       light: lightGreen[300],
-    //       main: lightGreen[500],
-    //       dark: lightGreen[700]
-    //     },
-    //     secondary: {
-    //       light: blueGrey[300],
-    //       main: blueGrey[500],
-    //       dark: blueGrey[700]
-    //     },
-    //     type: this.state.themeType
-    //   }
-    // });
 
     const { isThemeLight } =  this.state;
     // const theme = AutoTheme;
@@ -439,7 +249,7 @@ class App extends Component {
       console.log(response);
 
       // //Передаем код авторизации для получения токена
-      fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+      fetch("https://dry-plains-18498.herokuapp.com"+'/oauth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -588,21 +398,6 @@ class Child extends React.Component {
   }
   async componentDidMount() {
     //this.getUsers();
-
-    // //Subscribtion accs
-    // let self = this;
-    // fetch('https://dry-plains-18498.herokuapp.com/accounts', {
-    //   method: 'GET'
-    // }).then(function (response) {
-    //   if (response.status >= 400) {
-    //     throw new Error("Bad response from server");
-    //   }
-    //   return response.json();
-    // }).then(function (data) {
-    //   self.setState({ users: data });
-    // }).catch(err => {
-    //   console.log('caught it!', err);
-    // })
 
   }
 

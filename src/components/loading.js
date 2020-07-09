@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.css";
-import * as legoData from "./legoloading.json";
+// import * as legoData from "./legoloading.json";
 import * as doneData from "./doneloading.json";
-import * as scrollFrames from "./scrollframesloading.json"
+// import * as scrollFrames from "./scrollframesloading.json"
 // import * as sckeletonFrames from "./skeletonframesloading.json"
 import * as rippleLoading from "./rippleloading.json"
 import './loading.css';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
+// import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -27,8 +27,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Tooltip from '@material-ui/core/Tooltip';
 import Fade from '@material-ui/core/Fade';
-import Zoom from '@material-ui/core/Zoom';
-import Grow from '@material-ui/core/Grow';
+// import Zoom from '@material-ui/core/Zoom';
+// import Grow from '@material-ui/core/Grow';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 // import FaceIcon from '@material-ui/icons/Face';
@@ -45,25 +45,8 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 // import clsx from 'clsx';
 // import { AutoSizer, Column, Table } from 'react-virtualized';
 
+// require('dotenv').config({ path: __dirname + '/./../.env' }) //Загружаем файл с переменными среды
 
-const useRowStyles = makeStyles({
-    root: {
-        '& > *': {
-            borderBottom: 'unset',
-        },
-    },
-});
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(0.5),
-        },
-    },
-}));
 
 const StyledRating = withStyles({
     iconFilled: {
@@ -74,15 +57,7 @@ const StyledRating = withStyles({
     },
 })(Rating);
 
-const splitEvery = (array, length) =>
-    array.reduce(
-        (result, item, index) => {
-            if (index % length === 0) result.push([])
-            result[Math.floor(index / length)].push(item)
-            return result
-        },
-        []
-    )
+
 
 //Для таблицы
 const numItemsPerRow = 8; //Максимально элементов в строке для полноэкранного
@@ -281,24 +256,25 @@ function SponsorInfo(props) {
         </TableRow>
     )
 }
-// Пример отправки POST запроса:
-async function postData(url = '', data = {}) {
-    // Default options are marked with *
-    const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        mode: 'cors', // no-cors, *cors, same-origin
-        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/json'
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        redirect: 'follow', // manual, *follow, error
-        referrerPolicy: 'no-referrer', // no-referrer, *client
-        body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return await response.json(); // parses JSON response into native JavaScript objects
-}
+
+// // Пример отправки POST запроса:
+// async function postData(url = '', data = {}) {
+//     // Default options are marked with *
+//     const response = await fetch(url, {
+//         method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//         mode: 'cors', // no-cors, *cors, same-origin
+//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//         credentials: 'same-origin', // include, *same-origin, omit
+//         headers: {
+//             'Content-Type': 'application/json'
+//             // 'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//         redirect: 'follow', // manual, *follow, error
+//         referrerPolicy: 'no-referrer', // no-referrer, *client
+//         body: JSON.stringify(data) // body data type must match "Content-Type" header
+//     });
+//     return await response.json(); // parses JSON response into native JavaScript objects
+// }
 
 export default class Loading extends React.Component {
     constructor(props) {
@@ -376,22 +352,11 @@ export default class Loading extends React.Component {
 
         this.setState({ randomLoadingText: this.randomLoadingTextenerator() })
 
-        // setTimeout(() => {
-        //     fetch("https://jsonplaceholder.typicode.com/posts")
-        //         .then(response => response.json())
-        //         .then(json => {
-        //             this.setState({ loading: true });
-        //             setTimeout(() => {
-        //                 this.setState({ done: true });
-        //             }, 1000);
-        //         });
-        // }, 1200);
-
         //Subscribtion MAIN accs
         let self = this;
         setTimeout(() => {
             // only show =1 
-            fetch('https://dry-plains-18498.herokuapp.com/onlyshow', {
+            fetch("https://dry-plains-18498.herokuapp.com" + '/onlyshow', {
                 //fetch('https://dry-plains-18498.herokuapp.com/mainusers', { 
                 method: 'GET'
             }).then(function (response) {
@@ -409,7 +374,7 @@ export default class Loading extends React.Component {
                 console.log('caught it!', err);
             })
 
-            fetch('https://dry-plains-18498.herokuapp.com/alljoin', {
+            fetch("https://dry-plains-18498.herokuapp.com" + '/alljoin', {
                 method: 'GET'
             }).then(function (response) {
                 if (response.status >= 400) {
@@ -480,17 +445,6 @@ export default class Loading extends React.Component {
         let self = this;
         // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
 
-        // postData('https://dry-plains-18498.herokuapp.com/getfollowers', { username: username2Get })
-        //     .then((data) => {
-        //         // console.log(data); // JSON data parsed by `response.json()` call
-        //         // self.setState({ loadingFollowers: true });
-        //         self.setState({ clickedUserFollowers: data });
-        //         // console.log(this.state.clickedUserFollowers);
-        //         // setTimeout(() => {
-        //         //     self.setState({ doneFollowers: true });
-        //         // }, 1000);
-        //     });
-
         const currentExpandedRows = this.state.expandedRows;
         const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
 
@@ -518,13 +472,6 @@ export default class Loading extends React.Component {
         };
 
 
-        // const chunked = _chunk(this.state.allJoin, 100);
-        // onClick={() => setOpen(!open)
-        // const isShow = item.show;
-        // if (isShow == 1) {
-        //     self.setState({ showGive = true });
-        // } else { self.setState({ showGive = false }); }
-
         const itemRows = [
             <React.Fragment>
                 {/* <TableCell>
@@ -545,6 +492,14 @@ export default class Loading extends React.Component {
                             {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <OrganisatorInfo user={item} />
                             )}
+                            <Box component="fieldset" mb={3} borderColor="transparent">
+                                <StyledRating
+                                    name="customized-color"
+                                    defaultValue={item.rating}
+                                    getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                    precision={0.5}
+                                    icon={<FavoriteIcon fontSize="inherit" />} />
+                            </Box>
 
                             {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <a target="_blank" rel="noopener noreferrer" href={item.link}>
@@ -566,7 +521,7 @@ export default class Loading extends React.Component {
                             <Box component="fieldset" mb={3} borderColor="transparent">
                                 <StyledRating
                                     name="customized-color"
-                                    defaultValue={5}
+                                    defaultValue={item.rating}
                                     getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
                                     precision={0.5}
                                     icon={<FavoriteIcon fontSize="inherit" />}/>

@@ -1,5 +1,5 @@
 // import React, { Component, Table, Fragment, useState, Suspense, lazy } from 'react';
-import React, { Component,  Suspense } from 'react';
+import React, { Component, Suspense } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
@@ -44,9 +44,10 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import Error from './components/Error';
-import Navigation from'./components/Navigation';
-import Agreement from'./components/Agreement';
+import Navigation from './components/Navigation';
+import Agreement from './components/Agreement';
 import Privacy from './components/Privacy';
+import Offer from './components/Offer';
 // //FUCK GG Theme not change in all elements нужно через CONTEXT
 // const Home = lazy(()=>import('./components/Home'));
 // const About = lazy(()=>import( './components/About'));
@@ -165,7 +166,11 @@ class App extends Component {
       // isToggleOn: true //ПОдписка
       navitem: undefined,
       setNav: undefined,
-      isThemeLight: true
+      isThemeLight: true,
+
+      // offerUserName: '',
+      // offerUserGiveinfo: '',
+      // offerUserAvatar: '',
     };
     this.onClickMainUser = this.onClickMainUser.bind(this);
     // this.onThemeChange = this.onThemeChange.bind(this);
@@ -174,14 +179,14 @@ class App extends Component {
     // isThemeLight: false
   }
 
-  componentDidMount(){
+  componentDidMount() {
 
   }
-  componentWillUnmount(){
-    
+  componentWillUnmount() {
+
   }
-  
-  onThemeChange = ( ) => {  
+
+  onThemeChange = () => {
     // this.setState({
     //   isThemeLight: !this.state.isThemeLight
     // });
@@ -429,14 +434,14 @@ class App extends Component {
     //   }
     // });
 
-    const { isThemeLight } =  this.state;
+    const { isThemeLight } = this.state;
     // const theme = AutoTheme;
     // const { users } = this.state;
     // const { index } = this.state;
     // const classes = useStyles();
     const navitem = this.state.navitem;
     const setNav = this.state.setNav;
-    
+
     const responseInstagram = (response) => {
       console.log(response);
 
@@ -478,21 +483,21 @@ class App extends Component {
     //   allItemRows = allItemRows.concat(perItemRows);
     // });
 
-  
+
 
     return <div className="App">
       {/* <ThemeProvider theme={theme}> */}
       <Suspense fallback={<div>Загрузка...</div>}>
-      <ThemeProvider theme={ isThemeLight ? themeLight : themeDark}>
-        <CssBaseline />
-        <Typography style={{ marginTop: 60 }}>
-          {/* Text should be white, background should be dark */}
-        </Typography>
+        <ThemeProvider theme={isThemeLight ? themeLight : themeDark}>
+          <CssBaseline />
+          <Typography style={{ marginTop: 60 }}>
+            {/* Text should be white, background should be dark */}
+          </Typography>
 
-        <Header />
+          <Header />
 
-        <MiniMenu />
-        {/* <CssBaseline />
+          <MiniMenu />
+          {/* <CssBaseline />
       <Typography style={{ marginTop: 50 }}>
         Text should be white, background should be dark
       </Typography>
@@ -501,42 +506,43 @@ class App extends Component {
       </AppBar> */}
 
 
-        <BrowserRouter>
-          <div>
-            <Navigation />
+          <BrowserRouter>
+            <div>
+              <Navigation />
 
-          
-            <Switch>
-              <Route  path="/" component={Home} exact />
-              <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/privacy" component={Privacy} />
-              <Route path="/agreement" component={Agreement} />
-              <Route component={Error} />
-            </Switch>
 
-          </div>
-        </BrowserRouter>
+              <Switch>
+                <Route path="/" component={Home} exact />
+                <Route path="/about" component={About} />
+                <Route path="/contact" component={Contact} />
+                <Route path="/privacy" component={Privacy} />
+                <Route path="/agreement" component={Agreement} />
+                <Route path="/offer" component={Offer} />
+                <Route component={Error} />
+              </Switch>
 
-        <Footer>
+            </div>
+          </BrowserRouter>
 
-          <span >
+          <Footer>
 
-            <BottomNavigation
-              value={this.navitem}
-              onChange={(event, newValue) => {
-                // this.state.setNav = newValue;
-                this.setState((state,props) => ({
-                  setNav: newValue
-                }))
-              }}
-              showLabels
-            >
-              {/* <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
+            <span >
+
+              <BottomNavigation
+                value={this.navitem}
+                onChange={(event, newValue) => {
+                  // this.state.setNav = newValue;
+                  this.setState((state, props) => ({
+                    setNav: newValue
+                  }))
+                }}
+                showLabels
+              >
+                {/* <BottomNavigationAction label="Текушие раздачи" icon={<RestoreIcon />} />
           <BottomNavigationAction label="Избранные раздачи" icon={<FavoriteIcon />} />
           <BottomNavigationAction label="Раздачи рядом" icon={<LocationOnIcon />} /> */}
 
-              {/* <InstagramLogin
+                {/* <InstagramLogin
                 clientId='296560698030895'
                 scope="user_profile,user_media"
                 buttonText="Войти через Instagram"
@@ -544,29 +550,29 @@ class App extends Component {
                 onFailure={responseInstagram}
               /> */}
 
-              <span style={{ marginLeft: 15 }}>
-                {/* <Toolbar isThemeLight = {isThemeLight} onThemeChange = {this.onThemeChange}/> */}
-                <FormControlLabel
-                  control={
-                    <Switcher
-                      checked={isThemeLight}
-                      onChange={this.onThemeChange}
-                      name="checkedB"
-                      color="primary"
-                    />
-                  }
-                  label={isThemeLight ? "Светлая тема" : "Темная тема"}
-                />
-              </span>
-               <span style={{ marginLeft: 15 }}><a href="https://github.com/rhiskey">rhiskey(C) 2020</a></span>
-            </BottomNavigation>
-          </span >
-        </Footer>
+                <span style={{ marginLeft: 15 }}>
+                  {/* <Toolbar isThemeLight = {isThemeLight} onThemeChange = {this.onThemeChange}/> */}
+                  <FormControlLabel
+                    control={
+                      <Switcher
+                        checked={isThemeLight}
+                        onChange={this.onThemeChange}
+                        name="checkedB"
+                        color="primary"
+                      />
+                    }
+                    label={isThemeLight ? "Светлая тема" : "Темная тема"}
+                  />
+                </span>
+                <span style={{ marginLeft: 15 }}><a href="https://github.com/rhiskey">rhiskey(C) 2020</a></span>
+              </BottomNavigation>
+            </span >
+          </Footer>
 
-      </ThemeProvider>
+        </ThemeProvider>
       </Suspense>
     </div>
-    
+
   }
 }
 

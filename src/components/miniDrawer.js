@@ -109,7 +109,7 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <div className={classes.root} onTouchEnd= {handleDrawerOpen} onMouseUp= {handleDrawerOpen}>
+    <div className={classes.root} onTouchEnd={handleDrawerOpen} onMouseUp={handleDrawerOpen}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -135,7 +135,7 @@ export default function PersistentDrawerLeft() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer disableBackdropTransition={!iOS} disableDiscovery={iOS} onTouchEnd= {handleDrawerClose} onMouseLeave = {handleDrawerClose} 
+      <Drawer disableBackdropTransition={!iOS} disableDiscovery={iOS} onTouchEnd={handleDrawerClose} onMouseLeave={handleDrawerClose}
         className={classes.drawer}
         variant="persistent"
         anchor="left"
@@ -167,13 +167,15 @@ export default function PersistentDrawerLeft() {
 
             </ListItem>
           </a>
-          <a href="/">
-            <ListItem button >
-              <ListItemIcon>{<AssignmentIndIcon />}</ListItemIcon>
-              <ListItemText primary="Организаторам" />
 
-            </ListItem>
-          </a>
+            <a href="/offer">
+              <ListItem button >
+                <ListItemIcon>{<AssignmentIndIcon />}</ListItemIcon>
+                <ListItemText primary="Организаторам" />
+
+              </ListItem>
+            </a>
+
 
           <Divider />
           <a href="https://dry-plains-18498.herokuapp.com/">

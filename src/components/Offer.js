@@ -102,7 +102,9 @@ class Offer extends Component {
                         </div>
                         <br />
                         <div style={{ width: '60%' }}>
-                            <button className="btn btn-success" type="submit">
+                            {/* Сделать успешное сообщение */}
+                            <button className="btn btn-success" type="submit" onClick={event => window.location.href = '/'}>
+                                {/* {() => { if (window.confirm('Are you sure you wish to delete this item?') window.location.href = '/' ) this.onCancel(item) } } */}
                                 Предложить
                             </button>
                         </div>

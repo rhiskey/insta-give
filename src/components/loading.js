@@ -33,7 +33,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 // import FaceIcon from '@material-ui/icons/Face';
 // import DoneIcon from '@material-ui/icons/Done';
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 import Skeleton from '@material-ui/lab/Skeleton';
 import Rating from '@material-ui/lab/Rating';
@@ -76,19 +76,19 @@ const itemStyle = {
 };
 //Для таблицы
 
-function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
-    return {
-        avatar,
-        name,
-        info,
-        link,
-        //   protein,
-        //   price,
-        sponsors: [
-            { avatarSponsor: avatarSponsor2set, nameSponsor: nameSponsor2set, linkSponsor: linkSponsor2set },
-        ],
-    };
-}
+// function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
+//     return {
+//         avatar,
+//         name,
+//         info,
+//         link,
+//         //   protein,
+//         //   price,
+//         sponsors: [
+//             { avatarSponsor: avatarSponsor2set, nameSponsor: nameSponsor2set, linkSponsor: linkSponsor2set },
+//         ],
+//     };
+// }
 
 // Пытаемся перейти к новой версии, когда подгрузка только по клику 
 
@@ -442,7 +442,7 @@ export default class Loading extends React.Component {
 
     handleRowClick(rowId, username2Get) {
         //Load Data
-        let self = this;
+        // let self = this;
         // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
 
         const currentExpandedRows = this.state.expandedRows;
@@ -492,15 +492,17 @@ export default class Loading extends React.Component {
                             {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <OrganisatorInfo user={item} />
                             )}
-                            <Box component="fieldset" mb={3} borderColor="transparent">
-                                <StyledRating
-                                    name="customized-color"
-                                    defaultValue={item.rating}
-                                    getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
-                                    precision={0.5}
-                                    icon={<FavoriteIcon fontSize="inherit" />} />
-                            </Box>
 
+                            {!this.state.doneFollowers ? (<Skeleton variant="rect" width="200px" height="20px" />) : (
+                                <Box component="fieldset" mb={3} borderColor="transparent">
+                                    <StyledRating
+                                        name="customized-color"
+                                        defaultValue={item.rating}
+                                        getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                        precision={0.5}
+                                        icon={<FavoriteIcon fontSize="inherit" />} />
+                                </Box>
+                            )}
                             {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <a target="_blank" rel="noopener noreferrer" href={item.link}>
                                     <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
@@ -585,12 +587,12 @@ export default class Loading extends React.Component {
 
     render() {
         // const classes = useRowStyles();
-        const wrapperStyle = {
-            backgroundColor: "#FFFFFF",
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-        }
+        // const wrapperStyle = {
+        //     backgroundColor: "#FFFFFF",
+        //     flex: 1,
+        //     justifyContent: 'center',
+        //     alignItems: 'center',
+        // }
 
         let allItemRows = [];
         this.state.usersMain.map(item => {

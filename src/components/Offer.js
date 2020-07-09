@@ -38,6 +38,12 @@ class Offer extends Component {
             .catch(err => {
                 console.error(err);
             });
+
+        this.setState({
+            offerUserName: '',
+            offerUserGiveinfo: '',
+            offerUserAvatar: '',
+        });
     };
 
     render() {
@@ -103,7 +109,8 @@ class Offer extends Component {
                         <br />
                         <div style={{ width: '60%' }}>
                             {/* Сделать успешное сообщение */}
-                            <button className="btn btn-success" type="submit" onClick={event => window.location.href = '/'}>
+                            <button className="btn btn-success" type="submit" >
+                                {/* onClick={event => window.location.href = '/'} */}
                                 {/* {() => { if (window.confirm('Are you sure you wish to delete this item?') window.location.href = '/' ) this.onCancel(item) } } */}
                                 Предложить
                             </button>

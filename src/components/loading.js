@@ -496,7 +496,7 @@ export default class Loading extends React.Component {
                                 <OrganisatorInfo user={item} />
                             )} */}
 
-                            {!this.state.doneFollowers ? (<Skeleton variant="rect" width="200px" height="20px" />) : (
+                            {!this.state.doneFollowers ? (<Skeleton variant="rect" width="150px" height="20px" />) : (
                                 <Box component="fieldset" mb={3} borderColor="transparent">
                                     <StyledRating
                                         name="customized-color"

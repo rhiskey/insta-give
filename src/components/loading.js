@@ -333,7 +333,7 @@ export default class Loading extends React.Component {
         'разгружаем вагоны...',
         "готовим пиццу...",
         "ждем...",
-        "учавствуем в...",
+        "участвуем в...",
         "загрузка...",
         "приводим в порядок...",
         // "...",
@@ -343,6 +343,9 @@ export default class Loading extends React.Component {
         "обновляем...",
         "читаем мануал...",
         "здесь будет таблица...",
+        "изучаем JS...",
+        "соединяем...",
+        "читаем из базы...",
     ];
     randomLoadingTextenerator = () => (
         this.loadingTextArray[Math.floor(Math.random() * this.loadingTextArray.length)]

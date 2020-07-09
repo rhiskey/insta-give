@@ -22,7 +22,8 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 // import RestoreIcon from '@material-ui/icons/Restore';
 // import FavoriteIcon from '@material-ui/icons/Favorite';
 // import LocationOnIcon from '@material-ui/icons/LocationOn';
-import 'fontsource-roboto';
+// import 'fontsource-roboto';
+
 // import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { ThemeProvider } from '@material-ui/styles';
 // import ThemeSwitch from './components/ThemeSwitch'
@@ -663,3 +664,4 @@ function Footer({ children }) {
 //   }
 // }
 
+const OtherComponent = React.lazy(() => import('fontsource-roboto'));

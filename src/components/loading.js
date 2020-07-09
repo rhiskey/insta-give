@@ -484,14 +484,17 @@ export default class Loading extends React.Component {
                         {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
                         <TableCell scope="row">
                             {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
-                                <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
-                                    {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                </IconButton>
+                                <Box>
+                                    <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
+                                        {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                    </IconButton>
+                                    <OrganisatorInfo user={item} />
+                                </Box>
                             )}
 
-                            {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                            {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <OrganisatorInfo user={item} />
-                            )}
+                            )} */}
 
                             {!this.state.doneFollowers ? (<Skeleton variant="rect" width="200px" height="20px" />) : (
                                 <Box component="fieldset" mb={3} borderColor="transparent">

@@ -497,16 +497,7 @@ export default class Loading extends React.Component {
                                 <OrganisatorInfo user={item} />
                             )} */}
 
-                            {!this.state.doneFollowers ? (<Skeleton variant="rect" width="150px" height="20px" />) : (
-                                <Box component="fieldset" mb={3} borderColor="transparent">
-                                    <StyledRating
-                                        name="customized-color"
-                                        defaultValue={item.rating}
-                                        getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
-                                        precision={0.5}
-                                        icon={<FavoriteIcon fontSize="inherit" />} />
-                                </Box>
-                            )}
+
                             {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <a target="_blank" rel="noopener noreferrer" href={item.link}>
                                     <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
@@ -520,8 +511,30 @@ export default class Loading extends React.Component {
                         </TableCell>
                         {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
                             <TableCell className="Loading-give-text">{item.giveinfo}
+                                <Box component="fieldset" mb={3} borderColor="transparent">
+                                    <StyledRating
+                                        name="customized-color"
+                                        defaultValue={item.rating}
+                                        getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                        precision={0.5}
+                                        icon={<FavoriteIcon fontSize="inherit" />} />
+                                </Box>
                             </TableCell>
                         )}
+{/* 
+                        {!this.state.doneFollowers ? (<Skeleton variant="rect" width="150px" height="20px" />) : (
+                            <TableCell>
+                                <Box component="fieldset" mb={3} borderColor="transparent">
+                                    <StyledRating
+                                        name="customized-color"
+                                        defaultValue={item.rating}
+                                        getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                        precision={0.5}
+                                        icon={<FavoriteIcon fontSize="inherit" />} />
+                                </Box>
+                            </TableCell>
+                        )} */}
+                        
                         {/* Рейтинг */}
                         {/* <TableCell>
                             <Box component="fieldset" mb={3} borderColor="transparent">

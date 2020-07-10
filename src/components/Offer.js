@@ -14,7 +14,10 @@ class Offer extends Component {
             offerUserGiveinfo: '',
             offerUserAvatar: '',
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     handleInputChange = e => {
         this.setState({
             [e.target.name]: e.target.value,
@@ -22,6 +25,10 @@ class Offer extends Component {
     };
 
     handleSubmit = e => {
+        if (!e.target.checkValidity()) {
+            // form is invalid! so we do nothing
+            return;
+        }
         e.preventDefault();
 
         const { offerUserName, offerUserGiveinfo, offerUserAvatar } = this.state;
@@ -32,18 +39,36 @@ class Offer extends Component {
             offerUserAvatar,
         };
 
+        //
+
         axios
             .post(apilink + 'offer', offer)
-            .then(() => console.log('Offer Created'))
+            .then(() => {
+                console.log('Offer Created');
+                //Clear values
+                this.setState({
+                    offerUserName: '',
+                    offerUserGiveinfo: '',
+                    offerUserAvatar: '',
+                });
+                //Show Message Success
+                if (window.confirm('Отправить предложенную раздачу?')) {
+                    alert('Спасибо, мы рассмотрим её в ближайшее время и возможно добавим на сайт!\nНикнейм: ' + this.state.offerUserName + '\nИнфо: ' + this.state.offerUserGiveinfo);
+                    //Clear Form Data
+                    document.getElementById("offer-form").reset();
+                    //Go To Main Page
+                    window.location.href = '/';
+                } else {
+                    alert('Ты нажал отмена? Уверен? Зачем тогда предлагать? Определись уже!!!');
+                }
+            })
             .catch(err => {
                 console.error(err);
+                //Show Message 
+                alert('Что-то пошло не так, технические неполадки с базой данных...');
             });
 
-        this.setState({
-            offerUserName: '',
-            offerUserGiveinfo: '',
-            offerUserAvatar: '',
-        });
+
     };
 
     render() {
@@ -64,7 +89,7 @@ class Offer extends Component {
                 <p>После нажатия на кнопку "Предложить" Ваша раздача будет рассмотрена модераторами.</p> */}
 
                 <center>
-                    <form onSubmit={this.handleSubmit}>
+                    <form id='offer-form' onSubmit={this.handleSubmit}>
                         {/* <div style={{ width: '30%' }} className="form-group"> */}
                         <div style={{ width: '60%' }} className="form-group">
                             <input

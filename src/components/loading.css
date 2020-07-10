@@ -1,10 +1,11 @@
-html{
-  scroll-behavior: smooth;
+html {
+    scroll-behavior: smooth;
 }
+
 .Loading {
     text-align: center;
-
 }
+
 .Loading-link {
     color: #61dafb;
 }
@@ -57,7 +58,9 @@ html{
 }
 
 /* .Giveaway-table { */
-    /* color: black; */
+
+/* color: black; */
+
 /* } */
 
 table {
@@ -73,11 +76,18 @@ table {
 
 table tr {
     counter-increment: row-num;
+    /* background: #b8d1f3; */
 }
 
+/* Define the default color for all the table rows */
+
+/* Define the hover highlight color for the table row */
+
+.Giveaway-table tr:hover {
+    background-color: #f5feff7c;
+}
 
 /* Нумерация */
-
 
 /* table tr td:first-child::before {
   content: counter(row-num) ". ";
@@ -90,6 +100,8 @@ table td {
     /* Renamed property in CSS3 draft spec */
     /* border-right: 1px solid #515BD4; */
     /*вертикальный разделитель*/
+    padding: 7px;
+    /* border: #4e95f4 1px solid; */
 }
 
 th {
@@ -112,11 +124,12 @@ td {
     /* Перенос на новую строку \n*/
 }
 
-
 /* Зебра */
 
 /* tr:nth-child(even) { */
-    /* background-color: #f2f2f2; */
+
+/* background-color: #f2f2f2; */
+
 /* } */
 
 .paddingRow {

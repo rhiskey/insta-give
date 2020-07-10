@@ -160,7 +160,7 @@ export default class Loading extends React.Component {
             isToggleOn: true, //ПОдписка
             open: false,
             clickedUserFollowers: [], //Для спонсоров
-            showGive: undefined // Показать раздачи?
+            showGive: undefined, // Показать раздачи?
         };
 
         this.tableRef = React.createRef();
@@ -302,6 +302,7 @@ export default class Loading extends React.Component {
     //     }
     // }
 
+
     handleRowClick(rowId, username2Get) {
         //Load Data
         // let self = this;
@@ -316,17 +317,21 @@ export default class Loading extends React.Component {
             currentExpandedRows.concat(rowId);
 
         // this.setState({ expandedRows: newExpandedRows, open: true });
-        
+
         this.setState(prevState => ({ expandedRows: newExpandedRows, open: !prevState.open }));
 
         // //Скроллит в середину
-        // this.scrollToMyRef();
+        // if (!isRowCurrentlyExpanded)
+        //     this.scrollToMyRef();
+
+        // !isRowCurrentlyExpanded ? this.scrollToMyRef():
 
         {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */ }
 
 
         // this.state.open = true;
         // this.setState(prevState => ({ open: !prevState.open }));
+
     }
 
 
@@ -350,7 +355,7 @@ export default class Loading extends React.Component {
                 <TableRow  /* onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} */ key={"row-data-" + item.id}>
                     {/* <TableCell component="th" scope="row"> */}
                     {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
-                    <TableCell scope="row">
+                    <TableCell scope="row" ref={this.tableRef} >
                         {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
 
                             < Box >
@@ -382,7 +387,7 @@ export default class Loading extends React.Component {
                     {/* Текст раздачи */}
                     {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
                         <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
-                            <Box border={1} borderColor="primary.main" borderRadius={16} ref={this.tableRef} >
+                            <Box border={1} borderColor="primary.main" borderRadius={16}  >
                                 <TableCell className="Loading-give-text" onClick={clickCallback} >
                                     <Box borderBottom={1}>
                                         <Typography>{item.giveinfo}</Typography>

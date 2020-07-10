@@ -1,8 +1,10 @@
+html{
+  scroll-behavior: smooth;
+}
 .Loading {
     text-align: center;
-    scroll-behavior: smooth;
-}
 
+}
 .Loading-link {
     color: #61dafb;
 }

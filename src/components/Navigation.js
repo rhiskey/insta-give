@@ -94,7 +94,7 @@ class Navigation extends React.Component {
               <MenuItem value={10}>Ten</MenuItem>
             </Select> */}
                </div>
-               <div style={Object.assign({}, stylesTab.slide, stylesTab.slide3)}>Добавляете инфо о раздаче в Instagram с помощью вкладки "Организаторам".</div>
+               <div style={Object.assign({}, stylesTab.slide, stylesTab.slide3)}>Добавляете инфо о раздаче в Instagram с помощью меню <NavLink to="/offer"><Tab label="Организаторам" /></NavLink></div>
             {/* </SwipeableViews> */}
             </AutoPlaySwipeableViews>
        <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} /> 

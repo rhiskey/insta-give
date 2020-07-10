@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.css";
@@ -42,6 +42,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ChatIcon from '@material-ui/icons/Chat';
 import PaymentIcon from '@material-ui/icons/Payment';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import { TableFooter } from "@material-ui/core";
 // import clsx from 'clsx';
 // import { AutoSizer, Column, Table } from 'react-virtualized';
 
@@ -75,125 +76,8 @@ const itemStyle = {
     // border: "1px solid black",
     boxSizing: "border-box"
 };
-//Для таблицы
 
-// function createData(avatar, name, info, link, avatarSponsor2set, nameSponsor2set, linkSponsor2set, nameOrganisator) {
-//     return {
-//         avatar,
-//         name,
-//         info,
-//         link,
-//         //   protein,
-//         //   price,
-//         sponsors: [
-//             { avatarSponsor: avatarSponsor2set, nameSponsor: nameSponsor2set, linkSponsor: linkSponsor2set },
-//         ],
-//     };
-// }
 
-// Пытаемся перейти к новой версии, когда подгрузка только по клику 
-
-// function Row(props) {
-//     const { row } = props;
-//     const [open, setOpen] = React.useState(false);
-//     const classes = useRowStyles();
-
-//     return (
-//         <React.Fragment>
-
-//             <TableRow className={classes.root} >
-//                 {/* <TableCell> */}
-//                 {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-//                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-//                     </IconButton> */}
-//                 {/* </TableCell> */}
-
-//                 <TableCell component="th" scope="row" >
-//                     {/* <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-//                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-//                     </IconButton>  */}
-//                     <Tooltip title="Нажми сюда для просмотра спонсоров" arrow>{row.avatar} - {row.name}</Tooltip>
-//                 </TableCell>
-
-//                 {/* <TableCell align="right">{row.name}</TableCell> */}
-//                 <TableCell align="right">{row.info}</TableCell>
-//                 {/* <TableCell align="right">{row.carbs}</TableCell>
-//           <TableCell align="right">{row.protein}</TableCell> */}
-//             </TableRow>
-
-//             <TableRow>
-//                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }}>
-//                     <Collapse in={open} timeout="auto" unmountOnExit>
-//                         <Box margin={1}>
-//                             <Typography variant="h6" gutterBottom component="div">
-//                                 Спонсоры:
-//                             </Typography>
-//                             <Table size="small" aria-label="purchases">
-//                                 <TableHead>
-//                                     <TableRow>
-//                                         <TableCell>Имя</TableCell>
-//                                         <TableCell>Ссылка</TableCell>
-//                                         {/* <TableCell align="right">Ссылка</TableCell> */}
-//                                         {/* <TableCell align="right">Total price ($)</TableCell> */}
-//                                     </TableRow>
-//                                 </TableHead>
-//                                 <TableBody>
-//                                     {row.sponsors.map((sponsorsRow) => (
-//                                         // row.sponsors.map((sponsorsRow) => ( 
-//                                         // if(row.name) sponsorsRow.nameOrganisator //Collumn - alljoin
-
-//                                         <TableRow key={sponsorsRow.nameSponsor} >
-//                                             <TableCell component="th" scope="row">
-//                                                 {sponsorsRow.avatarSponsor} - {sponsorsRow.nameSponsor}
-//                                             </TableCell>
-//                                             {/* <TableCell>{sponsorsRow.nameSponsor}</TableCell> */}
-//                                             {/* <TableCell align="right">{sponsorsRow.linkSponsor}</TableCell> */}
-//                                             <TableCell  >{sponsorsRow.linkSponsor}</TableCell>
-//                                             {/* <TableCell align="right">
-//                           {Math.round(historyRow.amount * row.price * 100) / 100}
-//                         </TableCell> */}
-//                                         </TableRow>
-
-//                                     ))}
-//                                 </TableBody>
-//                             </Table>
-//                         </Box>
-//                     </Collapse>
-//                 </TableCell>
-//             </TableRow>
-//         </React.Fragment>
-//     );
-
-// }
-
-// Row.propTypes = {
-//     row: PropTypes.shape({
-//         avatar: PropTypes.string.isRequired,
-//         name: PropTypes.string.isRequired,
-//         info: PropTypes.string.isRequired,
-//         link: PropTypes.string.isRequired,
-//         sponsors: PropTypes.arrayOf(
-//             PropTypes.shape({
-//                 avatarSponsor: PropTypes.string.isRequired,
-//                 nameSponsor: PropTypes.string.isRequired,
-//                 linkSponsor: PropTypes.string.isRequired,
-//                 nameOrganisator: PropTypes.string.isRequired,
-//             }),
-//         ).isRequired,
-//         //   name: PropTypes.string.isRequired,
-//         //   price: PropTypes.number.isRequired,
-//         //   protein: PropTypes.number.isRequired,
-//     }).isRequired,
-// };
-
-// const rows = [
-//     createData('Avatar', "Name1", "info", "link", "sponsor Ava 1", "sponsor name", "sponsor link", "Name1"),
-//     createData('Avatar2', "Name2", "info", "link", "sponsor Ava1", "sponsor name", "sponsor link", "Name1")
-//     // createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-//     // createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-//     // createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-//     // createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
-// ];
 
 const defaultOptions = {
     loop: true,
@@ -258,24 +142,7 @@ function SponsorInfo(props) {
     )
 }
 
-// // Пример отправки POST запроса:
-// async function postData(url = '', data = {}) {
-//     // Default options are marked with *
-//     const response = await fetch(url, {
-//         method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//         mode: 'cors', // no-cors, *cors, same-origin
-//         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//         credentials: 'same-origin', // include, *same-origin, omit
-//         headers: {
-//             'Content-Type': 'application/json'
-//             // 'Content-Type': 'application/x-www-form-urlencoded',
-//         },
-//         redirect: 'follow', // manual, *follow, error
-//         referrerPolicy: 'no-referrer', // no-referrer, *client
-//         body: JSON.stringify(data) // body data type must match "Content-Type" header
-//     });
-//     return await response.json(); // parses JSON response into native JavaScript objects
-// }
+
 
 export default class Loading extends React.Component {
     constructor(props) {
@@ -295,6 +162,9 @@ export default class Loading extends React.Component {
             clickedUserFollowers: [], //Для спонсоров
             showGive: undefined // Показать раздачи?
         };
+
+        this.tableRef = React.createRef();
+
         // Эта привязка обязательна для работы `this` в колбэке.
         // this.handleButtonClick = this.handleButtonClick.bind(this);
         // this.handleChange = this.handleChange.bind(this);
@@ -327,23 +197,14 @@ export default class Loading extends React.Component {
     randomLoadingTextenerator = () => (
         this.loadingTextArray[Math.floor(Math.random() * this.loadingTextArray.length)]
     )
-    handleMouseEnter = (e) => {
-        this.setState({
-            left: e.target.getBoundingClientRect().x - 4,
-        });
-        //e.target.style. = 'purple';
-        e.target.borderWidth = 2;
-    }
-    handleMouseLeave = (e) => {
-        //e.target.style.background = 'white';
-        e.target.borderWidth = 2;
-    }
+
 
     // handleButtonClick() {
     //     this.setState(state => ({
     //         isToggleOn: !state.isToggleOn
     //     }));
     // }
+
 
     handleChipClick = () => {
         console.info('You clicked the Chip.');
@@ -454,7 +315,7 @@ export default class Loading extends React.Component {
             currentExpandedRows.concat(rowId);
 
         this.setState({ expandedRows: newExpandedRows, open: true });
-
+        this.scrollToMyRef();
         {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */ }
 
 
@@ -463,11 +324,12 @@ export default class Loading extends React.Component {
     }
 
 
-
+    //Элементы таблицы, данные
     renderItem(item) {
         const clickCallback = () => {
             // Сделать разворот только при нажатии на поле (на ник не должно ничего происходить)
             this.handleRowClick(item.id, item.username);
+
             //Load Data
             //    this.setState(prevState => ({ open: !prevState.open })) 
         };
@@ -478,27 +340,30 @@ export default class Loading extends React.Component {
                 {/* <TableCell>
 
         </TableCell> */}
-                <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
 
-                    <TableRow onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} key={"row-data-" + item.id}>
-                        {/* <TableCell component="th" scope="row"> */}
-                        {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
-                        <TableCell scope="row">
-                            {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
-                                <Box>
-                                    <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
-                                        {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                    </IconButton>
-                                    <OrganisatorInfo user={item} />
-                                </Box>
-                            )}
+                <TableRow  /* onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} */ key={"row-data-" + item.id} ref={this.tableRef}>
+                    {/* <TableCell component="th" scope="row"> */}
+                    {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
+                    <TableCell scope="row">
+                        {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
 
-                            {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                            < Box >
+
+                                {/* <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
+                                    {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                </IconButton> */}
+
+                                < OrganisatorInfo user={item} />
+                            </Box>
+
+                        )}
+
+                        {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <OrganisatorInfo user={item} />
                             )} */}
 
 
-                            {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
+                        {/* {!this.state.doneFollowers ? (<Skeleton variant="circle" width="50px" height="50px" />) : (
                                 <a target="_blank" rel="noopener noreferrer" href={item.link}>
                                     <img className="instaImage" border="0" alt="FollowImage" src={item.avatar} width="100" height="100"></img>
                                 </a>
@@ -507,21 +372,31 @@ export default class Loading extends React.Component {
                                 <b><a className="Loading-give-user" target="_blank" rel="noopener noreferrer" href={item.link}>{item.username}</a> </b>
                             )} */}
 
-                            {/* Текст раздачи */}
-                        </TableCell>
-                        {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
-                            <TableCell className="Loading-give-text">{item.giveinfo}
-                                <Box component="fieldset" mb={3} borderColor="transparent">
-                                    <StyledRating
-                                        name="customized-color"
-                                        defaultValue={item.rating}
-                                        getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
-                                        precision={0.5}
-                                        icon={<FavoriteIcon fontSize="inherit" />} />
-                                </Box>
-                            </TableCell>
-                        )}
-{/* 
+                    </TableCell>
+                    {/* Текст раздачи */}
+                    {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
+                        <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
+                            <Box border={1} borderColor="primary.main" borderRadius={16} >
+                                <TableCell className="Loading-give-text" onClick={clickCallback} >
+                                    <Box borderBottom={1}>
+                                        <Typography>{item.giveinfo}</Typography>
+                                    </Box>
+                                    <Box component="fieldset" mb={3} borderColor="transparent">
+                                        <IconButton aria-label="expand row" size="small" onClick={(e) => this.setState(prevState => ({ open: !prevState.open }))}>
+                                            {this.state.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                        </IconButton>
+                                        <StyledRating
+                                            name="customized-color"
+                                            defaultValue={item.rating}
+                                            getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
+                                            precision={0.5}
+                                            icon={<FavoriteIcon fontSize="inherit" />} />
+                                    </Box>
+                                </TableCell>
+                            </Box>
+                        </Tooltip>
+                    )}
+                    {/* 
                         {!this.state.doneFollowers ? (<Skeleton variant="rect" width="150px" height="20px" />) : (
                             <TableCell>
                                 <Box component="fieldset" mb={3} borderColor="transparent">
@@ -534,9 +409,9 @@ export default class Loading extends React.Component {
                                 </Box>
                             </TableCell>
                         )} */}
-                        
-                        {/* Рейтинг */}
-                        {/* <TableCell>
+
+                    {/* Рейтинг */}
+                    {/* <TableCell>
                             <Box component="fieldset" mb={3} borderColor="transparent">
                                 <StyledRating
                                     name="customized-color"
@@ -546,9 +421,9 @@ export default class Loading extends React.Component {
                                     icon={<FavoriteIcon fontSize="inherit" />}/>
                             </Box>
                         </TableCell> */}
-                    </TableRow>
-                </Tooltip>
-            </React.Fragment>
+                </TableRow>
+
+            </React.Fragment >
         ];
 
         if (this.state.expandedRows.includes(item.id)) {
@@ -556,18 +431,19 @@ export default class Loading extends React.Component {
                 <FadeIn in={this.state.open}>
                     {/* <Collapse  in={this.state.open} {...(this.state.open ? { timeout: 1000 } : {})} unmountOnExit> */}
                     <TableRow key={"row-expanded-" + item.id}>
-                        {/* <td>{item.followers}</td> */}
-                        {/* <th>Спонсоры:</th>  */}
+                        <Box style={containerStyle} border={1} borderColor="grey.500" borderRadius={1} >
+                            {/* <td>{item.followers}</td> */}
+                            {/* <th>Спонсоры:</th>  */}
 
-                        {/* <TableCell /> */}
-                        <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
-                            <AccountBalanceWalletIcon />Спонсоры:
+                            {/* <TableCell /> */}
+                            <Typography variant="h7" gutterBottom component="div" style={{ marginLeft: 5 }}>
+                                <AccountBalanceWalletIcon />Спонсоры:
                         </Typography>
 
-                        {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */}
+                            {/* Должны получить имя организатора item.username - запрос к БД на получение фолловеров именно этого спонсора */}
 
-                        {/* NEW */}
-                        {/* {this.state.clickedUserFollowers.map(collumn => { //Проблема в том что 1 за раз отображает. Для каждого юзера придется свой список
+                            {/* NEW */}
+                            {/* {this.state.clickedUserFollowers.map(collumn => { //Проблема в том что 1 за раз отображает. Для каждого юзера придется свой список
                             // if (item.username === collumn.usernameFollower)
                             return (
                                 // Возможно несогласование ID
@@ -576,23 +452,24 @@ export default class Loading extends React.Component {
                             );
                         })} */}
 
-                        {/* OLD */}
+                            {/* OLD */}
 
-                        {/* <TableCell/> */}
+                            {/* <TableCell/> */}
 
-                        <div style={containerStyle}>
-                            {this.state.allJoin.map(collumn => {
-                                if (item.username === collumn.username) //Collumn - alljoin
-                                    return (
-                                        <div style={itemStyle}>
+                            <div style={containerStyle}>
+                                {this.state.allJoin.map(collumn => {
+                                    if (item.username === collumn.username) //Collumn - alljoin
+                                        return (
+                                            <div style={itemStyle}>
 
-                                            {/* // Возможно несогласование ID */}
-                                            <SponsorInfo follower={collumn} />
-                                        </div>
-                                    );
-                            })}
-                        </div>
-                        {/* </TableCell> */}
+                                                {/* // Возможно несогласование ID */}
+                                                <SponsorInfo follower={collumn} />
+                                            </div>
+                                        );
+                                })}
+                            </div>
+                            {/* </TableCell> */}
+                        </Box>
                     </TableRow>
                     {/* </Collapse> */}
                 </FadeIn>
@@ -691,6 +568,17 @@ export default class Loading extends React.Component {
 
                                 </TableBody>
 
+                                {/* <TableFooter>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Typography> <MonetizationOnIcon /> Организатор</Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <ChatIcon /> Инфо раздачи
+                                    </TableCell>
+                                    </TableRow>
+                                </TableFooter> */}
+
                             </Table>
                         </TableContainer>
                     </>
@@ -739,4 +627,5 @@ export default class Loading extends React.Component {
             </section>
         );
     }
+    scrollToMyRef = () => window.scrollTo(0, this.tableRef.current.offsetTop);
 }

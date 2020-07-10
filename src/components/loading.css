@@ -1,5 +1,6 @@
 .Loading {
     text-align: center;
+    scroll-behavior: smooth;
 }
 
 .Loading-link {

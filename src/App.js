@@ -505,7 +505,9 @@ class App extends Component {
 
           <BrowserRouter>
             <div>
-              <Navigation />
+              
+              {/* Навигация с презентацие */}
+              {/* <Navigation /> */}
 
 
               <Switch>

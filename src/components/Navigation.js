@@ -19,7 +19,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const stylesTab = {
    root: {
       position: 'relative',
-    },
+   },
    tabs: {
       // background: '#fff',
 
@@ -70,23 +70,23 @@ class Navigation extends React.Component {
          <div className="Nav-text">
 
             <Tabs value={index} fullWidth onChange={this.handleChange} style={stylesTab.tabs}>
-            <NavLink to="/"><HomeIcon/><Tab label="Главная" /></NavLink>
-               <NavLink to="/about"><InfoIcon/><Tab label="О сервисе" /></NavLink>
+               <NavLink to="/"><HomeIcon /><Tab label="Главная" /></NavLink>
+               <NavLink to="/about"><InfoIcon /><Tab label="О сервисе" /></NavLink>
                <Tab label="FAQ" />
             </Tabs>
 
-         <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex} >
-         {/* <div style={Object.assign({}, stylesTab.slide, stylesTab.slide1)}>slide n°1</div>
+            <AutoPlaySwipeableViews index={index} onChangeIndex={this.handleChangeIndex} >
+               {/* <div style={Object.assign({}, stylesTab.slide, stylesTab.slide1)}>slide n°1</div>
          <div style={Object.assign({}, stylesTab.slide, stylesTab.slide2)}>slide n°2</div>
          <div style={Object.assign({}, stylesTab.slide, stylesTab.slide3)}>slide n°3</div> */}
-            {/* <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}> */}
+               {/* <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}> */}
                <div style={Object.assign({}, stylesTab.slide, stylesTab.slide1)}>
-               <h3>Insta-give - аггрегатор новых giveaways</h3>
+                  <h3>Insta-give - аггрегатор новых giveaways</h3>
                </div>
                <div style={Object.assign({}, stylesTab.slide, stylesTab.slide2)}>
                   <h3>О сервисе</h3>
                   {/* <p>Чтобы сразу подписаться на аккаунты, необходимо авторизироваться в Инстаграм, нажав кнопку внизу страницы "Войти через Instagram"</p> */}
-                  <p>Вы можете участвовать в активных раздачах от реальных проверенных пользователей, подписавшись на спонсоров аккаунтов организаторов!</p>
+                  <p>Первое, что стоит знать - это конкурс.<br></br>⠀⠀⠀⠀⠀⠀</p>⠀⠀⠀⠀⠀⠀⠀
                   {/* <Select value={10} autoWidth={false}>
               <MenuItem value="">
                 <em>None</em>
@@ -95,15 +95,15 @@ class Navigation extends React.Component {
             </Select> */}
                </div>
                <div style={Object.assign({}, stylesTab.slide, stylesTab.slide3)}>Добавляете инфо о раздаче в Instagram с помощью меню <NavLink to="/offer"><Tab label="Организаторам" /></NavLink></div>
-            {/* </SwipeableViews> */}
+               {/* </SwipeableViews> */}
             </AutoPlaySwipeableViews>
-       <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} /> 
+            <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} />
 
-{/* Ссылки на другие страницы */}
+            {/* Ссылки на другие страницы */}
             {/* <b className="Nav-text"><NavLink to="/">Главная</NavLink></b>
             <span className="Nav-text"><NavLink to="/about">О сервисе</NavLink> </span> */}
             {/* <NavLink to="/contact">Contact</NavLink> */}
-            
+
          </div>
       );
    }

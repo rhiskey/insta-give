@@ -16,6 +16,8 @@ class Offer extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleInputNicknameChange = this.handleInputNicknameChange(this);
+        // this.handleInputAvatarChange = this.handleInputAvatarChange(this);
     }
 
     handleInputChange = e => {
@@ -23,6 +25,28 @@ class Offer extends Component {
             [e.target.name]: e.target.value,
         });
     };
+
+    // //Allow only English Letters in Nickname
+    // handleInputNicknameChange = e => {
+    //     var value = e.target.value;
+
+    //     value = value.replace(/[^A-Za-z]/ig, '');
+
+    //     this.setState({
+    //         [e.target.name]: value,
+    //     })
+
+    // };
+
+    // handleInputAvatarChange = e => {
+    //     var value = e.target.value
+
+    //     value = value.replace(/[^A-Za-z]/ig, '')
+
+    //     this.setState({
+    //         [e.target.name]: value,
+    //     })
+    // };
 
     handleSubmit = e => {
         if (!e.target.checkValidity()) {
@@ -40,34 +64,33 @@ class Offer extends Component {
         };
 
         //
-
-        axios
-            .post(apilink + 'offer', offer)
-            .then(() => {
-                console.log('Offer Created');
-                //Clear values
-                this.setState({
-                    offerUserName: '',
-                    offerUserGiveinfo: '',
-                    offerUserAvatar: '',
-                });
-                //Show Message Success
-                if (window.confirm('Отправить предложенную раздачу?')) {
-                    alert('Спасибо, мы рассмотрим её в ближайшее время и возможно добавим на сайт!\nНикнейм: ' + this.state.offerUserName + '\nИнфо: ' + this.state.offerUserGiveinfo);
+        if (window.confirm('Отправить предложенную раздачу? Введенные данные верны?\nНикнейм: ' + offerUserName + '\nИнфо: ' + offerUserGiveinfo)) {
+            //Show Message Success
+            alert('Спасибо, мы рассмотрим её в ближайшее время и возможно добавим на сайт!');
+            axios
+                .post(apilink + 'offer', offer)
+                .then(() => {
+                    console.log('Offer Created');
+                    //Clear values
+                    this.setState({
+                        offerUserName: '',
+                        offerUserGiveinfo: '',
+                        offerUserAvatar: '',
+                    });
                     //Clear Form Data
                     document.getElementById("offer-form").reset();
                     //Go To Main Page
                     window.location.href = '/';
-                } else {
-                    alert('Ты нажал отмена? Уверен? Зачем тогда предлагать? Определись уже!!!');
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                //Show Message 
-                alert('Что-то пошло не так, технические неполадки с базой данных...');
-            });
 
+                })
+                .catch(err => {
+                    console.error(err);
+                    //Show Message 
+                    alert('Что-то пошло не так, технические неполадки с базой данных...');
+                });
+        } else {
+            // alert('Отмена... Зачем тогда предлагать? Определись уже!!!');
+        }
 
     };
 
@@ -122,7 +145,7 @@ class Offer extends Component {
                             </textarea>
                         </div>
                         <br />
-                        <div style={{ width: '60%' }} className="form-group">
+                        {/* <div style={{ width: '60%' }} className="form-group">
                             <input
                                 type="text"
                                 className="form-control"
@@ -131,7 +154,7 @@ class Offer extends Component {
                                 onChange={this.handleInputChange}
                             />
                         </div>
-                        <br />
+                        <br /> */}
                         <div style={{ width: '60%' }}>
                             {/* Сделать успешное сообщение */}
                             <button className="btn btn-success" type="submit" >

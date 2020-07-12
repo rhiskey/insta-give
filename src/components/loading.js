@@ -307,6 +307,9 @@ export default class Loading extends React.Component {
         //Load Data
         // let self = this;
         // Загружаем только фолловеров кликнутого! - Передаем в бэк запросом POST - item.username
+        
+
+
 
         const currentExpandedRows = this.state.expandedRows;
         const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
@@ -351,8 +354,7 @@ export default class Loading extends React.Component {
                 {/* <TableCell>
 
         </TableCell> */}
-
-                <TableRow  /* onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} */ key={"row-data-" + item.id}>
+                <TableRow  /* onClick={clickCallback} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} */ key={"row-data-" + item.id }>
                     {/* <TableCell component="th" scope="row"> */}
                     {/* <Tooltip TransitionComponent={Zoom} title="Нажми сюда чтобы открыть аккаунт организатора" > */}
                     <TableCell scope="row" ref={this.tableRef} >
@@ -388,6 +390,7 @@ export default class Loading extends React.Component {
                     {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
                         <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
                             <Box border={1} borderColor="primary.main" borderRadius={16}  >
+
                                 <TableCell className="Loading-give-text" onClick={clickCallback} >
                                     <Box borderBottom={1}>
                                         <Typography>{item.giveinfo}</Typography>
@@ -472,7 +475,6 @@ export default class Loading extends React.Component {
                                     if (item.username === collumn.username) //Collumn - alljoin
                                         return (
                                             <div style={itemStyle}>
-
                                                 {/* // Возможно несогласование ID */}
                                                 <SponsorInfo follower={collumn} />
                                             </div>
@@ -541,6 +543,7 @@ export default class Loading extends React.Component {
                     <>
                         <TableContainer component={Paper}>
                             <Table aria-label="collapsible table" className="Giveaway-table" size="small" >
+                                {/* { условие ? (фолс):(тру) } */}
                                 {!this.state.done ? (<Skeleton variant="rect" width="100%" />) : (
 
                                     <TableHead>

@@ -48,7 +48,7 @@ import { TableFooter } from "@material-ui/core";
 
 // require('dotenv').config({ path: __dirname + '/./../.env' }) //Загружаем файл с переменными среды
 
-const apilink = "http://api.instagive.ga/";
+const apilink = "https://dry-plains-18498.herokuapp.com/";
 
 const StyledRating = withStyles({
     iconFilled: {

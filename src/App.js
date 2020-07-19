@@ -56,7 +56,7 @@ import Offer from './components/Offer';
 // const Navigation = lazy(()=>import( './components/Navigation'));
 // const Agreement = lazy(()=>import( './components/Agreement'));
 // const Privacy = lazy(()=>import( './components/Privacy'));
-const apilink = "http://api.instagive.ga/";
+const apilink = "https://dry-plains-18498.herokuapp.com/";
 
 const themeLight = createMuiTheme({
   palette: {

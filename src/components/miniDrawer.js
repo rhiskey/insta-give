@@ -37,7 +37,7 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const drawerWidth = 240;
-const apilink = "http://api.instagive.ga/";
+const apilink = "https://dry-plains-18498.herokuapp.com";
 
 const useStyles = makeStyles((theme) => ({
   root: {

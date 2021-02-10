@@ -27,6 +27,18 @@ import Navigation from './components/Navigation';
 import Agreement from './components/Agreement';
 import Privacy from './components/Privacy';
 import Offer from './components/Offer';
+<<<<<<< HEAD
+=======
+// //FUCK GG Theme not change in all elements нужно через CONTEXT
+// const Home = lazy(()=>import('./components/Home'));
+// const About = lazy(()=>import( './components/About'));
+// const Contact = lazy(()=>import( './components/Contact'));
+// const Error = lazy(()=>import( './components/Error'));
+// const Navigation = lazy(()=>import( './components/Navigation'));
+// const Agreement = lazy(()=>import( './components/Agreement'));
+// const Privacy = lazy(()=>import( './components/Privacy'));
+const apilink = "https://dry-plains-18498.herokuapp.com/";
+>>>>>>> 0b3b689486171fbd31ef3215b808cea27328420e
 
 
 const apilink = "http://api.instagive.ga/";

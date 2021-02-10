@@ -18,9 +18,6 @@ class FooterContent extends React.Component {
 
   render() {
 
-    // const classes = useStyles();
-    // const [value, setValue] = React.useState(0);
-
     const responseInstagram = (response) => {
       console.log(response);
 
@@ -31,9 +28,7 @@ class FooterContent extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          // user: {
           authCode: response
-          // }
         })
       })
         .then(response2 => {
@@ -45,8 +40,6 @@ class FooterContent extends React.Component {
         .then(function (data) {
           console.log(data); // this will be a AccessToken
           this.setState.accessToken = data;
-          // https://www.instagram.com/web/friendships/5401182145/follow/
-          // https://www.instagram.com/web/friendships/5401182145/unfollow/
         })
         .catch(err => {
           console.log('caught it!', err);
@@ -54,23 +47,7 @@ class FooterContent extends React.Component {
     }
 
     return (
-
-
       <span className="">
-        {/* <button className="instagramButton"></button> */}
-
-        {/* <BottomNavigation
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          showLabels
-          className={classes.root}
-        >
-          <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
-        </BottomNavigation> */}
 
         <InstagramLogin
           clientId="296560698030895"
@@ -80,7 +57,7 @@ class FooterContent extends React.Component {
           onFailure={responseInstagram}
         //implicitAuth = {getAccessToken} //Не работает: invalid response type=token
         />
-        {/* document.getElementById('instagramButton') */}
+
       </span >
     );
   }

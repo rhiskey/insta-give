@@ -15,24 +15,9 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-// import InboxIcon from '@material-ui/icons/MoveToInbox';
 import HomeIcon from '@material-ui/icons/Home';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-// import MailIcon from '@material-ui/icons/Mail';
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-// import { NavLink } from 'react-router-dom';
-// import Loading from "./loading.js";
-// import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-
-// import Navigation from './Navigation';
-// import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import Home from './Home';
-// import About from './About';
-// import Contact from './Contact';
-// import Error from './Error';
-// // import Navigation from './components/Navigation';
-// import Agreement from './Agreement';
-// import Privacy from './Privacy';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -187,49 +172,13 @@ export default function PersistentDrawerLeft() {
             </ListItem>
           </a>
 
-          {/* {['Спонсорам', 'Организаторам'  ].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
+
 
         </List>
         <Divider />
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
+
       </Drawer>
-      {/* <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
 
-
-        <BrowserRouter>
-          <div>
-            <Navigation />
-
-
-            <Switch>
-              <Route path="/" component={Home} exact />
-              <Route path="/about" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/privacy" component={Privacy} />
-              <Route path="/agreement" component={Agreement} />
-              <Route component={Error} />
-            </Switch>
-          </div>
-        </BrowserRouter>
-
-
-      </main> */}
     </div>
   );
 }

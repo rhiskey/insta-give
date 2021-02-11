@@ -41,7 +41,7 @@ const apilink = "https://dry-plains-18498.herokuapp.com/";
 >>>>>>> 0b3b689486171fbd31ef3215b808cea27328420e
 
 
-const apilink = "http://api.instagive.ga/";
+const apilink = process.env.REACT_APP_APILINK;
 const themeLight = createMuiTheme({
   palette: {
     type: "light"

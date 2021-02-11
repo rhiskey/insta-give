@@ -22,7 +22,7 @@ class FooterContent extends React.Component {
       console.log(response);
 
       // //Передаем код авторизации для получения токена
-      fetch('https://dry-plains-18498.herokuapp.com/oauth', {
+      fetch(process.env.REACT_APP_APILINK+'oauth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

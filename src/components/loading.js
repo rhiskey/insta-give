@@ -34,7 +34,7 @@ import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import { TableFooter } from "@material-ui/core";
 
 
-const apilink = "https://dry-plains-18498.herokuapp.com/";
+const apilink = process.env.REACT_APP_APILINK;
 
 const StyledRating = withStyles({
     iconFilled: {

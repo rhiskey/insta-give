@@ -22,7 +22,7 @@ import GroupWorkIcon from '@material-ui/icons/GroupWork';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const drawerWidth = 240;
-const apilink = "https://dry-plains-18498.herokuapp.com";
+const apilink = process.env.REACT_APP_APILINK;
 
 const useStyles = makeStyles((theme) => ({
   root: {

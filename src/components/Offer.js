@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import React, { Component } from 'react';
 import axios from 'axios';
-const apilink = "http://api.instagive.ga/";
+const apilink = process.env.REACT_APP_APILINK;
 
 class Offer extends Component {
     // const Offer = () => {

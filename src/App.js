@@ -118,7 +118,7 @@ class App extends Component {
           <Header />
           <MiniMenu />
 
-          <BrowserRouter>
+          <BrowserRouter basename="/insta-give">
             <div>
 
               <Switch>

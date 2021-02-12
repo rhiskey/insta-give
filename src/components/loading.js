@@ -1,11 +1,11 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.css";
 import * as doneData from "./doneloading.json";
 import * as rippleLoading from "./rippleloading.json"
 import './loading.css';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -31,7 +31,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ChatIcon from '@material-ui/icons/Chat';
 import PaymentIcon from '@material-ui/icons/Payment';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import { TableFooter } from "@material-ui/core";
+// import { TableFooter } from "@material-ui/core";
 
 
 const apilink = process.env.REACT_APP_APILINK;
@@ -243,7 +243,7 @@ export default class Loading extends React.Component {
                     {/* Текст раздачи */}
                     {!this.state.doneFollowers ? (<Skeleton variant="rect" width="100%" height="80px" />) : (
                         <Tooltip title="Нажми  чтобы показать/скрыть спонсоров" TransitionComponent={Fade} interactive arrow>
-                            <Box border={1} borderColor="primary.main" borderRadius={16}  >
+                            {/* <Box border={1} borderColor="primary.main" borderRadius={16}  > */}
 
                                 <TableCell className="Loading-give-text" onClick={clickCallback} >
                                     <Box borderBottom={1}>
@@ -261,7 +261,7 @@ export default class Loading extends React.Component {
                                             icon={<FavoriteIcon fontSize="inherit" />} />
                                     </Box>
                                 </TableCell>
-                            </Box>
+                            {/* </Box> */}
                         </Tooltip>
                     )}
                 </TableRow>

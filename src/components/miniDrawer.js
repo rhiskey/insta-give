@@ -146,13 +146,13 @@ export default function PersistentDrawerLeft() {
             </ListItem>
           </a>
           <Divider />
-          <a href="/">
-            <ListItem button >
+          {/* <a href="/"> */}
+            <ListItem button disabled >
               <ListItemIcon>{<MonetizationOnIcon />}</ListItemIcon>
               <ListItemText primary="Спонсорам" />
 
             </ListItem>
-          </a>
+          {/* </a> */}
 
             <a href="/offer">
               <ListItem button >

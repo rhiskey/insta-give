@@ -16,14 +16,14 @@
         height: 77px;
         width: 100%; /* 70% - сместит правее*/
         margin: 0 auto;
-        padding: 26px 60px;
+        padding: 26px 10px;
       }
       .Nav-brand-logo {
         display: block;
         /* background-position: -176px 0px; */
         background-position: -176px 0px;
         /* background-image: url(https://sun9-45.userapi.com/Wut2zGYiGJtcqrvVrmQkXsuOvkrHm6rSdNsu3w/SFobWTBeonE.jpg); */
-        background-image: url("https://gtmetrix.com/reports/insta-give.herokuapp.com/auepz96A/pagespeed/sprite.f4f81f08_e110d02bdf8a8658fa74fefd75b317e8.png");
+        background-image: url("/sprite.png");
         background-size: 405px 379px;
         background-repeat: no-repeat;
         height: 35px;

@@ -2,8 +2,8 @@ import React, { Component, Suspense } from 'react';
 import './App.css';
 import Header from './components/Header';
 import "bootstrap/dist/css/bootstrap.min.css";
-import styled from "styled-components";
-import InstagramLogin from 'react-instagram-login';
+// import styled from "styled-components";
+// import InstagramLogin from 'react-instagram-login';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { ThemeProvider } from '@material-ui/styles';
@@ -23,22 +23,10 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import Error from './components/Error';
-import Navigation from './components/Navigation';
+// import Navigation from './components/Navigation';
 import Agreement from './components/Agreement';
 import Privacy from './components/Privacy';
 import Offer from './components/Offer';
-<<<<<<< HEAD
-=======
-// //FUCK GG Theme not change in all elements нужно через CONTEXT
-// const Home = lazy(()=>import('./components/Home'));
-// const About = lazy(()=>import( './components/About'));
-// const Contact = lazy(()=>import( './components/Contact'));
-// const Error = lazy(()=>import( './components/Error'));
-// const Navigation = lazy(()=>import( './components/Navigation'));
-// const Agreement = lazy(()=>import( './components/Agreement'));
-// const Privacy = lazy(()=>import( './components/Privacy'));
-const apilink = "https://dry-plains-18498.herokuapp.com/";
->>>>>>> 0b3b689486171fbd31ef3215b808cea27328420e
 
 
 const apilink = process.env.REACT_APP_APILINK;
@@ -99,9 +87,9 @@ class App extends Component {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          authCode: response
-        })
+        // body: JSON.stringify({
+        //   authCode: response
+        // })
       })
         .then(response2 => {
           if (response2.ok) {
@@ -160,7 +148,7 @@ class App extends Component {
                 showLabels
               >
 
-                <span style={{ marginLeft: 15 }}>
+                <span style={{ marginLeft: 15, marginTop:5 }}>
                   <FormControlLabel
                     control={
                       <Switcher
@@ -173,7 +161,7 @@ class App extends Component {
                     label={isThemeLight ? "Светлая тема" : "Темная тема"}
                   />
                 </span>
-                <span style={{ marginLeft: 15 }}><a href="https://github.com/rhiskey">rhiskey(C) 2020</a></span>
+                <span style={{ marginLeft: 15, marginTop:10 }}><a href="https://github.com/rhiskey">rhiskey(C) 2021</a></span>
               </BottomNavigation>
             </span >
           </Footer>
@@ -198,4 +186,4 @@ function Footer({ children }) {
 }
 
 
-const OtherComponent = React.lazy(() => import('fontsource-roboto'));
+// const OtherComponent = React.lazy(() => import('fontsource-roboto'));

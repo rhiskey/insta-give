@@ -147,7 +147,6 @@ class App extends Component {
                 }}
                 showLabels
               >
-
                 <span style={{ marginLeft: 15, marginTop:5 }}>
                   <FormControlLabel
                     control={

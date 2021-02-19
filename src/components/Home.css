@@ -1,0 +1,10 @@
+.Home-menu{
+    margin-left: 10px;  
+    /* Таблица и все что внутри */
+    margin-right: 10px;
+    text-align: left;
+    position: relative;
+    font-size: 20;
+    padding-top: 10;
+    padding-bottom: 10;
+  }

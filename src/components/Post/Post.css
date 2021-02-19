@@ -1,0 +1,65 @@
+    /* src/components/Post/Post.css */
+    .Post {
+        border-radius: 3px;
+        border: 1px solid #e6e6e6;
+        background-color: #fff;
+        margin-bottom: 20px;
+        margin-left : 20%;
+        margin-right: 20%;
+      }
+      .Post-user {
+        display: flex;
+        padding: 16px;
+        align-items: center;
+      }
+      .Post-user-avatar {
+        width: 55px;
+        height: 55px;
+        margin-top: 5px;
+        
+      }
+      .Post-user-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      .Post-user-nickname {
+        margin-left: 12px;
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+        display: inline-block;
+      }
+      .Post-image-bg {
+        background-color: #efefef;
+      }
+      .Post-image img {
+        display: block;
+        width: 100%;
+      }
+      .Post-follow-btn{
+        background-color: darkblue;
+        color: white;
+        margin-left: 12px;
+        border-radius: 8px;
+        font-size: large;
+        
+      }
+      .Post-follow-link{
+        color: blue;
+        margin-left: 12px;
+        text-align: center;
+        display: inline;
+        padding:10px;
+      }
+      .Post-caption {
+        padding: 16px 16px;
+      }
+      .Post-caption strong {
+        font-family: 'PT Sans', sans-serif;
+        font-weight: bold;
+      }
+      .vjs-fade-out {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+      }
